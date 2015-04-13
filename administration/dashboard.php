@@ -412,6 +412,39 @@ echo '
 </div>
 </div>
 </div>
+</div>
+<div style="float:left">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+<div class="panel panel-default ">
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Infusions</strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>
+<div class="panel-body">
+<div class="text-center">There are no infusions installed</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+<div class="panel panel-default ">
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Comments</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>
+<div class="panel-body">
+<div class="text-center">'.nl2br(parseubb(parsesmileys($data['comment_message']))).'</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+<div class="panel panel-default ">
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Ratings</strong></span><span class="pull-right label label-warning">'.dbcount("(rating_id)", DB_RATINGS).'</span></div>
+<div class="panel-body">
+<div class="text-center">There are no ratings now.</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+<div class="panel panel-default ">
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Submissions</strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
+<div class="panel-body">
+<div class="text-center">There are no submissions now.</div>
+</div>
+</div>
 </div>';	
 	
 	
