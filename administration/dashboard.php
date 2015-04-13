@@ -166,7 +166,7 @@ $weblinks_num = dbcount("(weblink_id)", DB_WEBLINKS);
 
 $members_num = dbcount("(user_id)", DB_USERS, "user_joined>='".strtotime("yesterday")."'");
 
-echo '
+/*echo '
 
 <div class="center-notifications" align="center">
 
@@ -196,7 +196,7 @@ echo '
 	
 		<div class="noti-button-member"><div class="img-caption"><a href="'.ADMIN.'members.php'.$aidlink.'" title="'.$locale['pro_1014'].'"><img src="'.THEMES.'templates/images/admin/Mitglieder.png" border="0" /></a><h5><span>'.$members_num.'</span></h5></div></div>
 
-	</div>';
+	</div>';*/
 echo "<td width='100%' class='tbl1'>";
 echo '<div style="float:right">
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
@@ -447,29 +447,8 @@ echo '
 </div>
 </div>';	
 	
-	
-echo'	
-	<div style="float:right">';
-
-		if (isset($_GET['status']) && $_GET['status'] == 'sort') { 
-
-			echo '<div style="float:left;margin-right:5px"><a href="'.FUSION_SELF.$aidlink.'"><img src="'.THEMES.'templates/images/admin/sort-button.jpg" /></a></div>';
-			
-			echo '<div style="float:left;line-height:300%"><a href="'.FUSION_SELF.$aidlink.'">'.$locale['pro_1078'].'</a></div>';
-
-		} else {
-
-			echo '<div style="float:left;margin-right:5px"><a href="'.FUSION_SELF.$aidlink.'&status=sort"><img src="'.THEMES.'templates/images/admin/sort-button.jpg" /></a></div>';
-			
-			echo '<div style="float:left;line-height:300%"><a href="'.FUSION_SELF.$aidlink.'&status=sort">'.$locale['pro_1077'].'</a></div>';
-
-		}
-
 echo '
 
-	</div>
-
-</div>
 
 <script type="text/javascript">
 
