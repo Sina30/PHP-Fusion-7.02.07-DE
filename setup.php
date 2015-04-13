@@ -75,7 +75,7 @@ function renderButton($finish = FALSE) {
 	} else {
 		$locale = $locale['007'];
 	}
-if (FUSION_SELF == "setup.php") {
+if (FUSION_SELF == "/setup.php") {
 	if (!isset($_POST['step']) || $_POST['step'] == "" || $_POST['step'] == "2") {	
 echo "</div>\n";
 	echo "</div>\n";
