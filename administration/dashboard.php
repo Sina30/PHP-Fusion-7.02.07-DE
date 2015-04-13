@@ -416,7 +416,7 @@ echo '
 <div style="float:left">
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Infusions</strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'infusions.php'.$aidlink.'">Infusions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>
 <div class="panel-body">
 <div class="text-center">There are no infusions installed</div>
 </div>
@@ -440,7 +440,7 @@ echo '
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Submissions</strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'">Latest Submissions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
 <div class="panel-body">
 <div class="text-center">There are no submissions now.</div>
 </div>
