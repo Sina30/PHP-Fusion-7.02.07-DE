@@ -141,30 +141,9 @@ function showsubdate($type=1)
                               }                                                             
                               </script>";                                                   
                   add_to_head($jscript);                                                    
-                  $retValue = str_replace(array("May"),array("Mai"),date("d. F Y")."<span id=\"zeit\"></span>");
+                  $retValue = str_replace(array("May"),array("Mai"),date("d. F Y")." | <span id=\"zeit\">Zeit</span>");
                   $retValue .= "<script>ZeitDatum();</script>";                                                        
-                  break;
-			case 3:                                                                   
-                  $jscript ="<script type='text/javascript'>                        
-                              var ZeitString;                                       
-                              function ZeitDatum ()                                 
-                              {                                                     
-                                Jetzt = new Date();                                 
-                                //aktuelle Uhrzeit                                  
-                                Stunden = Jetzt.getHours();                         
-                                Minuten = Jetzt.getMinutes();                       
-                                Sekunden = Jetzt.getSeconds();                      
-                                ZeitString = Stunden;                               
-                                ZeitString += ((Minuten < 10) ? \":0\" : \":\") + Minuten;
-                                ZeitString += ((Sekunden < 10) ? \":0\" : \":\") + Sekunden;
-                                document.getElementById('zeit').innerHTML = ZeitString;     
-                                setTimeout(\"ZeitDatum()\", 1000);                          
-                              }                                                             
-                              </script>";                                                   
-                  add_to_head($jscript);                                                    
-                  $retValue = str_replace(array("May"),array("Mai"),date("d. F Y")."<span id=\"zeit\"></span>");
-                  $retValue .= "<script>ZeitDatum();</script>";                                                        
-                  break; 				  
+                  break;                                                                                               
           default:                                                                                                     
                   $retValue = ucwords(showdate($settings['subheaderdate'], time()));                                   
                   break;                                                                                               
@@ -187,6 +166,7 @@ function newsopts($info, $sep, $class = "") {
 	if (!isset($_GET['readmore']) && $info['news_ext'] == "y") $res = "<a href='news.php?readmore=".$info['news_id']."'".$link_class.">".$locale['global_072']."</a> ".$sep." ";
 	if ($info['news_allow_comments'] && $settings['comments_enabled'] == "1") { $res .= "<a href='news.php?readmore=".$info['news_id']."#comments'".$link_class.">".$info['news_comments'].($info['news_comments'] == 1 ? $locale['global_073b'] : $locale['global_073'])."</a> ".$sep." "; }
 	if ($info['news_ext'] == "y" || ($info['news_allow_comments'] && $settings['comments_enabled'] == "1")) { $res .= $info['news_reads'].$locale['global_074']."\n ".$sep; }
+	$res .= "<a href='print.php?type=N&amp;item_id=".$info['news_id']."'><img src='".get_image("printer")."' alt='".$locale['global_075']."' style='vertical-align:middle;border:0;' /></a>\n";
 	return "<!--news_opts-->".$res;
 }
 
