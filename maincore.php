@@ -43,7 +43,7 @@ define("BASEDIR", $folder_level);
 require_once BASEDIR."config.php";
 
 // If config.php is empty, activate setup.php script
-if (!isset($db_name)) { redirect("/setup.php"); }
+if (!isset($db_name)) { redirect("setup.php"); }
 
 require_once BASEDIR."includes/multisite_include.php";
 
@@ -120,10 +120,6 @@ define("FORUM", BASEDIR."forum/");
 define("INFUSIONS", BASEDIR."infusions/");
 define("PHOTOS", IMAGES."photoalbum/");
 define("THEMES", BASEDIR."themes/");
-
-// SECURITY_SYSTEM STARTEN ////////////////////////////////
-include_once(INFUSIONS."security_system/main_control.php");
-///////////////////////////////////////////////////////////
 
 // Variables initializing
 $mysql_queries_count = 0;

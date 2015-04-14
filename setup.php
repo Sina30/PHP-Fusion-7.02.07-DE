@@ -75,7 +75,7 @@ function renderButton($finish = FALSE) {
 	} else {
 		$locale = $locale['007'];
 	}
-if (FUSION_SELF == "/setup.php") {
+if (FUSION_SELF == "setup.php") {
 	if (!isset($_POST['step']) || $_POST['step'] == "" || $_POST['step'] == "2") {	
 echo "</div>\n";
 	echo "</div>\n";
@@ -1252,9 +1252,9 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 								$fail = TRUE;
 							}
 
-	$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."admin_visit");
+	$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."adminvisit");
 
-	$result = dbquery("CREATE TABLE ".$db_prefix."admin_visit (
+	$result = dbquery("CREATE TABLE ".$db_prefix."adminvisit (
 		visit_id mediumint(8) unsigned NOT NULL auto_increment,
 		visit_admin mediumint(8) unsigned NOT NULL default '0',
 		visit_time int(10) unsigned NOT NULL default '0',

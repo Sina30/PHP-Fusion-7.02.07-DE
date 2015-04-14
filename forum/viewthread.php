@@ -134,6 +134,7 @@ if (iMOD) { $can_vote = !$had_voted; }
 if ($poll_there && $can_vote && !$had_voted && isset($_POST['cast_vote']) && (isset($_POST['poll_option']) && isnum($_POST['poll_option'])) && ($_POST['poll_option'] <= $poll_options)) { // bug #1012
 	$result = dbquery("UPDATE ".DB_FORUM_POLL_OPTIONS." SET forum_poll_option_votes=forum_poll_option_votes+1 WHERE thread_id='".$_GET['thread_id']."' AND forum_poll_option_id='".$_POST['poll_option']."'");
 	$result = dbquery("UPDATE ".DB_FORUM_POLLS." SET forum_poll_votes=forum_poll_votes+1 WHERE thread_id='".$_GET['thread_id']."'");
+	$result = dbquery("INSERT INTO ".DB_FORUM_POLL_VOTERS." (thread_id, forum_vote_user_id, forum_vote_user_ip, forum_vote_user_ip_type) VALUES ('".$_GET['thread_id']."', '".$userdata['user_id']."', '".USER_IP."', '".USER_IP_TYPE."')");
 	redirect(FUSION_SELF."?thread_id=".$_GET['thread_id']);
 }
 
@@ -169,12 +170,12 @@ if (($rows > $posts_per_page) || ($can_post || $can_reply)) {
 	if (iMEMBER && $can_post) {
 		echo "<td align='right' style='padding:0px 0px 4px 0px'>\n<!--pre_forum_buttons-->\n";
 		if ($can_post) {
-			//echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
-			//echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
+			echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
+			echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
 		}
 		if (!$fdata['thread_locked'] && $can_reply) {
-			//echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
-			//echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
+			echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
+			echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
 		}
 		echo "</td>\n";
 	}
@@ -237,10 +238,10 @@ if ($rows != 0) {
 					$result2 = dbquery("UPDATE ".DB_THREAD_NOTIFY." SET notify_datestamp='".time()."', notify_status='1' WHERE thread_id='".$_GET['thread_id']."' AND notify_user='".$userdata['user_id']."'");
 					echo "<a href='postify.php?post=off&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>".$locale['515']."</a>";
 				} else {
-					echo "<a href='postify.php?post=on&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'></a>";
+					echo "<a href='postify.php?post=on&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>".$locale['516']."</a>";
 				}
 			}
-			echo "&nbsp;<a href=''><img src='' alt='' title='' style='border:0;vertical-align:middle' /></a></div>\n";
+			echo "&nbsp;<a href='".BASEDIR."print.php?type=F&amp;thread=".$_GET['thread_id']."&amp;rowstart=".$_GET['rowstart']."'><img src='".get_image("printer")."' alt='".$locale['519']."' title='".$locale['519']."' style='border:0;vertical-align:middle' /></a></div>\n";
 			add_to_title($locale['global_201'].$fdata['thread_subject']);
 			echo "<div style='position:absolute' class='forum_thread_title'><!--forum_thread_title--><strong>".$fdata['thread_subject']."</strong></div>\n</td>\n</tr>\n";
 		}
@@ -249,30 +250,17 @@ if ($rows != 0) {
 		echo "<tr>\n<td class='tbl2 forum_thread_user_name' style='width:140px'><!--forum_thread_user_name-->".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n";
 		echo "<td class='tbl2 forum_thread_post_date'>\n";
 		echo "<div style='float:right' class='small'>";
-		//echo "<a href='#top'>\n";
-		//echo "&nbsp;<a href='#post_".$data['post_id']."' name='post_".$data['post_id']."' id='post_".$data['post_id']."'>#".($current_row+$_GET['rowstart'])."</a>";
-		//echo "&nbsp;<a href='".BASEDIR."print.php?type=F&amp;thread=".$_GET['thread_id']."&amp;post=".$data['post_id']."&amp;nr=".($current_row+$_GET['rowstart'])."'><img src='".get_image("printer")."' alt='".$locale['519a']."' title='".$locale['519a']."' style='border:0;vertical-align:middle' /></a></div>\n";
+		echo "<a href='#top'><img src='".get_image("up")."' alt='".$locale['541']."' title='".$locale['542']."' style='border:0;vertical-align:middle' /></a>\n";
+		echo "&nbsp;<a href='#post_".$data['post_id']."' name='post_".$data['post_id']."' id='post_".$data['post_id']."'>#".($current_row+$_GET['rowstart'])."</a>";
+		echo "&nbsp;<a href='".BASEDIR."print.php?type=F&amp;thread=".$_GET['thread_id']."&amp;post=".$data['post_id']."&amp;nr=".($current_row+$_GET['rowstart'])."'><img src='".get_image("printer")."' alt='".$locale['519a']."' title='".$locale['519a']."' style='border:0;vertical-align:middle' /></a></div>\n";
 		echo "<div class='small'>".$locale['505'].showdate("forumdate", $data['post_datestamp'])."</div>\n";
-		echo "\n<hr />\n<span class='small'>".$locale['508'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['509'].showdate("forumdate", $data['post_edittime'])."</span>\n";
-		//echo "<div class='small'>".$locale['505'].showdate("forumdate", $data['post_datestamp'])."</div>\n";
-		//echo "</td>\n";
-		echo "</tr>\n<td valign='top' class='tbl2 forum_thread_user_info' style='width:140px'>\n";
-		echo "</span>\n";
-		echo "<div id='f1_container'>";
-		echo "<div id='f1_card' class='shadow'>";
-		echo "<div class='front face'>";
+		echo "</td>\n";
+		echo "</tr>\n<tr>\n<td valign='top' class='tbl2 forum_thread_user_info' style='width:140px'>\n";
 		if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) {
-			echo "<img class='avatarforum' src='".IMAGES."avatars/".$data['user_avatar']."' alt='".$locale['567']."' /><br /><br />\n";
+			echo "<img src='".IMAGES."avatars/".$data['user_avatar']."' alt='".$locale['567']."' /><br /><br />\n";
 		} else {
-			echo "<img class='avatarforum' src='".IMAGES."avatars/noavatar100.png' alt='".$locale['567']."' /><br /><br />\n";
+			echo "<img src='".IMAGES."avatars/noavatar100.png' alt='".$locale['567']."' /><br /><br />\n";
 		}
-		echo "</div>";
-		echo "<div class='back face center'>";
-		echo "<p>";
-		echo "<!--forum_thread_user_info--><span class='small'><strong>".$locale['502']."</strong> ".$data['user_posts']."</span><br />\n";
-		echo "<span class='small'><strong>".$locale['504']."</strong> ".showdate("shortdate", $data['user_joined'])."</span><br />\n";
-		echo "</p>";
-		echo "<p>";
 		echo "<span class='small'>";
 		if ($data['user_level'] >= 102) {
 			echo $settings['forum_ranks'] ? show_forum_rank($data['user_posts'], $data['user_level'], $data['user_groups']) : getuserlevel($data['user_level']);
@@ -289,10 +277,9 @@ if ($rows != 0) {
 				echo $is_mod ? $locale['userf1'] : getuserlevel($data['user_level']);
 			}
 		}
-		echo "</p>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
+		echo "</span><br /><br />\n";
+		echo "<!--forum_thread_user_info--><span class='small'><strong>".$locale['502']."</strong> ".$data['user_posts']."</span><br />\n";
+		echo "<span class='small'><strong>".$locale['504']."</strong> ".showdate("shortdate", $data['user_joined'])."</span><br />\n";
 		echo "<br /></td>\n<td valign='top' class='tbl1 forum_thread_user_post'>\n";
 		if (iMOD) { echo "<div style='float:right'><input type='checkbox' name='delete_post[]' value='".$data['post_id']."' /></div>\n"; }
 		$message = parseubb($message);
@@ -333,7 +320,7 @@ if ($rows != 0) {
 			}
 		}
 		if ($data['post_edittime'] != "0") {
-			//echo "\n<hr />\n<span class='small'>".$locale['508'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['509'].showdate("forumdate", $data['post_edittime'])."</span>\n";
+			echo "\n<hr />\n<span class='small'>".$locale['508'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['509'].showdate("forumdate", $data['post_edittime'])."</span>\n";
 			if ($data['post_editreason'] != "" && iMEMBER) {
 				$edit_reason = true;
 				echo "<br /><div class='edit_reason'><a id='reason_pid_".$data['post_id']."' rel='".$data['post_id']."' class='reason_button small' href='#reason_div_pid_".$data['post_id']."'>";
@@ -347,6 +334,7 @@ if ($rows != 0) {
 		}
 		echo "<!--sub_forum_post--></td>\n</tr>\n";
 		echo "<tr>\n<td class='tbl2 forum_thread_ip' style='width:140px;white-space:nowrap'>";
+		if (($settings['forum_ips'] && iMEMBER) || iMOD) { echo "<strong>".$locale['571']."</strong>: ".$data['post_ip']; } else { echo "&nbsp;"; }
 		echo "</td>\n<td class='tbl2 forum_thread_userbar'>\n<div style='float:left;white-space:nowrap' class='small'><!--forum_thread_userbar-->\n";
 		if (isset($data['user_web']) && $data['user_web'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
 			echo "<a href='".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a>"; 
@@ -463,12 +451,12 @@ if ($can_post || $can_reply) {
 	echo "<table cellpadding='0' cellspacing='0' width='100%'>\n<tr>\n";
 	echo "<td align='right' style='padding-top:10px'>\n<!--post_forum_buttons-->\n";
 	if ($can_post) {
-		//echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
-		//echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
+		echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
+		echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
 	}
 	if (!$fdata['thread_locked'] && $can_reply) {
-		//echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
-		//echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
+		echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
+		echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
 	}
 	echo "</td>\n</tr>\n</table>\n";
 }

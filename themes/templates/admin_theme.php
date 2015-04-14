@@ -8,22 +8,6 @@ require_once INCLUDES."theme_functions_include.php";
 
 include LOCALE.LOCALESET."admin/adminpro.php";
 
-$repeat = dbcount("(visit_id)", DB_ADMINVISIT, "visit_link='".FUSION_SELF."' AND visit_admin='".$userdata['user_id']."'");
-
-if ($repeat == 0 && FUSION_SELF != "dashboard.php" && FUSION_SELF != "ibdex.php") { $result = dbquery("INSERT INTO ".DB_ADMINVISIT." (visit_link, visit_admin, visit_time) VALUES ('".FUSION_SELF."', '".$userdata['user_id']."', '".time()."')"); }
-
-$visitcount = dbcount("(visit_id)", DB_ADMINVISIT, "visit_admin='".$userdata['user_id']."'");
-
-if ($visitcount > 5) { 
-
-	$adminvisit = dbquery("SELECT visit_id FROM ".DB_ADMINVISIT." WHERE visit_admin='".$userdata['user_id']."' ORDER BY visit_time ASC LIMIT 0,1");
-
-	$lastv = dbarray($adminvisit);
-
-	$result = dbquery("DELETE FROM ".DB_ADMINVISIT." WHERE visit_id='".$lastv['visit_id']."'"); 
-
-}
-
 function render_page($license = false) {
 	
 	global $settings, $main_style, $locale, $mysql_queries_time, $userdata, $locale, $aidlink, $navi_name;

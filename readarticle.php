@@ -18,6 +18,6 @@
 require_once "maincore.php";
 
 if (isset($_GET['article_id']) && isnum($_GET['article_id'])) {
-	redirect("articles/articles.php?article_id=".$_GET['article_id']);
+	redirect("articles.php?article_id=".$_GET['article_id']);
 }
 ?>

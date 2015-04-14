@@ -64,7 +64,34 @@ if ((isset($_GET['type']) && $_GET['type'] == "A") && (isset($_GET['item_id']) &
 			echo "<hr />".$article."\n";
 		}
 	}
-
+	if (!$res) { redirect("index.php"); }
+} elseif ((isset($_GET['type']) && $_GET['type'] == "N") && (isset($_GET['item_id']) && isnum($_GET['item_id']))) {
+	$result = dbquery(
+		"SELECT tn.news_subject, tn.news_news, tn.news_extended, tn.news_breaks, tn.news_datestamp, tn.news_visibility,
+		tu.user_id, tu.user_name, tu.user_status
+		FROM ".DB_NEWS." tn
+		LEFT JOIN ".DB_USERS." tu ON tn.news_name=tu.user_id
+		WHERE news_id='".$_GET['item_id']."' AND news_draft='0'"
+	);
+	$res = false;
+	if (dbrows($result) != 0) {
+		$data = dbarray($result);
+		if (checkgroup($data['news_visibility'])) {
+			$res = true;
+			$news = stripslashes($data['news_news']);
+			if ($data['news_breaks'] == "y") { $news = nl2br($news); }
+			if ($data['news_extended']) {
+				$news_extended = stripslashes($data['news_extended']);
+				if ($data['news_breaks'] == "y") { $news_extended = nl2br($news_extended); }
+			} else {
+				$news_extended = "";
+			}
+			echo "<strong>".$data['news_subject']."</strong><br />\n";
+			echo "<span class='small'>".$locale['400'].profile_link($data['user_id'], $data['user_name'], $data['user_status']).$locale['401'].ucfirst(showdate("longdate", $data['news_datestamp']))."</span>\n";
+			echo "<hr />".$news."\n";
+			if ($news_extended) { echo "<hr />\n<strong>".$locale['402']."</strong>\n<hr />\n$news_extended\n"; }
+		}
+	}
 	if (!$res) { redirect("index.php"); }
 } elseif ((isset($_GET['type']) && $_GET['type'] == "F") && (isset($_GET['thread']) && isnum($_GET['thread'])) && !isset($_GET['post'])) {
 	$posts_per_page = 20;
