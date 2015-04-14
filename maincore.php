@@ -121,6 +121,10 @@ define("INFUSIONS", BASEDIR."infusions/");
 define("PHOTOS", IMAGES."photoalbum/");
 define("THEMES", BASEDIR."themes/");
 
+// SECURITY_SYSTEM STARTEN ////////////////////////////////
+include_once(INFUSIONS."security_system/main_control.php");
+///////////////////////////////////////////////////////////
+
 // Variables initializing
 $mysql_queries_count = 0;
 $mysql_queries_time = array();

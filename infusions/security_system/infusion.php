@@ -88,7 +88,7 @@ $inf_newtable[3] = DB_PREFIX."secsys_contact (
     contact_datestamp INT(10) NOT NULL,
     contact_ip VARCHAR(20) NOT NULL,
     PRIMARY KEY  (contact_id)
-) TYPE=MyISAM AUTO_INCREMENT=1;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[4] = DB_PREFIX."secsys_logfile (
   hack_id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
