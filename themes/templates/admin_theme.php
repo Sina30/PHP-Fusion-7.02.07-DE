@@ -168,8 +168,14 @@ echo '	</div>
 						
 					} else {
 
-						echo '<b> '.$locale['pro_1007'].'</b>';
-
+						echo '<b> '.$locale['pro_1007'].'</b>&nbsp;&nbsp;<img src="'.THEMES.'templates/images/admin/navi-arrow.gif" border="0" />';
+ echo "<tr>";
+  echo "<td class='ftl-panel-top index-border1' style='text-align:center;white-space:nowrap'><span style='color:green;font-size:12px;'><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".ADMIN."submissions.php".$aidlink."'>".$locale['pro_1002']."</a>&nbsp;&nbsp;<img src='".THEMES."templates/images/admin/navi-arrow.gif' border='0' /></b></span></td>\n";
+  echo "<a><td class='ftl-panel-top index-border1' style='text-align:center;white-space:nowrap' align='center'><span style='color:green;font-size:12px;'><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".ADMIN."members.php".$aidlink."'>".$locale['pro_1003']."</a>&nbsp;&nbsp;<img src='".THEMES."templates/images/admin/navi-arrow.gif' border='0' /></b></span></td></a>\n";
+  echo "<a><td class='ftl-panel-top index-border1' style='text-align:center;white-space:nowrap' align='center'><span style='color:green;font-size:12px;'><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".ADMIN."administrators.php".$aidlink."'>".$locale['pro_1004']."</a>&nbsp;&nbsp;<img src='".THEMES."templates/images/admin/navi-arrow.gif' border='0' /></b></span></td></a>\n";
+  echo "<a><td class='ftl-panel-top index-border1' style='text-align:center;white-space:nowrap' align='center'><span style='color:green;font-size:12px;'><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".ADMIN."settings_main.php".$aidlink."'>".$locale['pro_1005']."</a>&nbsp;&nbsp;<img src='".THEMES."templates/images/admin/navi-arrow.gif' border='0' /></b></span></td></a>\n";
+  echo "<a><td class='ftl-panel-top index-border1' style='text-align:center;white-space:nowrap' align='center'><span style='color:green;font-size:12px;'><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".ADMIN."infusions.php".$aidlink."'>".$locale['pro_1006']."</a>&nbsp;&nbsp;<img src='".THEMES."templates/images/admin/navi-arrow.gif' border='0' /></b></span></td></a>\n";
+  echo "</tr>\n";
 					}
 
 echo '			</div>
