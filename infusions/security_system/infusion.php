@@ -46,7 +46,7 @@ $inf_newtable[1] = DB_PREFIX."secsys_filter (
     list VARCHAR(255) NOT NULL,
     active TINYINT(1) unsigned NOT NULL DEFAULT '1',
     PRIMARY KEY  (id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[2] = DB_PREFIX."secsys_settings (
   secsys_started tinyint(1) unsigned NOT NULL,
@@ -80,7 +80,7 @@ $inf_newtable[2] = DB_PREFIX."secsys_settings (
   panel_set smallint(1) NOT NULL,
   license_accept smallint(1) NOT NULL,
   KEY version (version)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 
 $inf_newtable[3] = DB_PREFIX."secsys_contact (
@@ -100,7 +100,7 @@ $inf_newtable[4] = DB_PREFIX."secsys_logfile (
   hack_agent TEXT NOT NULL,
   hack_datestamp INT(10) NOT NULL,
   PRIMARY KEY (hack_id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[5] = DB_PREFIX."secsys_statistics (
   stats_id TINYINT(1) UNSIGNED NOT NULL,
@@ -113,7 +113,7 @@ $inf_newtable[5] = DB_PREFIX."secsys_statistics (
   proxy_register INT(11) UNSIGNED NOT NULL,
   proxy_blacklist INT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (stats_id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[6] = DB_PREFIX."secsys_membercontrol (
   c_user_id INT(10) UNSIGNED NOT NULL,
@@ -121,26 +121,26 @@ $inf_newtable[6] = DB_PREFIX."secsys_membercontrol (
   c_userlock SMALLINT(1) NOT NULL DEFAULT 0,
   c_userlock_datestamp INT(10) NOT NULL,
   PRIMARY KEY (c_user_id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[7] = DB_PREFIX."secsys_spamfilter (
   spam_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   spam_word VARCHAR(255) NOT NULL,
   PRIMARY KEY (spam_id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[8] = DB_PREFIX."secsys_blacklist (
   blacklist_ip varchar(15) NOT NULL DEFAULT '0.0.0.0',
   blacklist_datestamp int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (blacklist_ip)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[9] = DB_PREFIX."secsys_proxy_blacklist (
   proxy_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
   proxy_ip VARCHAR(15) NOT NULL,
   proxy_datestamp INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (proxy_id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_newtable[10] = DB_PREFIX."secsys_proxy_whitelist (
   proxy_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
@@ -148,7 +148,7 @@ $inf_newtable[10] = DB_PREFIX."secsys_proxy_whitelist (
   proxy_datestamp INT(10) UNSIGNED NOT NULL,
   proxy_status TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (proxy_id)
-) TYPE=MyISAM;";
+) ENGINE = MyISAM;";
 
 $inf_insertdbrow[1]=DB_PREFIX."secsys_filter VALUES (1, 'Aqua_Products',1),(2, 'asterias',1),(3, 'b2w',1),(4, 'BackDoorBot',1),(5, 'Bait & Tackle',1),(6, 'BlowFish',1),(7, 'Bookmark search tool',1),(8, 'BotALot',1),(9, 'BruteForce',1),(10, 'BuiltBotTough',1),(11, 'BullsEye',1),(12, 'BunnySlippers',1),(13, 'CheeseBot',1),(14, 'CherryPicker',1),(15, 'CopyRightCheck',1),(16, 'cosmos',1),(17, 'Crescent',1),(18, 'DittoSpyder',1),(19, 'EmailCollector',1),(20, 'EmailSiphon',1),(21, 'EmailWolf',1),(22, 'EroCrawler',1),(23, 'ExtractorPro',1),(24, 'FairAd Client',1),(25, 'Flaming AttackBot',1),(26, 'Foobot',1),(27, 'Gaisbot',1),(28, 'GetRight',1),(29, 'grup',1),(30, 'grub-client',1),(31, 'Harvest/1.5',1),(32, 'hloader',1),(33, 'httplib',1),(34, 'HTTrack',1),(35, 'humanlinks',1),(36, 'ia_archiver',1),(37, 'InfoNaviRobot',1),(38, 'Iron33',1),(39, 'JennyBot',1),(40, 'Kenjin Spider',1),(41, 'Keyword Density',1),(42, 'larbin',1),(43, 'LexiBot',1),(44, 'libWeb/clsHTTP',1),(45, 'LinkextractorPro',1),(46, 'LinkScan',1),(47, 'LinkWalker',1),(48, 'LNSpiderguy',1),(49, 'looksmart',1),(50, 'lwp',1),(51, 'Mata Hari',1),(52, 'URL Control',1),(53, 'MIIxpc',1),(54, 'Mister PiX',1),(55, 'moget',1),(56, 'MSIECrawler',1),(57, 'NetAnts',1),(58, 'NetMechanic',1),(59, 'NICErsPRO',1),(60, 'Offline Explorer',1),(61, 'Openbot',1),(62, 'Openfind',1),(63, 'Oracle Ultra Search',1),(64, 'PerMan',1),(65, 'ProPowerBot',1),(66, 'ProWebwalker',1),(67, 'psbot',1),(68, 'Python-urllib',1),(69, 'QueryN MetaSearch',1),(70, 'Radiation Retriever',1),(71, 'RepoMonkey',1),(72, 'RMA',1),(73, 'searchpreview',1),(74, 'SiteSnagger',1),(75, 'SpankBot',1),(76, 'spanner',1),(77, 'suzuran',1),(78, 'Szukacz',1),(79, 'Teleport',1),(80, 'The Intraformant',1),(81, 'TheNomad',1),(82, 'TightTwatBot',1),(83, 'True Robot',1),(84, 'toCrawl',1),(85, 'turingos',1),(86, 'UrlDispatcher',1),(87, 'URL_Spider_Pro',1),(88, 'VCI',1),(89, 'Warning',1),(90, 'WebAuto',1),(91, 'WebBandit',1),(92, 'WebCopier',1),(93, 'WebDownloader',1),(94, 'WebEnhancer',1),(95, 'Wget',1),(96, 'Web Image Collector',1),(97, 'WebmasterWorldForumBot',1),(98, 'WebSauger',1),(99, 'Website Quester',1),(100, 'Webster',1),(101, 'WebStripper',1),(102, 'WebZip',1),(103, 'WWW-Collector-E',1),(104, 'Xenu\'s',1),(105, 'Zeus',1),(106, 'AntiLeech Leecher',1),(107, 'HenryTheMiragoRobot',1),(108,'libwww',1)";
 
