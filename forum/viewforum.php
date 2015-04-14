@@ -150,7 +150,6 @@ if (iMOD) { echo "<form name='mod_form' method='post' action='".FUSION_SELF."?fo
 echo "<table cellpadding='0' cellspacing='1' width='100%' class='tbl-border forum_table'>\n<tr>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>&nbsp;</td>\n";
 echo "<td class='tbl2 forum-caption'>".$locale['451']."</td>\n";
-echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>".$locale['452']."</td>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center' >".$locale['453']."</td>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center'>".$locale['454']."</td>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>".$locale['404']."</td>\n</tr>\n";
@@ -207,9 +206,8 @@ if ($rows) {
 			echo "<img src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
 		}
 		echo $threadsubject."</td>\n";
-		echo "<td width='1%' class='tbl2' style='white-space:nowrap'>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</td>\n";
-		echo "<td align='center' width='1%' class='tbl1' style='white-space:nowrap'>".$tdata['thread_views']."</td>\n";
-		echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>".($tdata['thread_postcount']-1)."</td>\n";
+		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$tdata['thread_views']."</td>\n";
+		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".($tdata['thread_postcount']-1)."</td>\n";
 		echo "<td width='1%' class='tbl1' style='white-space:nowrap'>".showdate("forumdate", $tdata['thread_lastpost'])."<br />\n";
 		echo "<span class='small'>".$locale['406'].profile_link($tdata['thread_lastuser'], $tdata['user_lastuser'], $tdata['status_lastuser'])."</span></td>\n";
 		echo "</tr>\n";

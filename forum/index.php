@@ -35,6 +35,20 @@ $result = dbquery(
 	WHERE ".groupaccess('f.forum_access')." AND f.forum_cat!='0'
 	GROUP BY forum_id ORDER BY f2.forum_order ASC, f.forum_order ASC"
 );
+
+$result = dbquery(
+   "SELECT f.forum_id, f.forum_cat, f.forum_name, f.forum_description, f.forum_moderators, f.forum_lastpost, f.forum_postcount,
+   f.forum_threadcount, f.forum_lastuser, f.forum_access, f2.forum_name AS forum_cat_name,
+   t.thread_id, t.thread_lastpost, t.thread_lastpostid, t.thread_subject, t.thread_locked,
+   u.user_id, u.user_name, u.user_status
+   FROM ".DB_FORUMS." f
+   LEFT JOIN ".DB_FORUMS." f2 ON f.forum_cat = f2.forum_id
+   LEFT JOIN ".DB_THREADS." t ON f.forum_id = t.forum_id AND f.forum_lastpost=t.thread_lastpost
+   LEFT JOIN ".DB_USERS." u ON f.forum_lastuser = u.user_id
+   WHERE ".$catWhere." ".groupaccess('f.forum_access')." AND f.forum_cat!='0'
+   GROUP BY forum_id ORDER BY f2.forum_order ASC, f.forum_order ASC, t.thread_lastpost DESC"
+);
+
 if (dbrows($result) != 0) {
 	while ($data = dbarray($result)) {
 		if ($data['forum_cat_name'] != $current_cat) {
@@ -71,17 +85,34 @@ if (dbrows($result) != 0) {
 			echo ($moderators ? "<strong>".$locale['411']."</strong>".$moderators."</span>\n" : "</span>\n")."\n";
 		}
 		echo "</td>\n";
-		echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>".$data['forum_threadcount']."</td>\n";
-		echo "<td align='center' width='1%' class='tbl1' style='white-space:nowrap'>".$data['forum_postcount']."</td>\n";
+		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_threadcount']."</td>\n";
+		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_postcount']."</td>\n";
 		echo "<td width='1%' class='tbl2' style='white-space:nowrap'>";
 		if ($data['forum_lastpost'] == 0) {
-			echo $locale['405']."</td>\n</tr>\n";
-		} else {
-			echo showdate("forumdate", $data['forum_lastpost'])."<br />\n";
-			echo "<span class='small'>".$locale['406'].profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."</span></td>\n";
-			echo "</tr>\n";
+         echo $locale['405']."";
+      } else {
+	$lseen = time() - stripinput($data['user_lastvisit']);
+	if($lseen < 60) { 
+	if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-online' src='".IMAGES."avatars/".$data['user_avatar']."'   title='".$data['user_name'].$locale['modish_006']."' alt='' /></a>";
+	} else { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-online' src='".IMAGES."avatars/noavatar100.png' alt=''  title=' ".$data['user_name'].$locale['modish_006']."' /></a>";
+	} 
+	} elseif($lseen < 300) {  if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-five lstsn-user' src='".IMAGES."avatars/".$data['user_avatar']."'   title='".$data['user_name'].$locale['modish_007']."' alt='' /></a>";
+	} else { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-five lstsn-user' src='".IMAGES."avatars/noavatar100.png'  alt=''  title=' ".$data['user_name'].$locale['modish_007']."' /></a>";
+	} 
+	}else{ if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-offline lstsn-user' src='".IMAGES."avatars/".$data['user_avatar']."'   title='".$data['user_name'].$locale['modish_008'].showdate("shortdate", $data['user_lastvisit'])."' alt='' /></a>";
+	} else { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-offline lstsn-user' src='".IMAGES."avatars/noavatar100.png' alt=''  title=' ".$data['user_name'].$locale['modish_008'].showdate("shortdate", $data['user_lastvisit'])."' /></a>";
+		echo "<br />";
+			
+         echo "<b><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
+		 echo trimlink($data['thread_subject'], 20)." </a></b><br />\n";
+			echo "".$locale['406'].profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."\n";
+			echo "<br />";
+			echo showdate("forumdate", $data['forum_lastpost'])."\n";
+			echo "</td></tr>\n";
+			}
 		}
 	}
+}
 } else {
 	echo "<tr>\n<td colspan='5' class='tbl1'>".$locale['407']."</td>\n</tr>\n";
 }
