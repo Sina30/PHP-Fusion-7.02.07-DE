@@ -1283,7 +1283,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('3', 'Last Visit', '1', '3', 'provisit.php', '1')");
 	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('4', 'Side Profile', '2', '3', 'proprofile.php', '1')");
 	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('5', 'Navigation', '3', '3', 'pronavigation.php', '1')");
-	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('6', 'Admin Information', '4', '3', 'proinfo.php', '1')");
 	
 	
 	$result = dbquery("CREATE TABLE ".$db_prefix."admin_options (
