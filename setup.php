@@ -1809,13 +1809,6 @@ if (isset($_POST['step']) && $_POST['step'] == "6") {
 			
 			for ($i = 0; $i < sizeof($enabled_languages); $i++) {
 				include "locale/".$enabled_languages[$i]."/setup.php";
-				$result = dbquery("INSERT INTO ".$db_prefix."email_templates (template_id, template_key, template_format, template_active, template_name, template_subject, template_content, template_sender_name, template_sender_email, template_language) VALUES ('', 'PM', 'html', '0', '".$locale['T101']."', '".$locale['T102']."', '".$locale['T103']."', '".$username."', '".$email."', '".$enabled_languages[$i]."')");
-				$result = dbquery("INSERT INTO ".$db_prefix."email_templates (template_id, template_key, template_format, template_active, template_name, template_subject, template_content, template_sender_name, template_sender_email, template_language) VALUES ('', 'POST', 'html', '0', '".$locale['T201']."', '".$locale['T202']."', '".$locale['T203']."', '".$username."', '".$email."', '".$enabled_languages[$i]."')");
-				$result = dbquery("INSERT INTO ".$db_prefix."email_templates (template_id, template_key, template_format, template_active, template_name, template_subject, template_content, template_sender_name, template_sender_email, template_language) VALUES ('', 'CONTACT', 'html', '0', '".$locale['T301']."', '".$locale['T302']."', '".$locale['T303']."', '".$username."', '".$email."', '".$enabled_languages[$i]."')");
-			}
-
-			for ($i = 0; $i < sizeof($enabled_languages); $i++) {
-				include "locale/".$enabled_languages[$i]."/setup.php";
 				$result = dbquery("INSERT INTO ".$db_prefix."forum_ranks VALUES ('', '".$locale['200']."', 'rank_super_admin.png', 0, '1', 103, '".$enabled_languages[$i]."')");
 				$result = dbquery("INSERT INTO ".$db_prefix."forum_ranks VALUES ('', '".$locale['201']."', 'rank_admin.png', 0, '1', 102, '".$enabled_languages[$i]."')");
 				$result = dbquery("INSERT INTO ".$db_prefix."forum_ranks VALUES ('', '".$locale['202']."', 'rank_mod.png', 0, '1', 104, '".$enabled_languages[$i]."')");
