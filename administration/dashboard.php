@@ -433,7 +433,7 @@ include LOCALE.LOCALESET."admin/adminpro.php";
 		
 			"SELECT c.comment_id, c.comment_name, c.comment_message, c.comment_datestamp, c.comment_ip, c.comment_type, c.comment_item_id, u.user_id, u.user_name, u.user_status, u.user_level, u.user_avatar FROM ".DB_COMMENTS." c
 		
-			LEFT JOIN ".DB_USERS." u ON c.comment_name=u.user_id ORDER BY c.comment_datestamp DESC LIMIT 0,5");
+			LEFT JOIN ".DB_USERS." u ON c.comment_name=u.user_id ORDER BY c.comment_datestamp DESC LIMIT 0,1");
 
 			if (dbrows($result)) {
 
