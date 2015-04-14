@@ -60,9 +60,9 @@ echo '		<div><ul id="navigation" style="list-style-type: none; margin: 0px; padd
 
 				</a></li>
 
-			</ul></div>
+			</ul></div>';
 
-			<div><ul id="navigation" style="list-style-type: none; margin: 0px; padding: 0px;" class="menu noaccordion">
+echo '			<div><ul id="navigation" style="list-style-type: none; margin: 0px; padding: 0px;" class="menu noaccordion">
 
 				<li><a style="cursor:pointer;" onclick="cookieyaz(1);">
 

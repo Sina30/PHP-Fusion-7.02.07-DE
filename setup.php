@@ -1252,6 +1252,18 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 								$fail = TRUE;
 							}
 
+	$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."adminvisit");
+
+	$result = dbquery("CREATE TABLE ".$db_prefix."adminvisit (
+		visit_id mediumint(8) unsigned NOT NULL auto_increment,
+		visit_admin mediumint(8) unsigned NOT NULL default '0',
+		visit_time int(10) unsigned NOT NULL default '0',
+		visit_link varchar(100) NOT NULL,
+		PRIMARY KEY (visit_id)
+		) ENGINE=MYISAM;");
+	if (!$result) {
+								$fail = TRUE;
+							}
 	$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."admin_panels");
 
 	$result = dbquery("CREATE TABLE ".$db_prefix."admin_panels (
@@ -1266,10 +1278,14 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 	if (!$result) {
 								$fail = TRUE;
 							}
-	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('1', 'Side Profile', '2', '3', 'proprofile.php', '1')");
-	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('2', 'Navigation', '3', '3', 'pronavigation.php', '1')");
-	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('3', 'Admin Information', '4', '3', 'proinfo.php', '1')");
-
+	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('1', 'Admin Members', '2', '1', 'promembers.php', '1')");
+	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('2', 'Admin Messages', '2', '2', 'promessages.php', '1')");
+	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('3', 'Last Visit', '1', '3', 'provisit.php', '1')");
+	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('4', 'Side Profile', '2', '3', 'proprofile.php', '1')");
+	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('5', 'Navigation', '3', '3', 'pronavigation.php', '1')");
+	$result = dbquery("INSERT INTO ".$db_prefix."admin_panels (panel_id, panel_name, panel_order, panel_side, panel_file, panel_display) VALUES ('6', 'Admin Information', '4', '3', 'proinfo.php', '1')");
+	
+	
 	$result = dbquery("CREATE TABLE ".$db_prefix."admin_options (
 		option_name varchar(200) NOT NULL,
 		option_value text NOT NULL

@@ -255,7 +255,7 @@ echo '
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default blank-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Forum ÜBERSICHT</strong></span>
+<span class="text-smaller text-uppercase"><strong>Forum Overview</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/forums.gif">
@@ -286,7 +286,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default green-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Downloads ÜBERSICHT</strong></span>
+<span class="text-smaller text-uppercase"><strong>Downloads Overview</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/dl.gif">
@@ -296,12 +296,12 @@ echo '
 <h4 class="m-t-0">'.dbcount("('download_id')", DB_DOWNLOADS).'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Kommentare</span>
+<span class="text-smaller">Comments</span>
 <br>
 <h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='d'").'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Einreichungen</span>
+<span class="text-smaller">Submissions</span>
 <br>
 <h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='d'").'</h4>
 </div>
@@ -312,7 +312,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default purple-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>News ÜBERSICHT</strong></span>
+<span class="text-smaller text-uppercase"><strong>News Overview</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/news.png">
@@ -322,12 +322,12 @@ echo '
 <h4 class="m-t-0">'.dbcount("('news_id')", DB_NEWS).'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Kommentare</span>
+<span class="text-smaller">Comments</span>
 <br>
 <h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='n'").'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Einreichungen</span>
+<span class="text-smaller">Submissions</span>
 <br>
 <h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='n'").'</h4>
 </div>
@@ -338,7 +338,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default dark-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Articles ÜBERSICHT</strong></span>
+<span class="text-smaller text-uppercase"><strong>Articles Overview</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/articles.png">
@@ -348,12 +348,12 @@ echo '
 <h4 class="m-t-0">'.dbcount("('article_id')", DB_ARTICLES).'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Kommentare</span>
+<span class="text-smaller">Comments</span>
 <br>
 <h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='A'").'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Einreichungen</span>
+<span class="text-smaller">Submissions</span>
 <br>
 <h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='a'").'</h4>
 </div>
@@ -364,7 +364,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default blank-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Weblinks ÜBERSICHT</strong></span>
+<span class="text-smaller text-uppercase"><strong>Weblinks Overview</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/wl.gif">
@@ -374,12 +374,12 @@ echo '
 <h4 class="m-t-0">'.dbcount("('weblink_id')", DB_WEBLINKS).'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Kommentare</span>
+<span class="text-smaller">Comments</span>
 <br>
 <h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='L'").'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Einreichungen</span>
+<span class="text-smaller">Submissions</span>
 <br>
 <h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='l'").'</h4>
 </div>
@@ -390,7 +390,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default flat-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Gallery ÜBERSICHT</strong></span>
+<span class="text-smaller text-uppercase"><strong>Gallery Overview</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/photoalbums.gif">
@@ -400,12 +400,12 @@ echo '
 <h4 class="m-t-0">'.dbcount("('photo_id')", DB_PHOTOS).'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Kommentare</span>
+<span class="text-smaller">Comments</span>
 <br>
 <h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='P'").'</h4>
 </div>
 <div class="pull-left display-inline-block m-r-10">
-<span class="text-smaller">Einreichungen</span>
+<span class="text-smaller">Submissions</span>
 <br>
 <h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='p'").'</h4>
 </div>
@@ -425,7 +425,7 @@ echo '</div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Kommentare</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Comments</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>
 <div class="panel-body">
 <div class="text-center">'; 
 include LOCALE.LOCALESET."admin/adminpro.php";		
@@ -496,7 +496,7 @@ echo '</div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'">Latest Einreichungen</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'">Latest Submissions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
 <div class="panel-body">
 <div class="text-center">';
 
@@ -685,6 +685,38 @@ echo '</div>
 </div>
 ';
 
+echo '
+<div class="dashboard-content" id="small" style="display:none">
+
+	<div style="width:100%;">';
+
+		include ADMIN."proadmin/proforum.php";
+
+		include ADMIN."proadmin/promembers.php";
+
+		include ADMIN."proadmin/procomment.php";
+
+		include ADMIN."proadmin/promessages.php";
+
+		include ADMIN."proadmin/prosubmission.php";
+
+echo '</div>
+
+</div>';
+echo '
+<div class="dashboard-content" id="small" style="display:none">
+
+	<div style="width:100%;">';
+
+		include ADMIN."proadmin/promembers.php";
+
+		include ADMIN."proadmin/promessages.php";
+
+		include ADMIN."proadmin/prosubmission.php";
+
+echo '</div>
+
+</div>';
 echo '	<script type="text/javascript" src="'.INCLUDES.'fusionpro/jquery.dragsort-0.5.1.min.js"></script>
 <!-- Bottom Scripts -->
 	<script type="text/javascript" src="'.THEMES.'templates/assets/js/bootstrap.min.js"></script>
