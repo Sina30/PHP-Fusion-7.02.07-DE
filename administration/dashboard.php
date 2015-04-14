@@ -418,7 +418,8 @@ echo '
 <div class="panel panel-default ">
 <div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'infusions.php'.$aidlink.'">Infusions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>
 <div class="panel-body">
-<div class="text-center">There are no infusions installed</div>
+<div class="text-center">'; 
+echo '</div>
 </div>
 </div>
 </div>
@@ -426,7 +427,60 @@ echo '
 <div class="panel panel-default ">
 <div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Comments</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>
 <div class="panel-body">
-<div class="text-center">'.nl2br(parseubb(parsesmileys($data['comment_message']))).'</div>
+<div class="text-center">'; 
+include LOCALE.LOCALESET."admin/adminpro.php";		
+		$result = dbquery(
+		
+			"SELECT c.comment_id, c.comment_name, c.comment_message, c.comment_datestamp, c.comment_ip, c.comment_type, c.comment_item_id, u.user_id, u.user_name, u.user_status, u.user_level, u.user_avatar FROM ".DB_COMMENTS." c
+		
+			LEFT JOIN ".DB_USERS." u ON c.comment_name=u.user_id ORDER BY c.comment_datestamp DESC LIMIT 0,5");
+
+			if (dbrows($result)) {
+
+				$counter = 0; $type = ""; $type_id = "";
+
+
+				while ($data = dbarray($result)) {
+
+					$counter++;
+
+					if (($type != $data['comment_type'] || $type_id !=  $data['comment_item_id']) && $counter >= '2') { echo "<hr />"; }
+
+					if ($type != $data['comment_type'] || $type_id !=  $data['comment_item_id']) { 
+
+						echo ''.$locale['pro_1016'];
+
+							if ($data['comment_type'] == "N") { $db_name = DB_NEWS; $db_id = 'news_id'; $db_field = 'news_subject'; $db_link = 'news.php?readmore='; $db_org = "News"; }
+
+							if ($data['comment_type'] == "A") { $db_name = DB_ARTICLES; $db_id = 'article_id'; $db_field = 'article_subject'; $db_link = 'articles.php?article_id='; $db_org = "Articles"; }
+
+							if ($data['comment_type'] == "D") { $db_name = DB_DOWNLOADS; $db_id = 'download_id'; $db_field = 'download_title'; $db_link = 'downloads.php?download_id='; $db_org = "Downloads"; }
+
+							if ($data['comment_type'] == "P") { $db_name = DB_PHOTOS; $db_id = 'photo_id'; $db_field = 'photo_title'; $db_link = 'photogallery.php?photo_id='; $db_org = "Photos"; }
+
+							$result_org = dbquery("SELECT ".$db_id.", ".$db_field." FROM ".$db_name." WHERE ".$db_id."='".$data['comment_item_id']."'");
+
+							if (dbrows($result_org)) {
+
+								$org = dbarray($result_org);
+
+								echo '<b><a href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$org[$db_field].'</a></b>';
+
+								//echo ' '.$locale['pro_1017'].' '.$db_org.' '.$locale['pro_1018'];
+							}
+					}
+					if ($data['user_level'] == "102" || $data['user_level'] == "103") {
+echo ' <b><font color="red">'.$data['user_name'].'</b></font> '.$locale['pro_1015'].'
+';
+					}
+					$type = $data['comment_type'];
+					$type_id = $data['comment_item_id'];
+				}
+			} else {
+				//echo '<br /><div align="center">'.$locale['global_026'].'</div><br />';
+			}
+
+echo'</div>
 </div>
 </div>
 </div>
@@ -434,7 +488,9 @@ echo '
 <div class="panel panel-default ">
 <div class="panel-heading"><span class="text-smaller text-uppercase"><strong>Latest Ratings</strong></span><span class="pull-right label label-warning">'.dbcount("(rating_id)", DB_RATINGS).'</span></div>
 <div class="panel-body">
-<div class="text-center">There are no ratings now.</div>
+<div class="text-center">'; 
+
+echo '</div>
 </div>
 </div>
 </div>
@@ -442,7 +498,61 @@ echo '
 <div class="panel panel-default ">
 <div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'">Latest Submissions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
 <div class="panel-body">
-<div class="text-center">There are no submissions now.</div>
+<div class="text-center">';
+
+include LOCALE.LOCALESET."admin/adminpro.php";		
+$result = dbquery("SELECT s.*, u.user_id, u.user_name, u.user_avatar FROM ".DB_SUBMISSIONS." s INNER JOIN ".DB_USERS." u ON s.submit_user =u.user_id ORDER BY s.submit_datestamp DESC LIMIT 0,5");
+
+if (dbrows($result)) {
+
+	$i = 0;
+
+	echo "<table cellpadding='0' cellspacing='0' width='100%'>\n<tr>\n";
+	echo "</tr>\n";
+
+	while ($data = dbarray($result)) {
+
+		$submit_criteria = unserialize($data['submit_criteria']);
+
+		if ($data['submit_type'] == "n") { $submit_name = "news_subject"; $type = "News"; }
+
+		if ($data['submit_type'] == "a") { $submit_name = "article_subject"; $type = "Article"; }
+
+		if ($data['submit_type'] == "d") { $submit_name = "download_title"; $type = "Download"; }
+
+		if ($data['submit_type'] == "p") { $submit_name = "photo_title"; $type = "Photo"; }
+
+		if ($data['submit_type'] == "l") { $submit_name = "link_name"; $type = "Link"; }
+
+		$row_color = ($i % 2 == 0 ? "tbl1" : "tbl2");
+
+		echo "<td width='1%' height='25'>$type</td>\n";
+
+		echo "<td width='60%' height='25'><a href='".ADMIN."submissions.php".$aidlink."&action=2&t=".$data['submit_type']."&submit_id=".$data['submit_id']."'><b><font color='red'>".$submit_criteria[$submit_name]."</b></font></a></td>\n";
+
+		echo "<td width='50' align='center' height='25'>";
+
+		echo '<div style="width:49px;" align="center">';
+
+		echo '<div  style="float:left;margin-right:5px"><a href="'.ADMIN.'submissions.php'.$aidlink.'&action=2&t='.$data['submit_type'].'&submit_id='.$data['submit_id'].'" title="'.$locale['pro_1025'].'"><img src="'.THEMES.'templates/images/admin/view.png" /></a></div>';
+
+		echo '<div  style="float:left"><a href="'.ADMIN.'submissions.php'.$aidlink.'&delete='.$data['submit_id'].'" title="'.$locale['pro_1019'].'"onclick="return confirm(\''.$locale['pro_1046'].'\');"><img src="'.THEMES.'templates/images/admin/delete.png" /></a></div>';
+
+		echo '</div>';
+
+		echo "</td>\n";
+
+		echo "</tr>\n";
+
+		$i++;
+
+	}
+
+	echo "</table>\n";
+
+} else { echo '<div align="center">'.$locale['pro_1055'].'</div>'; }
+
+echo'</div>
 </div>
 </div>
 </div>';	
