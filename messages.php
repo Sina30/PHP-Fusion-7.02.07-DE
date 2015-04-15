@@ -416,7 +416,7 @@ if (!isset($_GET['msg_send']) && !isset($_GET['msg_read']) && $_GET['folder'] !=
 		echo "<td class='tbl1'>".showdate("longdate", $data['message_datestamp'])."</td>\n</tr>\n";
 		echo "<tr>\n<td align='right' width='1%' class='tbl2' style='white-space:nowrap'>".$locale['405']."</td>\n";
 		echo "<td class='tbl1'>".$data['message_subject']."</td>\n</tr>\n";
-		echo "<tr>\n<td colspan='2' class='tbl1'><b>".nl2br(parseubb($message_message))."</td>\n</tr></b>\n";
+		echo "<tr>\n<td colspan='2' class='tbl2'><b>".$locale['422']."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".nl2br(parseubb($message_message))."</td>\n</tr></b>\n";
 		echo "</table>\n";
 		echo "<table cellpadding='0' cellspacing='0' width='100%'>\n";
 		echo "<tr>\n<td colspan='2' class='tbl'><a href='".FUSION_SELF."?folder=".$_GET['folder']."'>".$locale['432']."</a></td>\n";
