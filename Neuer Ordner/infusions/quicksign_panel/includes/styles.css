@@ -1,0 +1,331 @@
+#position-fixed-top {
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:9999999999999999999999;
+}
+/* Top Bar */
+#top-bar {
+    font-family: 'Open Sans',sans-serif;
+	display:block;
+	position:relative;
+	width:100%;
+	height:42px;
+	background: #131C36; /* Top Bar Background Colour */
+	box-shadow:0 1px 2px #666666;  /* Top Bar Shadow Colour */
+	-webkit-box-shadow: 0 1px 2px #666666; /* Top Bar Shadow Colour */
+} 
+.active-linkage {
+	position:absolute;
+	right:1px;
+	top:0;
+}
+#quicksign-container {
+	width:90%;
+	margin:0 auto;
+	position: relative;
+}
+#top-navi {
+	text-align:right;
+}
+#session {
+	cursor:pointer;
+	display:inline-block;
+	height:22px;
+	padding:10px 12px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+/* Login Link */
+#session.active, #session:hover {
+	background: #2a6496;
+	color: #ffffff;
+}
+a#quicksign-login-link {
+	color:#eee;
+	position:relative;
+}
+a#quicksign-login-link em {
+	font-size:10px;
+	font-style:normal;
+	margin-right:4px;
+}
+a#quicksign-login-link strong {
+	color:#fff;
+}
+/* Quicksign Login Dropdown */
+#quicksign-login-dropdown {
+	background-color:#2a6496; /* Quicksign Login Dropdown Background Colour */
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	box-shadow:0 1px 2px #666666;
+	-webkit-box-shadow: 0 1px 2px #666666;
+	min-height:200px;
+	min-width:160px;
+	position:absolute;
+	right:0;
+	display:none;
+	z-index:9999999999999999999999;
+}
+#quicksign-login-dropdown form{
+	cursor:pointer;
+	padding:10px;
+	text-align:left;
+}
+/* Quicksign Login Textbox */
+#quicksign-login-dropdown .textboxq span { 
+	color:#eee;
+}
+#quicksign-login-dropdown .textboxq input { 
+	width:200px; 
+}
+/* Quicksign Login List for User Controls */
+#quicksign-login-dropdown ul{
+	list-style-type: none;
+	padding: 0px;
+	margin: 70px 0px 0px 0px;	
+}
+#quicksign-login-dropdown li {
+	width:200px;
+	text-align:left; 
+	border-bottom: 1px solid #6790BC;
+	padding: 5px 0 5px 30px;
+	opacity: 0.8;
+	-khtml-opacity: 0.8;
+	-moz-opacity: 0.8;
+	-ms-filter:'progid:DXImageTransform.Microsoft.Alpha'(Opacity=0.8);
+	filter: progid:DXImageTransform.Microsoft:Alpha(opacity=0.8);
+	filter:alpha(opacity=0.8);
+}
+#quicksign-login-dropdown  li.messages {
+	background: url(../images/messages.png) no-repeat 8px 7px;
+}
+#quicksign-login-dropdown li.your-profile {
+	background: url(../images/your_profile.png) no-repeat 8px 7px;
+}
+#quicksign-login-dropdown li.edit-proofile {
+	background: url(../images/edit_profile.png) no-repeat 8px 7px;
+}
+#quicksign-login-dropdown  li.members {
+	background: url(../images/members.png) no-repeat 8px 7px;
+}
+#quicksign-login-dropdown  li.administrators {
+	background: url(../images/administrator.png) no-repeat 8px 7px;
+}
+#quicksign-login-dropdown  li.logout {
+	background: url(../images/logout.png) no-repeat 8px 7px;
+}
+#quicksign-login-dropdown li:hover {
+	background-color:rgba(255,255,255,0.1);
+	color:fff;
+	opacity: 1;
+	-khtml-opacity: 1;
+	-moz-opacity: 1;
+	-ms-filter:'progid:DXImageTransform.Microsoft.Alpha'(Opacity=1);
+	filter: progid:DXImageTransform.Microsoft:Alpha(opacity=1);
+	filter:alpha(opacity=1);
+}
+#quicksign-login-dropdown a {
+	color: #fff;
+}
+#quicksign-login-dropdown a:hover{
+	color: #fff;
+}
+fieldset { 
+	border:none; 
+}
+
+form.quicksign-login .textboxq label { 
+	display:block; 
+	padding-bottom:7px; 
+}
+form.quicksign-login .textboxq span { 
+	display:block;
+}
+form.quicksign-login p, form.quicksign-login span { 
+	color:#eee; 
+	font-size:11px; 
+	line-height:18px;
+} 
+
+form.quicksign-login .textboxq input { 
+	background-color: #fff;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	box-shadow:  0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	-moz-box-shadow:  0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	-webkit-box-shadow:  0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	font-size: 13px;
+	padding: 6px 6px 4px;
+	-webkit-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	-moz-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	-ms-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	-o-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	margin-bottom: 5px;
+}
+form.quicksign-login .remb { 
+	padding:9px 0; 
+	position:relative; 
+	text-align:right;
+}
+form.quicksign-login .remb .remember { 
+	text-align:left; 
+	position:absolute; 
+	left:0;
+}
+/* Quicksign Login Button */
+.qbutton { 
+	border: 1px solid #333;
+	display: inline-block;
+	padding: 5px 10px;
+	font-size: 0.8925em;
+	color: #ffffff;
+	background: #428bca;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-o-border-radius: 2px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	margin:5px;
+	cursor: pointer; 
+}
+.qbutton:hover {
+	background:#3071A9;
+}
+form.quicksign-login p a {
+	color: #fff;
+}
+.mobile a {
+	color: #fff;
+}
+.user-data {
+	padding-top: 11px;
+	font-size: 14px;
+	color: #eee;
+	font-weight:bold;
+}
+.new-msgs, .new-msgs a {
+	color: #ff1111;
+}
+.member-avatar {
+	width: 40px;
+	height: 40px; 
+	border: 0px; 
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+}
+.home {
+	cursor:pointer;
+	display:inline-block;
+	height:22px;
+	padding:10px 12px;
+	vertical-align: top;
+	white-space: nowrap;
+	background: url(../images/home-icon.png) no-repeat 12px center;
+	width: 16px;
+}
+ .home a:hover,  .home:hover{
+	background-position: -43px center;
+	background-color: #2a6496;
+	color: #ffffff;
+}
+.up {
+	cursor:pointer;
+	display:inline-block;
+	height:22px;
+	padding:10px 12px;
+	vertical-align: top;
+	white-space: nowrap;
+	background: url(../images/up-icon.png) no-repeat 12px center;
+	width: 16px;
+	margin-right: 5px;
+}
+ .up a:hover,  .up:hover{
+	background-position: -43px center;
+	background-color: #2a6496;
+	color: #ffffff;
+}
+.down {
+	cursor:pointer;
+	display:inline-block;
+	height:22px;
+	padding:10px 12px;
+	vertical-align: top;
+	white-space: nowrap;
+	background: url(../images/down-icon.png) no-repeat 12px center;
+	width: 16px;
+	margin-right: 5px;
+}
+.down a:hover,  .down:hover{
+	background-position: -43px center;
+	background-color: #2a6496;
+	color: #ffffff;
+}
+
+	#quicksign-search {
+float:right;
+margin-right: 180px;
+padding-top: 6px;
+margin-bottom: 2px;
+}
+
+#quicksign-search input[type='text'] {
+    background: url(../images/search-white.png) no-repeat 10px 6px #444;
+    border: 0 none;
+    font: bold 12px Arial,Helvetica,Sans-serif;
+    color: #c0c0c0;
+    width: 150px;
+    padding: 6px 15px 6px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    }
+@media only screen and (min-width: 100px) and (max-width: 768px) {
+#quicksign-search { display: none;
+}
+    }
+	@media only screen and (min-width: 100px) and (max-width: 480px) {
+	#top-bar {
+	display:block;
+	position:relative;
+	width:100%;
+	height:82px;
+	background: #131C36; /* Top Bar Background Colour */
+	box-shadow:0 1px 2px #666666;  /* Top Bar Shadow Colour */
+	-webkit-box-shadow: 0 1px 2px #666666; /* Top Bar Shadow Colour */
+} 
+
+
+.user-data {
+
+	padding-top: 41px;
+	font-size: 12px;
+	color: #eee;
+	font-weight:bold;
+}
+#session {
+font-size: 12px;
+}
+	}
+	#quicksign-search input[type='text']:focus {
+    width: 200px;
+	border: 0;
+	outline:none;
+    }

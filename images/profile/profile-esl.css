@@ -1,0 +1,234 @@
+
+
+
+.esl-profile {
+}
+
+.esl-profile .clear {
+	clear: both;
+}
+
+.esl-profile hr {
+	margin-top: 5px;
+}
+
+.esl-profile .top-info {
+}
+
+.esl-profile .top-info .status, .esl-profile .top-info .flag, .esl-profile .top-info .gender {
+	width: 20px;
+	float: left;
+	text-align: center;
+}
+
+.esl-profile .top-info .status {
+	margin-right: 20px;
+}
+
+.esl-profile .top-info .gender {
+	margin-right: 6px;
+}
+
+.esl-profile .top-info .status img {
+	max-height: 16px;
+	max-width: 16px;
+}
+
+.esl-profile .top-info .name {
+	width: 320px;
+	float: left;
+	font-size: 13px;
+}
+
+.esl-profile .top-info .name img {
+	max-height: 16px;
+	max-width: 16px;
+}
+
+.esl-profile .top-info .user-id {
+	float: right;
+	font-weight: bold;
+}
+
+.esl-profile .options {
+	float: right;
+}
+
+.esl-profile .options-admin {
+	width: 120px;
+	margin-top: 7px;
+	font-size: 10px;
+}
+
+.esl-profile .options-admin .title {
+	cursor: pointer;
+}
+
+.esl-profile .options-admin a, .esl-profile .options-admin input, .esl-profile .options-admin select {
+	font-size: 8px;
+}
+
+.esl-profile .options img {
+	padding: 5px;
+}
+
+.esl-profile .middle-info {
+	padding: 12px;
+	margin-top: 20px;
+}
+
+.esl-profile .middle-info .avatar {
+	padding: 4px;
+	width: 120px;
+	height: 180px;
+	float: left;
+	text-align: center;
+}
+
+.esl-profile .middle-info .user-info {
+	float: left;
+	margin-left: 25px;
+}
+
+.esl-profile .middle-info .user-info .field {
+	padding: 1px;
+	width: 140px;
+	float: left;
+	margin-right: 30px;
+	margin-bottom: 10px;
+}
+
+.esl-profile .middle-info .user-info .field div:first-child {
+	padding: 1px;
+	background-image: url(field-bg.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;	
+}
+
+.esl-profile .middle-info .user-info .field div:last-child {
+	padding: 1px;
+	font-size: 9px;
+	font-style: italic;
+}
+
+.esl-profile .extra-info {
+	margin-top: 12px;
+}
+
+.esl-profile .extra-info .description {
+	width: 240px;
+	float: left;
+}
+
+.esl-profile .extra-info .description .title {
+	padding: 2px;
+	background-image: url(field-bg.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;	
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+.esl-profile .extra-info .visitors {
+	width: 200px;
+	float: right;
+}
+
+.esl-profile .extra-info .visitors .title {
+	padding: 2px;
+	background-image: url(field-bg.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;	
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+.esl-profile .statistics-info {
+	margin-top: 20px;
+}
+
+.esl-profile .statistics-info .title {
+	padding: 2px;
+	background-image: url(field-bg.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;	
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+.esl-profile .statistics-info .field-table {
+	width: 100%;
+}
+
+.esl-profile .statistics-info .field-table td:first-child {
+	width: 160px;
+}
+
+.esl-profile .statistics-info .field-table td:last-child {
+	text-align: left;
+}
+
+.esl-profile .contact-info {
+	margin-top: 20px;
+}
+
+.esl-profile .contact-info .title {
+	padding: 2px;
+	background-image: url(field-bg.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;	
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+.esl-profile .contact-info .field-table {
+	width: 100%;
+}
+
+.esl-profile .contact-info img {
+	max-height: 16px;
+	max-width: 16px;
+}
+
+.esl-profile .contact-info .field-table td:first-child {
+	width: 160px;
+}
+
+.esl-profile .contact-info .field-table td:last-child {
+	text-align: left;
+}
+
+.esl-profile .group-info {
+	margin-top: 20px;
+}
+
+.esl-profile .group-info .title {
+	padding: 2px;
+	background-image: url(field-bg.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;	
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+.esl-profile .group-info .field-table {
+	width: 100%;
+}
+
+.esl-profile .group-info img {
+	max-height: 16px;
+	max-width: 16px;
+}
+
+.esl-profile .group-info .field-table td:first-child {
+	width: 160px;
+}
+
+.esl-profile .group-info .field-table td:last-child {
+	text-align: left;
+}

@@ -736,6 +736,7 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							message_subject VARCHAR(100) NOT NULL DEFAULT '',
 							message_message TEXT NOT NULL,
 							message_smileys CHAR(1) NOT NULL DEFAULT '',
+							message_reply TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 							message_read TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 							message_datestamp INT(10) UNSIGNED NOT NULL DEFAULT '0',
 							message_folder TINYINT(1) UNSIGNED NOT NULL DEFAULT  '0',
