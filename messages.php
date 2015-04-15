@@ -296,8 +296,22 @@ if (!isset($_GET['msg_send']) && !isset($_GET['msg_read']) && $_GET['folder'] !=
 			if (!$data['message_read']) { $message_subject = "<strong>".$message_subject."</strong>"; }
 			echo "<tr>\n<td class='tbl1'><input type='checkbox' name='check_mark[]' value='".$data['message_id']."' />\n";
 			echo "<a href='".FUSION_SELF."?folder=".$_GET['folder']."&amp;msg_read=".$data['message_id']."'>".$message_subject."</a></td>\n";
-			echo "<td width='1%' class='tbl1' style='white-space:nowrap'>".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n";
+	echo "<td width='1%' class='tbl2' style='white-space:nowrap'>";
+	$lseen = time() - stripinput($data['user_lastvisit']);
+	if($lseen < 60) { 
+	if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-online' src='".IMAGES."avatars/".$data['user_avatar']."'   title='".$data['user_name'].$locale['modish_006']."' alt='' /></a>";
+	} else { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-online' src='".IMAGES."avatars/noavatar100.png' alt=''  title=' ".$data['user_name'].$locale['modish_006']."' /></a>";
+	} 
+	} elseif($lseen < 300) {  if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-five lstsn-user' src='".IMAGES."avatars/".$data['user_avatar']."'   title='".$data['user_name'].$locale['modish_007']."' alt='' /></a>";
+	} else { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-five lstsn-user' src='".IMAGES."avatars/noavatar100.png'  alt=''  title=' ".$data['user_name'].$locale['modish_007']."' /></a>";
+	} 
+	}else{ if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-offline lstsn-user' src='".IMAGES."avatars/".$data['user_avatar']."'   title='".$data['user_name'].$locale['modish_008'].showdate("shortdate", $data['user_lastvisit'])."' alt='' /></a>";
+	} else { echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'><img class='lstsn-users-offline lstsn-user' src='".IMAGES."avatars/noavatar100.png' alt=''  title=' ".$data['user_name'].$locale['modish_008'].showdate("shortdate", $data['user_lastvisit'])."' /></a>";
+			echo "<br />";
+			echo "".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n";
 			echo "<td width='1%' class='tbl1' style='white-space:nowrap'>".showdate("shortdate", $data['message_datestamp'])."</td>\n</tr>\n";
+		}
+		}
 		}
 		echo "</table>\n";
 
