@@ -44,4 +44,10 @@ $locale['459'] = $locale['457']." und ".$locale['458'];
 #$locale['450'] = utf8_encode($locale['450']);
 #$locale['451'] = utf8_encode($locale['451']);
 
+// Advanced Article Admin
+$locale['c20_001'] = "Artikel &amp; Auszug";
+$locale['c20_002'] = "Hits";
+$locale['c20_003'] = "Kategorie";
+$locale['c20_004'] = "Erstellt am";
+
 ?>

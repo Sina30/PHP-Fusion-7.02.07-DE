@@ -1,11 +1,19 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2010 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
-| Filename: articles.php
-| Author: Nick Jones (Digitanium)
+| Filename:         articles.php
+| Original Author:  Nick Jones (Digitanium)
+| Mod Author:       cypher2020
+| Mod Version:      0.1a
++--------------------------------------------------------+
+| c20 ADVANCED ARTICLE-ADMIN
+| ''''''''''''''''''''''''''
+| This modification shows existent articles of your site
+| in a table with more information and direct links.
+| It uses pagination to generate clear tables.
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -16,11 +24,10 @@
 | written permission from the original author(s).
 +--------------------------------------------------------*/
 require_once "../maincore.php";
-
-if (!checkrights("A") || !defined("iAUTH") || !isset($_GET['aid']) || $_GET['aid'] != iAUTH) { redirect("../index.php"); }
-
 require_once THEMES."templates/admin_header_mce.php";
 include LOCALE.LOCALESET."admin/articles.php";
+
+if (!checkrights("A") || !defined("iAUTH") || $_GET['aid'] != iAUTH) { redirect("../index.php"); }
 
 if ($settings['tinymce_enabled'] == 1) {
 	echo "<script language='javascript' type='text/javascript'>advanced();</script>\n";
@@ -86,35 +93,84 @@ if (!empty($result)) {
 			echo $body2preview."\n";
 			closetable();
 		}
-		$result = dbquery("SELECT article_id, article_subject, article_draft FROM ".DB_ARTICLES." ORDER BY article_draft DESC, article_datestamp DESC");
-		if (dbrows($result)) {
-			$editlist = ""; $sel = "";
-			while ($data = dbarray($result)) {
-				if ((isset($_POST['article_id']) && isnum($_POST['article_id'])) || (isset($_GET['article_id']) && isnum($_GET['article_id']))) {
-					$article_id = isset($_POST['article_id']) ? $_POST['article_id'] : $_GET['article_id'];
-					$sel = ($article_id == $data['article_id'] ? " selected='selected'" : "");
-				} else {
-					$sel = "";
-				}
-				$editlist .= "<option value='".$data['article_id']."'".$sel.">".($data['article_draft'] ? $locale['433']." " : "").$data['article_subject']."</option>\n";
-			}
-			opentable($locale['402']);
-			echo "<div style='text-align:center'>\n<form name='selectform' method='post' action='".FUSION_SELF.$aidlink."&amp;action=edit'>\n";
-			echo "<select name='article_id' class='textbox' style='width:250px;'>\n".$editlist."</select>\n";
-			echo "<input type='submit' name='edit' value='".$locale['420']."' class='button' />\n";
-			echo "<input type='submit' name='delete' value='".$locale['421']."' onclick='return DeleteArticle();' class='button' />\n";
-			echo "</form>\n</div>\n";
-			closetable();
-		}
+  
+                // *** c20 Advanced Article Admin ***
+                $a = isset($_GET['rowstart']) && isnum($_GET['rowstart']) ? $_GET['rowstart'] : "0";
+                $b = 10;
+
+                $result = dbquery("SELECT * FROM ".DB_ARTICLES." ORDER BY article_draft DESC, article_datestamp DESC LIMIT ".$a.",".$b);
+
+                if (dbrows($result))
+                {
+                  $editlist = "";
+                  $sel = "";
+                  $rows = dbcount("(*)",DB_ARTICLES,"");
+
+                  opentable($locale['402']);
+                  echo "<form name='selectform' method='post' action='".FUSION_SELF.$aidlink."&amp;action=edit'>";
+                  echo "<table class='tbl-border' cellpadding='0' cellspacing='1' width='100%'>";
+                  echo "<tr>";
+                  echo "<td class='tbl2' style='width: 20px; text-align: center;'></td>";
+                  echo "<td class='tbl2'><b>".$locale['c20_001']."</b></td>";
+                  echo "<td class='tbl2'><b>".$locale['c20_002']."</b></td>";
+                  echo "<td class='tbl2'><b>".$locale['c20_003']."</b></td>";
+                  echo "<td class='tbl2'><b>".$locale['c20_004']."</b></td>";
+                  echo "</tr>";
+
+                  $color = "tbl1";
+                  while ($data = dbarray($result))
+                  {
+                    if ((isset($_POST['article_id']) && isnum($_POST['article_id'])) || (isset($_GET['article_id']) && isnum($_GET['article_id'])))
+                    {
+                      $article_id = isset($_POST['article_id']) ? $_POST['article_id'] : $_GET['article_id'];
+                      $sel = ($article_id == $data['article_id'] ? " selected='selected'" : "");
+                    }
+                    else
+                    {
+                      $sel = "";
+                    }
+                    if ($color=="tbl1")
+                    {
+                      $color="tbl";
+                    }
+                    else
+                    {
+                      $color="tbl1";
+                    }
+                    $result2 = dbquery("SELECT * FROM ".DB_ARTICLE_CATS." WHERE article_cat_id='".$data['article_cat']."'");
+                    if (dbrows($result2))
+                    {
+                      $data2 = dbarray($result2);
+                      
+                    }
+                    if (isset($article_id)) $sel = ($article_id == $data['article_id'] ? " checked" : "");
+                    echo "<tr>";
+                    echo "<td class='".$color."' style='width: 20px; text-align: center;'><input type='radio' name='article_id' value='".$data['article_id']."'$sel></td>";
+                    echo "<td class='".$color."'><b><a href='../articles.php?article_id=".$data['article_id']."' target='_blank'>".$data['article_subject']."</a></b><br />".substr(strip_tags($data['article_snippet']),0,75)." ...</td>";
+                    echo "<td class='".$color."'>".$data['article_reads']."</td>";
+                    echo "<td class='".$color."'>".$data2['article_cat_name']."</td>";
+                    echo "<td class='".$color."'>".date("d.m.Y - H:i:s",$data['article_datestamp'])."</td>";
+                    echo "</tr>";
+                  }
+                  echo "</table>";
+                  if ($rows > $b)
+                  {
+                    echo "<div style='width: 100%; margin-top: 5px; margin-bottom: 5px; text-align: center;'>\n";
+                    echo makePageNav($a,$b,$rows,3,FUSION_SELF."?aid=".iAUTH."&")."\n";
+                    echo "</div>";
+                  }
+                  echo "<div style='width: 100%; text-align: center;'>\n";
+                  echo "<input type='submit' name='edit' value='".$locale['420']."' class='button' />\n";
+                  echo "<input type='submit' name='delete' value='".$locale['421']."' onclick='return DeleteArticle();' class='button' />\n";
+                  echo "</div>";
+                  echo "</form>";
+                  
+                  closetable();
+                }
+                // *** Advanced Article Admin ***
 
 		if ((isset($_GET['action']) && $_GET['action'] == "edit") && (isset($_POST['article_id']) && isnum($_POST['article_id'])) || (isset($_GET['article_id']) && isnum($_GET['article_id']))) {
-			$id = "";
-			if (isset($_POST['article_id']) && isnum($_POST['article_id'])) {
-				$id = $_POST['article_id'];
-			} elseif (isset($_GET['article_id']) && isnum($_GET['article_id'])) {
-				$id = $_GET['article_id'];
-			}
-			$result = dbquery("SELECT article_cat, article_subject, article_snippet, article_article, article_draft, article_breaks, article_allow_comments, article_allow_ratings FROM ".DB_ARTICLES." WHERE article_id='".$id."'");
+			$result = dbquery("SELECT article_cat, article_subject, article_snippet, article_article, article_draft, article_breaks, article_allow_comments, article_allow_ratings FROM ".DB_ARTICLES." WHERE article_id='".(isset($_POST['article_id']) ? $_POST['article_id'] : $_GET['article_id'])."'");
 			if (dbrows($result)) {
 				$data = dbarray($result);
 				$article_cat = $data['article_cat'];
@@ -170,7 +226,7 @@ if (!empty($result)) {
 		echo "</tr>\n";
 		if ($settings['tinymce_enabled'] != 1) {
 			echo "<tr>\n<td class='tbl'></td><td class='tbl'>\n";
-			echo "<input type='button' value='".$locale['432']."' class='button' onclick=\"insertText('body2', '&lt;!--PAGEBREAK--&gt;');\" />\n";
+			echo "<input type='button' value='".$locale['432']."' class='button' style='width:80px;' onclick=\"insertText('body2', '<--PAGEBREAK-->');\" />\n";
 			echo display_html("inputform", "body2", true, true, true, IMAGES_A);
 			echo "</td>\n</tr>\n";
 		}
@@ -178,31 +234,9 @@ if (!empty($result)) {
 		echo "<td class='tbl'></td><td class='tbl'>\n";
 		echo "<label><input type='checkbox' name='article_draft' value='yes'".$draft." /> ".$locale['426']."</label><br />\n";
 		if ($settings['tinymce_enabled'] != 1) { echo "<label><input type='checkbox' name='line_breaks' value='yes'".$breaks." /> ".$locale['427']."</label><br />\n"; }
-		echo "<label><input type='checkbox' name='article_comments' value='yes'".$comments." /> ".$locale['428']."</label>";
-		if ($settings['comments_enabled'] == "0") {
-			echo "<span style='color:red;font-weight:bold;margin-left:3px;'>*</span>";
-		}
-		echo "<br />\n";
-		echo "<label><input type='checkbox' name='article_ratings' value='yes'".$ratings." /> ".$locale['429']."</label>";
-		if ($settings['ratings_enabled'] == "0") {
-			echo "<span style='color:red;font-weight:bold;margin-left:3px;'>*</span>";
-		}
-		echo "</td>\n";
-		echo "</tr>\n";
-		if ($settings['comments_enabled'] == "0" || $settings['ratings_enabled'] == "0") {
-			$sys = "";
-			if ($settings['comments_enabled'] == "0" &&  $settings['ratings_enabled'] == "0") {
-				$sys = $locale['459'];
-			} elseif ($settings['comments_enabled'] == "0") {
-				$sys = $locale['457'];
-			} else {
-				$sys = $locale['458'];
-			}
-			echo "<tr>\n<td colspan='2' class='tbl1' style='font-weight:bold;text-align:left; color:black !important; background-color:#FFDBDB;'>";
-			echo "<span style='color:red;font-weight:bold;margin-right:5px;'>*</span>".sprintf($locale['456'], $sys);
-			echo "</td>\n</tr>";
-		}
-		echo "<tr>\n";
+		echo "<label><input type='checkbox' name='article_comments' value='yes'".$comments." /> ".$locale['428']."</label><br />\n";
+		echo "<label><input type='checkbox' name='article_ratings' value='yes'".$ratings." /> ".$locale['429']."</label></td>\n";
+		echo "</tr>\n<tr>\n";
 		echo "<td align='center' colspan='2' class='tbl'><br />\n";
 		if ((isset($_POST['article_id']) && isnum($_POST['article_id'])) || (isset($_GET['article_id']) && isnum($_GET['article_id']))) {
 			echo "<input type='hidden' name='article_id' value='".(isset($_POST['article_id']) ? $_POST['article_id'] : $_GET['article_id'])."' />\n";
@@ -211,14 +245,10 @@ if (!empty($result)) {
 		echo "<input type='submit' name='save' value='".$locale['431']."' class='button' /></td>\n";
 		echo "</tr>\n</table>\n</form>\n";
 		closetable();
-		echo "<script type='text/javascript'>\n";
-		echo "/* <![CDATA[ */\n";
-		echo "function DeleteArticle() {\n";
+		echo "<script type='text/javascript'>"."\n"."function DeleteArticle() {\n";
 		echo "return confirm('".$locale['451']."');\n}\n";
 		echo "function ValidateForm(frm) {"."\n"."if(frm.subject.value=='') {\n";
-		echo "alert('".$locale['450']."');"."\n"."return false;\n}\n}\n";
-		echo "/* ]]>*/\n";
-		echo "</script>\n";
+		echo "alert('".$locale['450']."');"."\n"."return false;\n}\n}\n</script>\n";
 	}
 } else {
 	opentable($locale['403']);
