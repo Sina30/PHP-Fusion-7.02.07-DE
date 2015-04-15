@@ -23,7 +23,7 @@ if ($profile_method == "input") {
 	if ($this->isError()) { $user_icq = isset($_POST['user_icq']) ? stripinput($_POST['user_icq']) : $user_icq; }
 
 	echo "<tr>\n";
-	echo "<td class='tbl".$this->getErrorClass("user_icq")."'><label for='user_icq'>".$locale['uf_icq'].$required."</label></td>\n";
+	echo "<td class='tbl".$this->getErrorClass("user_icq")."'><label for='user_icq'><img src='".IMAGES."icons/icqM.png'>&nbsp;".$locale['uf_icq'].$required."</label></td>\n";
 	echo "<td class='tbl".$this->getErrorClass("user_icq")."'>";
 	echo "<input type='text' id='user_icq' name='user_icq' value='".$user_icq."' maxlength='16' class='textbox' style='width:200px;' />";
 	echo "</td>\n</tr>\n";
@@ -34,7 +34,7 @@ if ($profile_method == "input") {
 } elseif ($profile_method == "display") {
 	if ($user_data['user_icq']) {
 		echo "<tr>\n";
-		echo "<td class='tbl1'>".$locale['uf_icq']."</td>\n";
+		echo "<td class='tbl1'><img src='".IMAGES."icons/icqM.png'>&nbsp;".$locale['uf_icq']."</td>\n";
 		echo "<td align='right' class='tbl1'>".$user_data['user_icq']."</td>\n";
 		echo "</tr>\n";
 	}

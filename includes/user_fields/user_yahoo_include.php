@@ -23,7 +23,7 @@ if ($profile_method == "input") {
 	if ($this->isError()) { $user_yahoo = isset($_POST['user_yahoo']) ? stripinput($_POST['user_yahoo']) : $user_yahoo; }
 
 	echo "<tr>\n";
-	echo "<td class='tbl".$this->getErrorClass("user_yahoo")."'><label for='user_yahoo'>".$locale['uf_yahoo'].$required."</label></td>\n";
+	echo "<td class='tbl".$this->getErrorClass("user_yahoo")."'><label for='user_yahoo'><img src='".IMAGES."icons/yahoo.png'>&nbsp;".$locale['uf_yahoo'].$required."</label></td>\n";
 	echo "<td class='tbl".$this->getErrorClass("user_yahoo")."'>";
 	echo "<input type='text' id='user_yahoo' name='user_yahoo' value='".$user_yahoo."' maxlength='100' class='textbox' style='width:200px;' />";
 	echo "</td>\n</tr>\n";
@@ -34,7 +34,7 @@ if ($profile_method == "input") {
 } elseif ($profile_method == "display") {
 	if ($user_data['user_yahoo']) {
 		echo "<tr>\n";
-		echo "<td class='tbl1'>".$locale['uf_yahoo']."</td>\n";
+		echo "<td class='tbl1'><img src='".IMAGES."icons/yahoo.png'>&nbsp;".$locale['uf_yahoo']."</td>\n";
 		echo "<td align='right' class='tbl1'>".$user_data['user_yahoo']."</td>\n";
 		echo "</tr>\n";
 	}

@@ -23,7 +23,7 @@ if ($profile_method == "input") {
 	if ($this->isError()) { $user_skype = isset($_POST['user_skype']) ? stripinput($_POST['user_skype']) : $user_skype; }
 	
 	echo "<tr>\n";
-	echo "<td class='tbl".$this->getErrorClass("user_skype")."'><label for='user_skype'>".$locale['uf_skype'].$required."</label></td>\n";
+	echo "<td class='tbl".$this->getErrorClass("user_skype")."'><label for='user_skype'><img src='".IMAGES."icons/skype.png'>&nbsp;".$locale['uf_skype'].$required."</label></td>\n";
 	echo "<td class='tbl".$this->getErrorClass("user_skype")."'>";
 	echo "<input type='text' id='user_skype' name='user_skype' value='".$user_skype."' maxlength='16' class='textbox' style='width:200px;' />";
 	echo "</td>\n</tr>\n";
@@ -34,7 +34,7 @@ if ($profile_method == "input") {
 } elseif ($profile_method == "display") {
 	if ($user_data['user_skype']) {
 		echo "<tr>\n";
-		echo "<td class='tbl1'>".$locale['uf_skype']."</td>\n";
+		echo "<td class='tbl1'><img src='".IMAGES."icons/skype.png'>&nbsp;".$locale['uf_skype']."</td>\n";
 		echo "<td align='right' class='tbl1'><a href='skype:".$user_data['user_skype']."?add'>".$user_data['user_skype']."</a></td>\n";
 		echo "</tr>\n";
 	}
