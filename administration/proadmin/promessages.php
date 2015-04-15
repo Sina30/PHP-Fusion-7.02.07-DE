@@ -35,12 +35,34 @@
 if (!defined("IN_FUSION")) { die("Access Denied"); }
 
 include LOCALE.LOCALESET."admin/adminpro.php";
-
-opentidetable($locale['pro_1033']);
 		
-$result = dbquery("SELECT m.message_id, m.message_subject, m.message_read, m.message_datestamp, m.message_from, u.user_id, u.user_name, u.user_avatar FROM ".DB_MESSAGES." m INNER JOIN ".DB_USERS." u ON m.message_from=u.user_id WHERE m.message_to='".$userdata['user_id']."' AND m.message_folder='0' ORDER BY m.message_datestamp DESC LIMIT 0,5");
+$result = dbquery("SELECT m.message_id, m.message_subject, m.message_read, m.message_datestamp, m.message_from, u.user_id, u.user_name, u.user_avatar FROM ".DB_MESSAGES." m INNER JOIN ".DB_USERS." u ON m.message_from=u.user_id WHERE m.message_to='".$userdata['user_id']."' AND m.message_folder='0' ORDER BY m.message_datestamp DESC LIMIT 0,10");
 
-if (dbrows($result)) {
+echo '<div class="col-sm-6">
+										<div class="widget-box">
+											<div class="widget-header">
+												<h4 class="widget-title lighter smaller">
+													<i class="fa fa-comment-o"></i>';
+												echo"<img class='img-responsive pull-left' src='../administration/images/articles.png'>&nbsp;&nbsp;".$locale['pro_1033']."";
+												echo '</h4>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<!-- #section:pages/dashboard.conversations -->
+													<div class="dialogs ace-scroll"><div class="scroll-track scroll-active" style="display: block;><div class="scroll-bar" style="top: 0px;"></div></div><div class="scroll-content">
+														<div class="itemdiv dialogdiv">
+															<div class="user">
+																
+															</div>
+
+															<div class="body">
+																<div class="time">
+																	<i class="ace-icon fa fa-clock-o"></i>
+																</div>
+
+																<div class="name">';
+																if (dbrows($result)) {
 
 	$i = 0;
 
@@ -138,7 +160,16 @@ if (dbrows($result)) {
 	echo "</div>\n";
 
 } else { echo '<br /><div align="center">'.$locale['pro_1054'].'</div><br />'; }
+															echo '	</div>
 
-closetidetable();
-
+																<div class="tools">
+																	</a>
+																</div>
+															</div>
+														</div>
+													</div></div>
+												</div><!-- /.widget-main -->
+											</div><!-- /.widget-body -->
+										</div><!-- /.widget-box -->
+									</div>';
 ?>

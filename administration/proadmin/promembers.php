@@ -36,11 +36,35 @@ if (!defined("IN_FUSION")) { die("Access Denied"); }
 
 include LOCALE.LOCALESET."admin/adminpro.php";
 
-opentidetable($locale['pro_1032']);
-		
-$result = dbquery("SELECT user_id, user_name, user_avatar, user_joined, user_ip FROM ".DB_USERS." ORDER BY user_joined DESC LIMIT 0,5");
 
-if (dbrows($result)) {
+$result = dbquery("SELECT user_id, user_name, user_avatar, user_joined, user_ip FROM ".DB_USERS." ORDER BY user_joined DESC LIMIT 0,10");
+
+
+echo '<div class="col-sm-6">
+										<div class="widget-box">
+											<div class="widget-header">
+												<h4 class="widget-title lighter smaller">
+													<i class="fa fa-comment-o"></i>';
+												echo"<img class='img-responsive pull-left' src='../administration/images/forums.gif'>&nbsp;&nbsp;".$locale['pro_1032']."";
+												echo '</h4>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<!-- #section:pages/dashboard.conversations -->
+													<div class="dialogs ace-scroll"><div class="scroll-track scroll-active" style="display: block;><div class="scroll-bar" style="top: 0px;"></div></div><div class="scroll-content">
+														<div class="itemdiv dialogdiv">
+															<div class="user">
+																
+															</div>
+
+															<div class="body">
+																<div class="time">
+																	<i class="ace-icon fa fa-clock-o"></i>
+																</div>
+
+																<div class="name">';
+																if (dbrows($result)) {
 
 	$i = 0;
 
@@ -84,7 +108,7 @@ if (dbrows($result)) {
 
 		echo "<td width='80' class='".$row_color."' align='center' style='text-align:center;white-space:nowrap;border-left: 1px solid #d5d5d5;border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff' height='58'>";
 
-		echo '<div style="width:76px;" align="center">';
+		echo '<div style="width:86px;" align="center">';
 
 		echo '<div class="square-button" style="float:left;margin-right:5px;"><a href="'.ADMIN.'members.php'.$aidlink.'&step=edit&user_id='.$data['user_id'].'" title="'.$locale['global_076'].'"><img src="'.THEMES.'templates/images/admin/edit.png" /></a></div>';
 
@@ -126,7 +150,17 @@ if (dbrows($result)) {
 	echo "</div>\n";
 
 } else { echo '<br /><div align="center">'.$locale['pro_1053'].'</div><br />'; }
+															echo '	</div>
 
-closetidetable();
+																<div class="tools">
+																	</a>
+																</div>
+															</div>
+														</div>
+													</div></div>
+												</div><!-- /.widget-main -->
+											</div><!-- /.widget-body -->
+										</div><!-- /.widget-box -->
+									</div>';
 
 ?>
