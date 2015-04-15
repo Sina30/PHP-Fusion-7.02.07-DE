@@ -386,7 +386,7 @@ if (!isset($_GET['msg_send']) && !isset($_GET['msg_read']) && $_GET['folder'] !=
 } elseif ((isset($_GET['msg_read']) && isnum($_GET['msg_read'])) && ($_GET['folder'] == "inbox" || $_GET['folder'] == "archive" || $_GET['folder'] == "outbox")) {
 	$result = dbquery(
 		"SELECT m.message_id, m.message_subject, m.message_message, m.message_smileys,
-		m.message_datestamp, m.message_folder, u.user_id, u.user_name, u.user_status
+		m.message_datestamp, m.message_folder, u.user_id, u.user_name, u.user_status, u.user_avatar
 		FROM ".DB_MESSAGES." m
 		LEFT JOIN ".DB_USERS." u ON m.message_from=u.user_id
 		WHERE message_to='".$userdata['user_id']."' AND message_id='".$_GET['msg_read']."'"
@@ -401,12 +401,22 @@ if (!isset($_GET['msg_send']) && !isset($_GET['msg_read']) && $_GET['folder'] !=
 		echo "<form name='pm_form' method='post' action='".FUSION_SELF."?folder=".$_GET['folder']."&amp;msg_send=".$data['user_id']."&amp;msg_id=".$data['message_id']."'>\n";
 		echo "<table cellpadding='0' cellspacing='1' width='100%' class='tbl-border'>\n<tr>\n";
 		echo "<td align='right' width='1%' class='tbl2' style='white-space:nowrap'>".($_GET['folder'] != "outbox" ? $locale['406'] : $locale['421'])."</td>\n";
-		echo "<td class='tbl1'>".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n</tr>\n";
+		echo "<td class='tbl2'>";
+		if (!$data['user_avatar']) { 
+	
+			echo '<img src="'.THEMES.'templates/images/admin/no-avatar.jpg" class="tbl1" width="35" height="35" style="vertical-align:middle" />'; 
+	
+		} else {
+	
+			echo '<img src="'.IMAGES.'avatars/'.$data['user_avatar'].'" width="35" height="35" class="tbl1" style="vertical-align:middle" />';
+	
+		}	
+		echo "<b>".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</b></td>\n</tr>\n";
 		echo "<tr>\n<td align='right' width='1%' class='tbl2' style='white-space:nowrap'>".$locale['407']."</td>\n";
 		echo "<td class='tbl1'>".showdate("longdate", $data['message_datestamp'])."</td>\n</tr>\n";
 		echo "<tr>\n<td align='right' width='1%' class='tbl2' style='white-space:nowrap'>".$locale['405']."</td>\n";
 		echo "<td class='tbl1'>".$data['message_subject']."</td>\n</tr>\n";
-		echo "<tr>\n<td colspan='2' class='tbl1'>".nl2br(parseubb($message_message))."</td>\n</tr>\n";
+		echo "<tr>\n<td colspan='2' class='tbl1'><b>".nl2br(parseubb($message_message))."</td>\n</tr></b>\n";
 		echo "</table>\n";
 		echo "<table cellpadding='0' cellspacing='0' width='100%'>\n";
 		echo "<tr>\n<td colspan='2' class='tbl'><a href='".FUSION_SELF."?folder=".$_GET['folder']."'>".$locale['432']."</a></td>\n";
