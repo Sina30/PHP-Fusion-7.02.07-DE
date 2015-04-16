@@ -840,14 +840,18 @@ div.side-both {
 }
 
 .capmain-news {
-
+  background-color: #556f8a;
+  border: 1px solid #405973;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #748ba4;
+  -moz-box-shadow: inset 0px 1px 0px 0px #748ba4;
+  box-shadow: inset 0px 1px 0px 0px #748ba4;
+  padding: 5px 10px;
 }
 
 .capmain-news .title {
 	font-family: 'BebasNeue', Arial, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-	font-size: 320%;
 	font-style: normal !important;
 	font-weight: normal !important;
 	text-shadow: 1px 1px 0 #fff;
@@ -855,7 +859,7 @@ div.side-both {
 	padding: 5px 0 2px 0;
 	word-wrap: break-word;
 	margin: 0;
-	color: #222;
+	color: #fff;
 }
 
 .news-body {
@@ -1105,22 +1109,60 @@ blockquote i {
 	font-family: 'Yanone Kaffeesatz Light', sans-serif;
 	-webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-	font-size: 130%;
+	font-size: 100%;
 	font-style: normal !important;
 	font-weight: normal !important;
 	padding: 0 4px;
 	text-shadow: 1px 1px 0 #fff;
+	font-family: 'BebasNeue', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-style: normal !important;
+  font-weight: normal !important;
+  display: inline-block;
+  padding: 5px 14px;
+  line-height: 1;
+  color: #fff;
+  background: #556f8a;
+  white-space: nowrap;
+  overflow: visible;
+  text-decoration: none;
+  border: 1px solid #405973;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #748ba4;
+  -moz-box-shadow: inset 0px 1px 0px 0px #748ba4;
+  box-shadow: inset 0px 1px 0px 0px #748ba4;
+  outline: none;
+  text-shadow: 1px 1px 0 #405973;
 }
 
 #news-comments {
 	font-family: 'Yanone Kaffeesatz Light', sans-serif;
 	-webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-	font-size: 130%;
+	font-size: 100%;
 	font-style: normal !important;
 	font-weight: normal !important;
 	padding: 0 4px;
 	text-shadow: 1px 1px 0 #fff;
+	font-family: 'BebasNeue', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-style: normal !important;
+  font-weight: normal !important;
+  display: inline-block;
+  padding: 5px 14px;
+  line-height: 1;
+  color: #fff;
+  background: #556f8a;
+  white-space: nowrap;
+  overflow: visible;
+  text-decoration: none;
+  border: 1px solid #405973;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #748ba4;
+  -moz-box-shadow: inset 0px 1px 0px 0px #748ba4;
+  box-shadow: inset 0px 1px 0px 0px #748ba4;
+  outline: none;
+  text-shadow: 1px 1px 0 #405973;
 }
 
 .news-meta {
@@ -1263,7 +1305,7 @@ blockquote i {
 }
 
 .edit-profile {
-	width: 500px;
+	width: 900px;
 }
 
 .profile_user_reason {
