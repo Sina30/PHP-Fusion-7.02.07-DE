@@ -448,7 +448,7 @@ include LOCALE.LOCALESET."admin/adminpro.php";
 
 					if ($type != $data['comment_type'] || $type_id !=  $data['comment_item_id']) { 
 
-						echo ''.$locale['pro_1016'];
+						
 
 							if ($data['comment_type'] == "N") { $db_name = DB_NEWS; $db_id = 'news_id'; $db_field = 'news_subject'; $db_link = 'news.php?readmore='; $db_org = "News"; }
 
@@ -469,10 +469,10 @@ include LOCALE.LOCALESET."admin/adminpro.php";
 								//echo ' '.$locale['pro_1017'].' '.$db_org.' '.$locale['pro_1018'];
 							}
 					}
-					if ($data['user_level'] == "102" || $data['user_level'] == "103") {
+					/*if ($data['user_level'] == "102" || $data['user_level'] == "103") {
 echo ' <b><font color="red">'.$data['user_name'].'</b></font> '.$locale['pro_1015'].'
 ';
-					}
+					}*/
 					$type = $data['comment_type'];
 					$type_id = $data['comment_item_id'];
 				}
