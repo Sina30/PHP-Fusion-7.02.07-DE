@@ -204,7 +204,7 @@ echo '<div style="float:right">
 <div class="panel-body">
 <img class="pull-left m-r-10" src="../administration/images/members.gif">
 <h4 class="text-right m-t-0 m-b-0">
-'.dbcount("(user_id)", DB_USERS, "user_status<='1' OR user_status='3' OR user_status='5'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Registered Members</strong></span>
+'.dbcount("(user_id)", DB_USERS, "user_status='0'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Registered Members</strong></span>
 </div>
 <div class="panel-footer"><div class="text-right text-uppercase">
 </div>
@@ -216,7 +216,7 @@ echo '<div style="float:right">
 <div class="panel-body">
 <img class="pull-left m-r-10" src="../administration/images/members.gif">
 <h4 class="text-right m-t-0 m-b-0">
-'.dbcount("(user_id)", DB_USERS, "user_status='2'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Canceled Members</strong></span>
+'.dbcount("(user_id)", DB_USERS, "user_status='6'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Canceled Members</strong></span>
 </div>
 <div class="panel-footer"><div class="text-right text-uppercase">
 </div>
@@ -228,7 +228,7 @@ echo '<div style="float:right">
 <div class="panel-body">
 <img class="pull-left m-r-10" src="../administration/images/members.gif">
 <h4 class="text-right m-t-0 m-b-0">
-'.dbcount("(user_id)", DB_USERS, "user_status='4'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Unactivated Members</strong></span>
+'.dbcount("(user_id)", DB_USERS, "user_status='2'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Unactivated Members</strong></span>
 </div>
 <div class="panel-footer"><div class="text-right text-uppercase">
 </div>
@@ -240,7 +240,7 @@ echo '<div style="float:right">
 <div class="panel-body">
 <img class="pull-left m-r-10" src="../administration/images/members.gif">
 <h4 class="text-right m-t-0 m-b-0">
-'.dbcount("(user_id)", DB_USERS, "user_status='5'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Security Banned Members</strong></span>
+'.dbcount("(user_id)", DB_USERS, "user_status='1'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>Security Banned Members</strong></span>
 </div>
 <div class="panel-footer"><div class="text-right text-uppercase">
 </div>
@@ -466,7 +466,7 @@ include LOCALE.LOCALESET."admin/adminpro.php";
 
 								echo '<b><a href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$org[$db_field].'</a></b>';
 
-								//echo ' '.$locale['pro_1017'].' '.$db_org.' '.$locale['pro_1018'];
+								echo ' '.$locale['pro_1017'].' '.$db_org.' ';
 							}
 					}
 					/*if ($data['user_level'] == "102" || $data['user_level'] == "103") {
