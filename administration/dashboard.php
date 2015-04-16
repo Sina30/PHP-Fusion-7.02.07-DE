@@ -452,11 +452,11 @@ include LOCALE.LOCALESET."admin/adminpro.php";
 
 							if ($data['comment_type'] == "N") { $db_name = DB_NEWS; $db_id = 'news_id'; $db_field = 'news_subject'; $db_link = 'news.php?readmore='; $db_org = "News"; }
 
-							if ($data['comment_type'] == "A") { $db_name = DB_ARTICLES; $db_id = 'article_id'; $db_field = 'article_subject'; $db_link = 'articles.php?article_id='; $db_org = "Articles"; }
+							if ($data['comment_type'] == "A") { $db_name = DB_ARTICLES; $db_id = 'article_id'; $db_field = 'article_subject'; $db_link = 'articles/articles.php?article_id='; $db_org = "Articles"; }
 
-							if ($data['comment_type'] == "D") { $db_name = DB_DOWNLOADS; $db_id = 'download_id'; $db_field = 'download_title'; $db_link = 'downloads.php?download_id='; $db_org = "Downloads"; }
+							if ($data['comment_type'] == "D") { $db_name = DB_DOWNLOADS; $db_id = 'download_id'; $db_field = 'download_title'; $db_link = 'downloads/downloads.php?download_id='; $db_org = "Downloads"; }
 
-							if ($data['comment_type'] == "P") { $db_name = DB_PHOTOS; $db_id = 'photo_id'; $db_field = 'photo_title'; $db_link = 'photogallery.php?photo_id='; $db_org = "Photos"; }
+							if ($data['comment_type'] == "P") { $db_name = DB_PHOTOS; $db_id = 'photo_id'; $db_field = 'photo_title'; $db_link = 'photogallery/photogallery.php?photo_id='; $db_org = "Photos"; }
 
 							$result_org = dbquery("SELECT ".$db_id.", ".$db_field." FROM ".$db_name." WHERE ".$db_id."='".$data['comment_item_id']."'");
 
