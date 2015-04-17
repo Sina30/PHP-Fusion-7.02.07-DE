@@ -36,6 +36,8 @@ $locale['431'] = "Es wurden noch keine Downloads in dieser Kategorie abgelegt.";
 $locale['440'] = "Downloads gesamt:";
 $locale['441'] = "Am &ouml;ftesten heruntergeladen:";
 $locale['442'] = "Am neuesten:";
+$locale['447'] = "Total Downloads";
+$locale['448'] = "Total Downloads";
 
 // Downloads Suche und Filter
 $locale['450'] = "Benutze die Filter rechts, um den gew&uuml;nschten Download zu finden.";
@@ -49,9 +51,11 @@ $locale['457'] = "Aufsteigend";
 $locale['458'] = "Absteigend";
 $locale['459'] = "Filtern";
 $locale['460'] = "Downloads durchsuchen:";
+$locale['460b'] = "Suchen:";
 $locale['461'] = "Los";
 $locale['462'] = "Kategorie:";
 $locale['463'] = "Sortieren nach:";
+$locale['464'] = "Bitte einloggen!";
 // Share Downloads
 $locale['share001'] ="Share This Download On Facebook";
 $locale['share002'] ="Share This Download On Twitter";

@@ -3,7 +3,8 @@ $locale['r100'] = "Ratings";
 $locale['r101'] = "Keine Bewertungen haben gepostet.";
 $locale['r102'] = "Bewertung entfernen";
 $locale['r103'] = "Post Rating";
-$locale['r104'] = "Rating sind nur für Mitglieder verfügbar. < Br / > Bitte anmelden oder registrieren um Stimmen.";
+$locale['r104'] = "Rating sind nur für Mitglieder verfügbar. 
+Bitte anmelden oder registrieren um Stimmen.";
 $locale['r105'] = "Sie bewertet dies als <strong>%s</strong> auf %s";
 $locale['r106'] = "Bitte wählen Sie Ihr Rating";
 $locale['r107'] = "wählen Sie Bewertung:";
