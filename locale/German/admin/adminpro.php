@@ -16,9 +16,9 @@ $locale['pro_1006'] = "Infusions";
 
 $locale['pro_1007'] = "Dashboard";
 
-$locale['pro_1008'] = "visits";
+$locale['pro_1008'] = "Besuche";
 
-$locale['pro_1009'] = "users";
+$locale['pro_1009'] = "Benutzer";
 
 $locale['pro_1010'] = "Add an Article";
 
@@ -92,12 +92,12 @@ $locale['pro_1030'] = "Unactivated Members";
 
 $locale['pro_1031'] = "Show";
 
-$locale['pro_1032'] = "Newest Members";
+$locale['pro_1032'] = "Neueste Mitglieder";
 
 
 // Messages Panel
 
-$locale['pro_1033'] = "Private Messages";
+$locale['pro_1033'] = "Private Nachrichten";
 
 $locale['pro_1034'] = "From";
 
@@ -185,7 +185,7 @@ $locale['pro_1079'] = "Show Last Visited Section Panel";
 $locale['pro_1080'] = "Show Profile Information Panel";
 
 $locale['pro_1081'] = "Show Navigation Panel";
-
+$locale['580'] = "Deactivate Inactive Members";
 $locale['pro_1082'] = "Show Information Panel";
 
 ?>
