@@ -72,7 +72,7 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	WHERE ".groupaccess('tf.forum_access')." AND tt.thread_lastpost >= ".$timeframeb." AND tt.thread_hidden='0'
 	ORDER BY tt.thread_lastpost DESC LIMIT 0,".$settingsb['numofthreads']);
 	if (dbrows($result)) {
-	echo"	<h4>latest active threads</h4>";
+	echo"	<h4>NEUESTEN AKTIVEN THREADS</h4>";
 	while($data = dbarray($result)) {
 	$itemsubject = trimlink($data['thread_subject'], 33);
 	echo " <span><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."' title='".$data['thread_subject']."'>$itemsubject</a><span>\n";
@@ -80,7 +80,7 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	} 
 	echo"</div>
 	<div class='collumn'>
-	<h4>Latest Downloads</h4>";
+	<h4>DIE AKTUELLSTEN DOWNLOADS</h4>";
 	$result = dbquery("SELECT td.download_id, td.download_datestamp,td.download_title, td.download_cat,
 	tc.download_cat_id, tc.download_cat_access
 	FROM ".DB_DOWNLOADS." td
@@ -153,7 +153,7 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	//echo"<br />".$locale['protean_014'].": <strong>".$new_members_today."</strong>";
 	$count_new = dbcount("(user_id)", DB_USERS, "user_status='2'");
 	if($settings['visitorcounter_enabled']) {
-	echo " <br /> Unique Visits: <strong>".number_format($settings['counter'])."</strong>";
+	echo " <br /> Eindeutige Besuche: <strong>".number_format($settings['counter'])."</strong>";
 	}
 	if (iADMIN && checkrights("M") && $settings['admin_activation'] == "1" && $count_new > 0) {
 	echo "<br /><strong><span style='color:#FF6100;'>".$locale['protean_015'].":</span> <a href='".ADMIN."members.php".$aidlink."&amp;status=2'>".$locale['protean_016']."</a>\n";
