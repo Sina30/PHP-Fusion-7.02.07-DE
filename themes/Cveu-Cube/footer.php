@@ -37,24 +37,23 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 								echo '<h3><i class="fa fa-info-circle"></i> Aktuelle News</h3>';
 							echo '</div>';
 							echo '<div class="article-list">';
-										$resultnews = dbquery(
-	"SELECT *
+	$resultnews = dbquery("SELECT *
 	FROM ".DB_NEWS." 
 	WHERE ".groupaccess('news_visibility')." AND (news_start='0'||news_start<=".time().")
 	AND (news_end='0'||news_end>=".time().") AND news_draft='0'
 	GROUP BY news_id
-	ORDER BY news_sticky DESC, news_datestamp DESC LIMIT 0,8"
+	ORDER BY news_sticky DESC, news_datestamp DESC LIMIT 0,5"
 );
 
 if (dbrows($resultnews)) {
 	while ($news = dbarray($resultnews)) {
-				$subject = trimlink(strip_tags(parseubb($news['news_subject'])), 35);			
-        echo "<a href='".BASEDIR."news.php?readmore=".$news['news_id']."'>".$subject."</a><br />";	
+				$itemsubject = trimlink(strip_tags(parseubb($news['news_subject'])), 35);			
+        echo "<span><a href='".BASEDIR."news.php?readmore=".$news['news_id']."' title='".$data['news_subject']."'>".$itemsubject."&nbsp;<i class='fa fa-external-link-square'></i></a><span><br />";	
 	 }	
 }
-							echo '</div>';
-						echo '</div>';
-						echo '</div>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
 	echo "<div class='collumn'>";
 	$settingsb['numofthreads'] = 12;
 	$datab = dbarray(dbquery("SELECT tt.thread_lastpost
@@ -72,12 +71,12 @@ if (dbrows($resultnews)) {
 	INNER JOIN ".DB_FORUMS." tf ON tt.forum_id=tf.forum_id
 	INNER JOIN ".DB_USERS." tu ON tt.thread_lastuser=tu.user_id
 	WHERE ".groupaccess('tf.forum_access')." AND tt.thread_lastpost >= ".$timeframeb." AND tt.thread_hidden='0'
-	ORDER BY tt.thread_lastpost DESC LIMIT 0,".$settingsb['numofthreads']);
+	ORDER BY tt.thread_lastpost DESC LIMIT 0,5");
 	if (dbrows($result)) {
 	echo "<h3><i class='fa fa-info-circle'></i> NEUESTEN AKTIVEN THREADS</h3>";
 	while($data = dbarray($result)) {
 	$itemsubject = trimlink($data['thread_subject'], 33);
-	echo " <span><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."' title='".$data['thread_subject']."'>$itemsubject</a><span>\n";
+	echo " <span><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."' title='".$data['thread_subject']."'>$itemsubject&nbsp;<i class='fa fa-external-link-square'></i></a><span>\n";
 	}
 	} 
 	echo"</div>
@@ -88,15 +87,15 @@ if (dbrows($resultnews)) {
 	FROM ".DB_DOWNLOADS." td
 	LEFT JOIN ".DB_DOWNLOAD_CATS." tc ON td.download_cat=tc.download_cat_id
 	WHERE ".groupaccess('download_cat_access')."
-	ORDER BY download_datestamp DESC LIMIT 0,12");
+	ORDER BY download_datestamp DESC LIMIT 0,5");
 	if (dbrows($result)) {
 	echo"<ul class='footer_section'>";
 	while ($dldata = dbarray($result)) {
 	$dl_title = trimlink(strip_tags(parseubb($dldata['download_title'])), 33);
 	if ($dldata['download_datestamp'] + 604800 > time() + ($settings['timeoffset'] * 3600)) {
-	$new = "<span><a style='font-weight: 700; color: #FF9933;' title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."</a> &nbsp;<img src='".THEME."images/icons/new_dl.png' alt='Neu' title='Neu' class='blink'  style='border:0px; vertical-align:middle;' /></span>";
+	$new = "<span><a style='font-weight: 700; color: #FF9933;' title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."&nbsp;<i class='fa fa-external-link-square'></i></a> &nbsp;<img src='".THEME."images/icons/new_dl.png' alt='Neu' title='Neu' class='blink'  style='border:0px; vertical-align:middle;' /></span>";
 	} else {
-	$new = "<span><a title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."</a></span>";
+	$new = "<span><a title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."&nbsp;<i class='fa fa-external-link-square'></i></a></span>";
 	}
 	echo "".$new."";
 
