@@ -34,22 +34,31 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	echo '<!-- BEGIN .widget -->
 						<div class="widget">
 							<div class="w-title">
-								<h3><i class="fa fa-info-circle"></i> Statistik</h3>
+								<h3><i class="fa fa-info-circle"></i> Aktuelle News</h3>
 							</div>
-							<div class="article-list">
-								<t style="color:#fff;"><i class="fa fa-users"></i> Mitglieder</t><div style="float: right;">'.dbcount("(user_id)", DB_USERS).'</div><br>
-                                <t style="color:#fff;"><i class="fa fa-comments"></i> Kommentare</t><div style="float: right;">'.dbcount("(comment_id)", DB_COMMENTS).'</div><br>
-                                <t style="color:#fff;"><i class="fa fa-folder-o"></i> Forenthemen</t><div style="float: right;">'.dbcount("(thread_id)", DB_THREADS).'</div><br>
-                                <t style="color:#fff;"><i class="fa fa-folder"></i> Forumbeiträge</t><div style="float: right;">'.dbcount("(post_id)", DB_POSTS).'</div><br>
-                                <t style="color:#fff;"><i class="fa fa-angle-double-right"></i> Private Nachrichten</t><div style="float: right;">'.dbcount("(message_id)", DB_MESSAGES).'</div><br>
-                                <t style="color:#fff;"><i class="fa fa-check"></i> Links zu Webseiten</t><div style="float: right;">'.dbcount("(weblink_id)", DB_WEBLINKS).'</div><br>';
-								echo '<t style="color:#fff;"><i class="fa fa-check"></i> Downloadkategorien</t><div style="float: right;">'.dbcount("(download_cat_id)", DB_DOWNLOAD_CATS).'</div><br>';
-								echo '<t style="color:#fff;"><i class="fa fa-check"></i> Downloads</t><div style="float: right;">'.dbcount("(download_id)", DB_DOWNLOADS).'</div><br>';
-								echo'    <t style="color:#fff;"><i class="fa fa-share"></i> Besucher</t><div style="float: right;"><!--counter-->';echo"".showcounter()."";echo'</div><br>';
-								echo'    <t style="color:#fff;"><i class="fa fa-share"></i> Datum - Uhrzeit</t><div style="float: right;"><!--counter-->';echo"".showsubdate(2)."";echo'</div><br>
-                    	
+							<div class="article-list">';
+										$resultnews = dbquery(
+	"SELECT *
+	FROM ".DB_NEWS." 
+	WHERE ".groupaccess('news_visibility')." AND (news_start='0'||news_start<=".time().")
+	AND (news_end='0'||news_end>=".time().") AND news_draft='0'
+	GROUP BY news_id
+	ORDER BY news_sticky DESC, news_datestamp DESC LIMIT 0,8"
+);
 
-							</div>
+if (dbrows($resultnews)) {
+
+	while ($news = dbarray($resultnews)) {
+
+				$subject = trimlink(strip_tags(parseubb($news['news_subject'])), 35);
+			
+        echo "<a href='".BASEDIR."news.php?readmore=".$news['news_id']."'>".$subject."</a><br />";
+	
+	 }
+	
+	
+}
+							echo '</div>
 						<!-- END .widget -->
 						</div>
 						</div>';
@@ -72,7 +81,7 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	WHERE ".groupaccess('tf.forum_access')." AND tt.thread_lastpost >= ".$timeframeb." AND tt.thread_hidden='0'
 	ORDER BY tt.thread_lastpost DESC LIMIT 0,".$settingsb['numofthreads']);
 	if (dbrows($result)) {
-	echo"	<h4>NEUESTEN AKTIVEN THREADS</h4>";
+	echo "<h4><i class='fa fa-info-circle'></i> NEUESTEN AKTIVEN THREADS</h4>";
 	while($data = dbarray($result)) {
 	$itemsubject = trimlink($data['thread_subject'], 33);
 	echo " <span><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."' title='".$data['thread_subject']."'>$itemsubject</a><span>\n";
@@ -80,7 +89,7 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	} 
 	echo"</div>
 	<div class='collumn'>
-	<h4>DIE AKTUELLSTEN DOWNLOADS</h4>";
+	<h4><i class='fa fa-info-circle'></i> DIE AKTUELLSTEN DOWNLOADS</h4>";
 	$result = dbquery("SELECT td.download_id, td.download_datestamp,td.download_title, td.download_cat,
 	tc.download_cat_id, tc.download_cat_access
 	FROM ".DB_DOWNLOADS." td
@@ -104,7 +113,7 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	}		
 	echo"</div>
 	<div class='collumn'>
-	<h4>".$locale['protean_006']."</h4>
+	<h4><i class='fa fa-info-circle'></i> ".$locale['protean_006']."</h4>
 	<ul class='footer_section'>";
 	$result = dbquery("SELECT * FROM ".DB_USERS." WHERE user_lastvisit !='0'  AND user_status ='0' ORDER BY  user_lastvisit DESC LIMIT 14");
 
