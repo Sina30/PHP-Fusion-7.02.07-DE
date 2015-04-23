@@ -338,7 +338,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default dark-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Articles Overview</strong></span>
+<span class="text-smaller text-uppercase"><strong>Artikel Übersicht</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/articles.png">
@@ -364,7 +364,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default blank-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Weblinks Overview</strong></span>
+<span class="text-smaller text-uppercase"><strong>Weblinks Übersicht</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/wl.gif">
@@ -390,7 +390,7 @@ echo '
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 <div class="panel panel-default flat-stats">
 <div class="panel-body">
-<span class="text-smaller text-uppercase"><strong>Gallery Overview</strong></span>
+<span class="text-smaller text-uppercase"><strong>Galerie Übersicht</strong></span>
 <br>
 <div class="clearfix m-t-10">
 <img class="img-responsive pull-right" src="../administration/images/photoalbums.gif">
@@ -416,7 +416,7 @@ echo '
 <div style="float:left">
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'infusions.php'.$aidlink.'">Infusions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'infusions.php'.$aidlink.'"><img class="img-responsive pull-left" src="../administration/images/infusionss.png">&nbsp;&nbsp;Infusions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>
 <div class="panel-body">
 <div class="text-center">'; 
 echo '</div>
@@ -425,7 +425,7 @@ echo '</div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>NEUESTE KOMMENTARE</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><img class="img-responsive pull-left" src="../administration/images/kommentare.png">&nbsp;&nbsp;NEUESTE KOMMENTARE</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>
 <div class="panel-body">
 <div class="text-center">'; 
 include LOCALE.LOCALESET."admin/adminpro.php";		
@@ -486,7 +486,7 @@ echo'</div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong>NEUESTE BEWERTUNGEN</strong></span><span class="pull-right label label-warning">'.dbcount("(rating_id)", DB_RATINGS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><img class="img-responsive pull-left" src="../administration/images/bewertungen.png">&nbsp;&nbsp;NEUESTE BEWERTUNGEN</strong></span><span class="pull-right label label-warning">'.dbcount("(rating_id)", DB_RATINGS).'</span></div>
 <div class="panel-body">
 <div class="text-center">'; 
 if ($data['download_allow_ratings']) {
@@ -503,7 +503,7 @@ echo '</div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 <div class="panel panel-default ">
-<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'">NEUESTE EINSENDUNGEN</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
+<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'"><img class="img-responsive pull-left" src="../administration/images/einsendungen.png">&nbsp;&nbsp;NEUESTE EINSENDUNGEN</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>
 <div class="panel-body">
 <div class="text-center">';
 
