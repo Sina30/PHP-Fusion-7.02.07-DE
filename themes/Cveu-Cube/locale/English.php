@@ -1,10 +1,10 @@
 <?php
 
-$locale['cube_0001'] = "By";
+$locale['cube_0001'] = "Von";
 $locale['cube_0002'] = "on";
 $locale['cube_0003'] = "in";
 $locale['cube_0004'] = "PHP-Fusion Powered Website Adminbereich - v7.02.07 DE";
-$locale['cube_0005'] = "Search";
+$locale['cube_0005'] = "Suchen";
 $locale['cube_0006'] = "Artikel";
 $locale['cube_0007'] = "Kontakt";
 $locale['cube_0008'] = "Downloads";
