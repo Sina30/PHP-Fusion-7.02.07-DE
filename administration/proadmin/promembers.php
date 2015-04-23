@@ -45,7 +45,7 @@ echo '<div class="col-sm-6">
 											<div class="widget-header">
 												<h4 class="widget-title lighter smaller">
 													<i class="fa fa-comment-o"></i>';
-												echo"<img class='img-responsive pull-left' src='../administration/images/forums.gif'>&nbsp;&nbsp;".$locale['pro_1032']."";
+												echo"<img class='img-responsive pull-left' src='../administration/images/Mitglieder.png'>&nbsp;&nbsp;".$locale['pro_1032']."";
 												echo '</h4>
 											</div>
 

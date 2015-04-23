@@ -43,7 +43,7 @@ echo '<div class="col-sm-6">
 											<div class="widget-header">
 												<h4 class="widget-title lighter smaller">
 													<i class="fa fa-comment-o"></i>';
-												echo"<img class='img-responsive pull-left' src='../administration/images/articles.png'>&nbsp;&nbsp;".$locale['pro_1033']."";
+												echo"<img class='img-responsive pull-left' src='../administration/images/narichten.png'>&nbsp;&nbsp;".$locale['pro_1033']."";
 												echo '</h4>
 											</div>
 
