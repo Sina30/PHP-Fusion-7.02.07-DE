@@ -26,17 +26,17 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 	include THEME."locale/English.php";
 }
 
-	echo "<div class='footer_bg'>
-	<div class='protean_wrapper'>
-	<div class='footer'>
-	<div class='collumns'>
-	<div class='collumn'>";
-	echo '<!-- BEGIN .widget -->
-						<div class="widget">
-							<div class="w-title">
-								<h3><i class="fa fa-info-circle"></i> Aktuelle News</h3>
-							</div>
-							<div class="article-list">';
+	echo "<div class='footer_bg'>";
+	echo "<div class='protean_wrapper'>";
+	echo "<div class='footer'>";
+	echo "<div class='collumns'>";
+	echo "<div class='collumn'>";
+	echo '<!-- BEGIN .widget -->';
+						echo '<div class="widget">';
+							echo '<div class="w-title">';
+								echo '<h3><i class="fa fa-info-circle"></i> Aktuelle News</h3>';
+							echo '</div>';
+							echo '<div class="article-list">';
 										$resultnews = dbquery(
 	"SELECT *
 	FROM ".DB_NEWS." 
@@ -47,21 +47,14 @@ if (file_exists(THEME."locale/".$settings['locale'].".php")) {
 );
 
 if (dbrows($resultnews)) {
-
 	while ($news = dbarray($resultnews)) {
-
-				$subject = trimlink(strip_tags(parseubb($news['news_subject'])), 35);
-			
-        echo "<a href='".BASEDIR."news.php?readmore=".$news['news_id']."'>".$subject."</a><br />";
-	
-	 }
-	
-	
+				$subject = trimlink(strip_tags(parseubb($news['news_subject'])), 35);			
+        echo "<a href='".BASEDIR."news.php?readmore=".$news['news_id']."'>".$subject."</a><br />";	
+	 }	
 }
-							echo '</div>
-						<!-- END .widget -->
-						</div>
-						</div>';
+							echo '</div>';
+						echo '</div>';
+						echo '</div>';
 	echo "<div class='collumn'>";
 	$settingsb['numofthreads'] = 12;
 	$datab = dbarray(dbquery("SELECT tt.thread_lastpost
@@ -170,23 +163,20 @@ if (dbrows($resultnews)) {
 	}
 	echo"</div></span>";
 	echo"</div>";
-	echo"<div class='clear'></div>
-	</div>
-	<div class='footer_top'>
-	<div class='footer_nav_right'>
-	<p>".stripslashes($settings['footer'])."</p>";
+	echo"<div class='clear'></div>";
+	echo"</div>";
+	echo"<div class='footer_top'>";
+	echo"<div class='footer_nav_right'>";
+	echo"<p>".stripslashes($settings['footer'])."</p>";
 	echo"<br />";
-	echo"</div>
-	<div class='copy'>
-	<p class='link'><span>";
+	echo"</div>";
+	echo"<div class='copy'>";
+	echo"<p class='link'><span>";
 	if (!$license) { echo showcvisioncr(); }
-	echo"</span></p>
-	</div>
-	<div class='clear'></div>
-	</div>
-	</div>
-	</div>
-	</div>";
+	echo"</span></p>";
+	echo"</div>";
+	echo"<div class='clear'></div>";
+	echo"</div></div></div></div>";
 
 add_to_footer("<script type='text/javascript'>
 $('body').show();
