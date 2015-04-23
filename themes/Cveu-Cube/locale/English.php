@@ -9,7 +9,6 @@ $locale['cube_0006'] = "Artikel";
 $locale['cube_0007'] = "Kontakt";
 $locale['cube_0008'] = "Downloads";
 $locale['cube_0009'] = "Kontakt";
-$locale['cube_0010'] = "Kontakt";
 
 //USERM MENU
 $locale['cube_1001'] = "Log In";
