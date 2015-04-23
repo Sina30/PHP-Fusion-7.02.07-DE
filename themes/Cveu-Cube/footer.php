@@ -81,7 +81,7 @@ if (dbrows($resultnews)) {
 	WHERE ".groupaccess('tf.forum_access')." AND tt.thread_lastpost >= ".$timeframeb." AND tt.thread_hidden='0'
 	ORDER BY tt.thread_lastpost DESC LIMIT 0,".$settingsb['numofthreads']);
 	if (dbrows($result)) {
-	echo "<h4><i class='fa fa-info-circle'></i> NEUESTEN AKTIVEN THREADS</h4>";
+	echo "<h3><i class='fa fa-info-circle'></i> NEUESTEN AKTIVEN THREADS</h3>";
 	while($data = dbarray($result)) {
 	$itemsubject = trimlink($data['thread_subject'], 33);
 	echo " <span><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."' title='".$data['thread_subject']."'>$itemsubject</a><span>\n";
@@ -89,7 +89,7 @@ if (dbrows($resultnews)) {
 	} 
 	echo"</div>
 	<div class='collumn'>
-	<h4><i class='fa fa-info-circle'></i> DIE AKTUELLSTEN DOWNLOADS</h4>";
+	<h3><i class='fa fa-info-circle'></i> DIE AKTUELLSTEN DOWNLOADS</h3>";
 	$result = dbquery("SELECT td.download_id, td.download_datestamp,td.download_title, td.download_cat,
 	tc.download_cat_id, tc.download_cat_access
 	FROM ".DB_DOWNLOADS." td
@@ -113,7 +113,7 @@ if (dbrows($resultnews)) {
 	}		
 	echo"</div>
 	<div class='collumn'>
-	<h4><i class='fa fa-info-circle'></i> ".$locale['protean_006']."</h4>
+	<h3><i class='fa fa-info-circle'></i> ".$locale['protean_006']."</h3>
 	<ul class='footer_section'>";
 	$result = dbquery("SELECT * FROM ".DB_USERS." WHERE user_lastvisit !='0'  AND user_status ='0' ORDER BY  user_lastvisit DESC LIMIT 14");
 
