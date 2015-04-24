@@ -40,7 +40,7 @@ $result = dbquery(
    "SELECT f.forum_id, f.forum_cat, f.forum_name, f.forum_description, f.forum_moderators, f.forum_lastpost, f.forum_postcount,
    f.forum_threadcount, f.forum_lastuser, f.forum_access, f2.forum_name AS forum_cat_name,
    t.thread_id, t.thread_lastpost, t.thread_lastpostid, t.thread_subject, t.thread_locked,
-   u.user_id, u.user_name,u.user_avatar, u.user_status, tu3.user_avatar AS user_avatarlastuser, tu1.user_avatar, tu1.user_id,
+   u.user_id, u.user_name,u.user_avatar, u.user_status, tu1.user_name AS user_author, tu1.user_status AS status_author, tu3.user_avatar AS user_avatarlastuser, tu1.user_avatar, tu1.user_id,
       tu2.user_name AS user_lastuser, tu2.user_status AS status_lastuser
    FROM ".DB_FORUMS." f
    LEFT JOIN ".DB_FORUMS." f2 ON f.forum_cat = f2.forum_id
@@ -98,11 +98,11 @@ if (dbrows($result) != 0) {
 		echo "Gestartet von&nbsp;";
 		 if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
-     if($data['user_avatarlastuser'] && file_exists(IMAGES."avatars/".$data['user_avatarlastuser'])) { $src = IMAGES."avatars/".$data['user_avatarlastuser']; }
+     if($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $src = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
-		echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_lastuser']."'>
-         <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' /></a>
-         ".profile_link($data['thread_lastuser'], $data['user_lastuser'], $data['status_lastuser'])."\n";
+		echo "
+         <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
+         ".$data['thread_author'], $data['user_author']."\n";
 		echo"<!--forum_name-->in&nbsp;".$data['forum_name']."&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_cat_name']."</a>\n";
 		echo "</td>\n";
 		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_threadcount']."</td>\n";
