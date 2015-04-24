@@ -58,7 +58,7 @@ if (dbrows($result) != 0) {
 		if ($data['forum_cat_name'] != $current_cat) {
 			$current_cat = $data['forum_cat_name'];
 			echo "<tr>\n<a><td colspan='2' class='forum-caption forum_cat_name'><!--forum_cat_name-->".$data['forum_cat_name']."</td>\n";
-			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['402']."</td>\n";
+			//echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['402']."</td>\n";
 			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['403']."</td>\n";
 			echo "<td width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['404']."</td>\n";
 			echo "</tr>\n";
@@ -105,8 +105,8 @@ if (dbrows($result) != 0) {
          ".$data['thread_author'], $data['user_author']."\n";
 		echo"<!--forum_name-->in&nbsp;".$data['forum_cat_name']."&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a>\n";
 		echo "</td>\n";
-		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_threadcount']."</td>\n";
-		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_postcount']."</td>\n";
+		echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".$data['forum_threadcount']." </br>Views</td>\n";
+		echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".$data['forum_postcount']." </br>Post</td>\n";
 		echo "<td width='1%' class='tbl1' style='white-space:nowrap; padding-right:50px;'>";
 				 if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
