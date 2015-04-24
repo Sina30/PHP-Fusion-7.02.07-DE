@@ -222,7 +222,7 @@ if ($rows) {
       echo "<td width='1%' class='tbl1' style='white-space:nowrap; padding-right:50px;'>
          <a href='".BASEDIR."profile.php?lookup=".$tdata['thread_lastuser']."' class='profile-link flleft'>
          <span ><img style='margin-right:4px; border-radius:6px;' width='30' src='".$src."' alt='".$src."' /></span></a>
-         <span class='small'>".profile_link($tdata['thread_lastuser'], $tdata['user_lastuser'], $tdata['status_lastuser'])."</span><br />
+        Zuletzt&nbsp;geantwortet&nbsp;<span class='small'>".profile_link($tdata['thread_lastuser'], $tdata['user_lastuser'], $tdata['status_lastuser'])."</span><br />
          ".showdate("forumdate", $tdata['thread_lastpost'])."</td>\n";
       echo "</tr>\n";
    }
