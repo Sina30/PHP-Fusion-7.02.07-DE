@@ -119,9 +119,11 @@ if (dbrows($result) != 0) {
          ".showdate("forumdate", $data['thread_lastpost'])."</td>\n";
 }
 		 }
-	echo "<tr>\n<td colspan='5' class='tbl1'>".$locale['407']."</td>\n</tr>\n";
-}
+		 }
+	//echo "<tr>\n<td colspan='5' class='tbl1'>".$locale['407']."</td>\n</tr>\n";
+
 echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+echo "</br>";
 echo "<tr><td><img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle; width:24px;' /> - ".$locale['470']."</td>";
 echo "<td><img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle; width:24px;' /> - ".$locale['472']."</td></tr>";
 echo "<tr><td><img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle; width:24px;' /> - ".$locale['473']."</td>";
