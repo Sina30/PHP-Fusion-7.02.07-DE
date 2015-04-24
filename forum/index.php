@@ -103,7 +103,7 @@ if (dbrows($result) != 0) {
 		echo "
          <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
          ".$data['thread_author'], $data['user_author']."\n";
-		echo"<!--forum_name-->in&nbsp;".$data['forum_name']."&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_cat_name']."</a>\n";
+		echo"<!--forum_name-->in&nbsp;".$data['forum_cat_name']."&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a>\n";
 		echo "</td>\n";
 		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_threadcount']."</td>\n";
 		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_postcount']."</td>\n";
