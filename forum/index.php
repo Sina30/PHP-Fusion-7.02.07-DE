@@ -59,7 +59,7 @@ if (dbrows($result) != 0) {
 			$current_cat = $data['forum_cat_name'];
 			echo "<tr>\n<a><td colspan='2' class='forum-caption forum_cat_name'><!--forum_cat_name-->".$data['forum_cat_name']."</td>\n";
 			//echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['402']."</td>\n";
-			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['403']."</td>\n";
+			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['400']."</td>\n";
 			echo "<td width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['404']."</td>\n";
 			echo "</tr>\n";
 		}
