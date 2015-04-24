@@ -152,7 +152,7 @@ echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>&nbsp
 echo "<td class='tbl2 forum-caption'>".$locale['451']."</td>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>".$locale['452']."</td>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center' >".$locale['453']."</td>\n";
-echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center'>".$locale['454']."</td>\n";
+//echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center'>".$locale['454']."</td>\n";
 echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>".$locale['404']."</td>\n</tr>\n";
 
 if ($rows) {
@@ -217,8 +217,8 @@ if ($rows) {
          <span class='small'>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</span><br />
          <a href='".BASEDIR."profile.php?lookup=".$tdata['user_id']."' class='profile-link'>
          <span><img id='author' style='border-radius:6px;' width='30' src='".$asrc."' alt='".$asrc."' /></span></a></td>\n";
-      echo "<td align='center' width='1%' class='tbl1' style='white-space:nowrap'>".$tdata['thread_views']."</td>\n";
-      echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>".($tdata['thread_postcount']-1)."</td>\n";
+      echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".$tdata['thread_views']." </br>Views</td>\n";
+      echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".($tdata['thread_postcount']-1)." </br>Post</td>\n";
       echo "<td width='1%' class='tbl1' style='white-space:nowrap; padding-right:50px;'>
          <a href='".BASEDIR."profile.php?lookup=".$tdata['thread_lastuser']."' class='profile-link flleft'>
          <span ><img style='margin-right:4px; border-radius:6px;' width='30' src='".$src."' alt='".$src."' /></span></a>
