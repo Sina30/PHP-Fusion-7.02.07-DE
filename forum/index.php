@@ -115,7 +115,7 @@ if (dbrows($result) != 0) {
 		
 			echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_lastuser']."' class='profile-link flleft'>
          <span ><img style='margin-right:4px; border-radius:6px;' width='30' src='".$src."' alt='".$src."' /></span></a>
-         <span class='small'>".profile_link($data['thread_lastuser'], $data['user_lastuser'], $data['status_lastuser'])."</span><br />
+        Zuletzt geantwortet <span class='small'>".profile_link($data['thread_lastuser'], $data['user_lastuser'], $data['status_lastuser'])."</span><br />
          ".showdate("forumdate", $data['thread_lastpost'])."</td>\n";
 }
 		 }
