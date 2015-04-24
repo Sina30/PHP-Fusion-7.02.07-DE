@@ -23,7 +23,7 @@ if (!isset($lastvisited) || !isnum($lastvisited)) { $lastvisited = time(); }
 
 add_to_title($locale['global_200'].$locale['400']);
 
-opentable($locale['400']);
+opentable();
 echo "<!--pre_forum_idx--><table cellpadding='0' cellspacing='1' width='100%' class='tbl-border forum_idx_table'>\n";
 
 $forum_list = ""; $current_cat = "";
@@ -40,11 +40,15 @@ $result = dbquery(
    "SELECT f.forum_id, f.forum_cat, f.forum_name, f.forum_description, f.forum_moderators, f.forum_lastpost, f.forum_postcount,
    f.forum_threadcount, f.forum_lastuser, f.forum_access, f2.forum_name AS forum_cat_name,
    t.thread_id, t.thread_lastpost, t.thread_lastpostid, t.thread_subject, t.thread_locked,
-   u.user_id, u.user_name,u.user_avatar, u.user_status
+   u.user_id, u.user_name,u.user_avatar, u.user_status, tu3.user_avatar AS user_avatarlastuser, tu1.user_avatar, tu1.user_id,
+      tu2.user_name AS user_lastuser, tu2.user_status AS status_lastuser
    FROM ".DB_FORUMS." f
    LEFT JOIN ".DB_FORUMS." f2 ON f.forum_cat = f2.forum_id
    LEFT JOIN ".DB_THREADS." t ON f.forum_id = t.forum_id AND f.forum_lastpost=t.thread_lastpost
    LEFT JOIN ".DB_USERS." u ON f.forum_lastuser = u.user_id
+   LEFT JOIN ".DB_USERS." tu1 ON t.thread_author = tu1.user_id
+      LEFT JOIN ".DB_USERS." tu2 ON t.thread_lastuser = tu2.user_id
+      LEFT JOIN ".DB_USERS." tu3 ON t.thread_lastuser = tu3.user_id
    WHERE ".$catWhere." ".groupaccess('f.forum_access')." AND f.forum_cat!='0'
    GROUP BY forum_id ORDER BY f2.forum_order ASC, f.forum_order ASC, t.thread_lastpost DESC"
 );
@@ -53,7 +57,7 @@ if (dbrows($result) != 0) {
 	while ($data = dbarray($result)) {
 		if ($data['forum_cat_name'] != $current_cat) {
 			$current_cat = $data['forum_cat_name'];
-			echo "<tr>\n<td colspan='2' class='forum-caption forum_cat_name'><!--forum_cat_name-->".$data['forum_cat_name']."</td>\n";
+			echo "<tr>\n<a><td colspan='2' class='forum-caption forum_cat_name'><!--forum_cat_name-->".$data['forum_cat_name']."</td>\n";
 			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['402']."</td>\n";
 			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['403']."</td>\n";
 			echo "<td width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['404']."</td>\n";
@@ -79,44 +83,51 @@ if (dbrows($result) != 0) {
 		}
 		echo "<tr>\n";
 		echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>$fim</td>\n";
-		echo "<td class='tbl1 forum_name'><!--forum_name--><a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a><br />\n";
-		if ($data['forum_description'] || $moderators) {
-			echo "<span class='small'>".nl2br(parseubb($data['forum_description'])).($data['forum_description'] && $moderators ? "<br />\n" : "");
-			echo ($moderators ? "<strong>".$locale['411']."</strong>".$moderators."</span>\n" : "</span>\n")."\n";
-		}
+		echo "<td class='tbl11 forum_name'>";
+		if ($data['forum_lastpost'] == 0) {
+         echo $locale['405']."in&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a>";
+      } else {
+
+		 echo "<h2><b>";
+      if ($tdata['thread_sticky'] == 1) {
+         echo "<img src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
+      }
+		 echo"<a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
+		 echo trimlink($data['thread_subject'], 33)." </a></b></h2>\n";
+		 
+		echo "Gestartet von&nbsp;";
+		 if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+     if($data['user_avatarlastuser'] && file_exists(IMAGES."avatars/".$data['user_avatarlastuser'])) { $src = IMAGES."avatars/".$data['user_avatarlastuser']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+		echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_lastuser']."'>
+         <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' /></a>
+         ".profile_link($data['thread_lastuser'], $data['user_lastuser'], $data['status_lastuser'])."\n";
+		echo"<!--forum_name-->in&nbsp;".$data['forum_name']."&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_cat_name']."</a>\n";
 		echo "</td>\n";
 		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_threadcount']."</td>\n";
 		echo "<td align='center' width='1%' class='mainbody' style='white-space:nowrap'>".$data['forum_postcount']."</td>\n";
-		echo "<td width='1%' class='tbl2' style='white-space:nowrap'>";
-		if ($data['forum_lastpost'] == 0) {
-         echo $locale['405']."";
-      } else {
-	if (file_exists(IMAGES . "avatars/" . $data['user_avatar']) && $data['user_avatar'] != null) {
-                echo "<img class='lstsn-users-offline lstsn-user' src='" . IMAGES . "avatars/" . $data['user_avatar'] . "' alt='' style='width: 50px; height: 50px; vertical-align:middle;' />";
-            } else {
-                echo "<img class='lstsn-users-offline lstsn-user' src='" . IMAGES . "avatars/noavatar100.png' alt='' style='width: 50px; height: 50px; vertical-align:middle;' />";
-            }
-		echo "<br />";	
-         echo "<b><a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
-		 echo trimlink($data['thread_subject'], 20)." </a></b><br />\n";
-			echo "".$locale['406'].profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."\n";
-			echo "<br />";
-			echo showdate("forumdate", $data['forum_lastpost'])."\n";
-			echo "</td></tr>\n";
-	}
+		echo "<td width='1%' class='tbl1' style='white-space:nowrap; padding-right:50px;'>";
+				 if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+     if($data['user_avatarlastuser'] && file_exists(IMAGES."avatars/".$data['user_avatarlastuser'])) { $src = IMAGES."avatars/".$data['user_avatarlastuser']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+		
+			echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_lastuser']."' class='profile-link flleft'>
+         <span ><img style='margin-right:4px; border-radius:6px;' width='30' src='".$src."' alt='".$src."' /></span></a>
+         <span class='small'>".profile_link($data['thread_lastuser'], $data['user_lastuser'], $data['status_lastuser'])."</span><br />
+         ".showdate("forumdate", $data['thread_lastpost'])."</td>\n";
 }
+		 }
 	echo "<tr>\n<td colspan='5' class='tbl1'>".$locale['407']."</td>\n</tr>\n";
 }
-echo "</table><!--sub_forum_idx_table-->\n<table cellpadding='0' cellspacing='0' width='100%'>\n<tr>\n";
-echo "<td class='forum'><br />\n";
-echo "<img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle;' /> - ".$locale['409']."<br />\n";
-echo "<img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle;' /> - ".$locale['410']."\n";
-echo "</td><td align='right' valign='bottom' class='forum'>\n";
-echo "<form name='searchform' method='get' action='".BASEDIR."search.php?stype=forums'>\n";
-echo "<input type='hidden' name='stype' value='forums' />\n";
-echo "<input type='text' name='stext' class='textbox' style='width:150px' />\n";
-echo "<input type='submit' name='search' value='".$locale['550']."' class='button' />\n";
-echo "</form>\n</td>\n</tr>\n</table><!--sub_forum_idx-->\n";
+echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+echo "<tr><td><img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle; width:24px;' /> - ".$locale['470']."</td>";
+echo "<td><img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle; width:24px;' /> - ".$locale['472']."</td></tr>";
+echo "<tr><td><img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle; width:24px;' /> - ".$locale['473']."</td>";
+echo "<td><img src='".get_image("stickythread")."' alt='".$locale['563']."' style='vertical-align:middle; width:24px;' /> - ".$locale['474']."</td></tr>";
+
+echo "</table>\n<!--sub_forum-->\n";
 closetable();
 	
 require_once THEMES."templates/footer.php";
