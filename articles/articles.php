@@ -113,8 +113,8 @@ if (isset($_GET['article_id']) && isnum($_GET['article_id'])) {
 	
 	// NEW QUERY
 	$result = dbquery(
-		"SELECT ac.article_cat_id, ac.article_cat_name, ac.article_cat_description, COUNT(a.article_cat) AS article_count FROM ".DB_ARTICLES." a
-		LEFT JOIN ".DB_ARTICLE_CATS." ac ON a.article_cat=ac.article_cat_id
+		"SELECT ac.article_cat_id, ac.article_cat_name, ac.article_cat_description, article_id, article_subject, COUNT(a.article_cat) AS article_count FROM ".DB_ARTICLES." a
+		LEFT JOIN ".DB_ARTICLE_CATS." ac ON a.article_cat=ac.article_cat_id 
 		WHERE ".groupaccess('ac.article_cat_access')."
 		GROUP BY ac.article_cat_id
 		ORDER BY ac.article_cat_name"
@@ -127,7 +127,9 @@ if (isset($_GET['article_id']) && isnum($_GET['article_id'])) {
 		while ($data = dbarray($result)) {
 			if ($counter != 0 && ($counter % $columns == 0)) { echo "</tr>\n<tr>\n"; }
 			//$num = dbcount("(article_cat)", DB_ARTICLES, "article_cat='".$data['article_cat_id']."' AND article_draft='0'");
-			echo "<td valign='top' width='50%' class='tbl article_idx_cat_name'><!--article_idx_cat_name--><a href='".FUSION_SELF."?cat_id=".$data['article_cat_id']."'>".$data['article_cat_name']."</a> <span class='small2'>(".$data['article_count'].")</span>";
+			echo "<td valign='top' width='50%' class='tbl article_idx_cat_name'>
+			<h3><a href='".FUSION_SELF."?article_id=".$data['article_id']."'>".$data['article_subject']."</h3>
+			<!--article_idx_cat_name--><a href='".FUSION_SELF."?cat_id=".$data['article_cat_id']."'>".$data['article_cat_name']."</a> <span class='small2'>(".$data['article_count'].")</span>";
 			if ($data['article_cat_description'] != "") { echo "<br />\n<span class='small'>".$data['article_cat_description']."</span>"; }
 			echo "</td>\n";
 			$counter++;
@@ -159,7 +161,7 @@ if (isset($_GET['article_id']) && isnum($_GET['article_id'])) {
 				while ($data = dbarray($result)) {
 					$class = ($i%2 ? "tbl1" : "tbl2");
 					if ($data['article_datestamp'] + 604800 > time() + ($settings['timeoffset'] * 3600)) {
-						$new = "&nbsp;<span class='small' style='color:green;'>[".$locale['402']."]</span>";
+						$new = "&nbsp;<span class='small' style='color:green;'><img src='".THEME."images/icons/new_dl.png' alt='Neu' title='Neu' class='blink'  style='border:0px; vertical-align:middle;' /></span>";
 					} else {
 						$new = "";
 					}
