@@ -57,67 +57,33 @@ $pm_savebox = $options['pm_savebox'];
 opentable($locale['400']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
 		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
-		echo "<tr><td class='tbl'>".$locale['930']."<br /><span class='small2'>".$locale['931']."</span></br>
-		<input type='text' name='download_max_b' value='".$settings2['download_max_b']."' maxlength='150' class='textbox' style='width:100px;' /></td>";
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['707']."</strong></tr>";
+		echo "<tr><td class='tbl'>".$locale['701']."<br /><span class='small2'>".$locale['704']."</span></br>
+		<input type='text' name='pm_inbox' value='".$pm_inbox."' maxlength='4' class='textbox' style='width:40px;' /></td>";
 		
-		echo "<td class='tbl'>".$locale['932']."<br /><span class='small2'>".$locale['933']."</span></br>
-		<input type='text' name='download_types' value='".$settings2['download_types']."' maxlength='150' class='textbox' style='width:200px;' /></br></td></tr>";
+		echo "<td class='tbl'>".$locale['702']."<br /><span class='small2'>".$locale['704']."</span></br>
+		<input type='text' name='pm_sentbox' value='".$pm_sentbox."' maxlength='4' class='textbox' style='width:40px;' /></br></td></tr>";
 		
-		echo "<tr><td class='tbl'>".$locale['934']."<br /><span class='small2'>".$locale['935']."</span></br>
-		<input type='text' name='download_screen_max_w' value='".$settings2['download_screen_max_w']."' maxlength='4' class='textbox' style='width:40px;' /> x
-		<input type='text' name='download_screen_max_h' value='".$settings2['download_screen_max_h']."' maxlength='4' class='textbox' style='width:40px;' /></td>";
+		echo "<tr><td class='tbl'>".$locale['703']."<br /><span class='small2'>".$locale['704']."</span></br>
+		<input type='text' name='pm_savebox' value='".$pm_savebox."' maxlength='4' class='textbox' style='width:40px;' /></td>";
 		
-		echo "<td class='tbl'>".$locale['936']."<br /><span class='small2'>".$locale['931']."</span></br>
-		<input type='text' name='download_screen_max_b' value='".$settings2['download_screen_max_b']."' maxlength='10' class='textbox' style='width:100px;' /></td></tr>";
+		echo "<tr></td>";
 		
-		echo "<tr><td class='tbl'>".$locale['937']."<br /><span class='small2'>".$locale['935']."</span></br>
-		<input type='text' name='download_thumb_max_w' value='".$settings2['download_thumb_max_w']."' maxlength='4' class='textbox' style='width:40px;' /> x
-		<input type='text' name='download_thumb_max_h' value='".$settings2['download_thumb_max_h']."' maxlength='4' class='textbox' style='width:40px;' /></td>";
-		
-		echo "<td class='tbl'>".$locale['938']."</br>
-		<select name='download_screenshot' size='1' class='textbox' style='width:100px;'>";
-		echo "<option value='1' ".($settings['download_screenshot'] ? "selected='selected'" : "").">".$locale['518']."</option>\n";
-		echo "<option value='0' ".(!$settings['download_screenshot'] ? "selected='selected'" : "").">".$locale['519']."</option>\n";
-		echo "</select>\n";
-		echo "</td></tr>";
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['708']."</strong></tr>";
 
+		echo "<tr><td class='tbl'>".$locale['709']."</span></br><select name='pm_email_notify' class='textbox'>
+		<option value='0'".($options['pm_email_notify'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>
+		<option value='1'".($options['pm_email_notify'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option></select></td>";
+		
+		echo "<td class='tbl'>".$locale['710']."</br><select name='pm_save_sent' class='textbox'>
+		<option value='0'".($options['pm_save_sent'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>
+		<option value='1'".($options['pm_save_sent'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option></select></td></tr>";
+		
+		echo "</td></tr>";
+echo "<td align='center' colspan='2' class='tbl'><span class='small2'>".$locale['711']."</span></td>\n";
 		echo "</tr>\n<tr>\n";
 		echo "<td align='center' colspan='2' class='tbl'><br />\n";
 echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
-echo "</tr>\n</table>\n</form>\n";
-
-
-echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['707']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl' width='50%'>".$locale['701']."<br /><span class='small2'>".$locale['704']."</span></td>\n";
-echo "<td class='tbl' width='50%'><input type='text' name='pm_inbox' value='".$pm_inbox."' maxlength='4' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl' width='50%'>".$locale['702']."<br /><span class='small2'>".$locale['704']."</span></td>\n";
-echo "<td class='tbl' width='50%'><input type='text' name='pm_sentbox' value='".$pm_sentbox."' maxlength='4' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl' width='50%'>".$locale['703']."<br /><span class='small2'>".$locale['704']."</span></td>\n";
-echo "<td class='tbl' width='50%'><input type='text' name='pm_savebox' value='".$pm_savebox."' maxlength='4' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['708']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl' width='50%'>".$locale['709']."</td>\n";
-echo "<td class='tbl' width='50%'><select name='pm_email_notify' class='textbox'>\n";
-echo "<option value='0'".($options['pm_email_notify'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "<option value='1'".($options['pm_email_notify'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl' width='50%'>".$locale['710']."</td>\n";
-echo "<td class='tbl' width='50%'><select name='pm_save_sent' class='textbox'>\n";
-echo "<option value='0'".($options['pm_save_sent'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "<option value='1'".($options['pm_save_sent'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><span class='small2'>".$locale['711']."</span></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
-echo "<input type='submit' name='saveoptions' value='".$locale['750']."' class='button' />\n</td>\n";
 echo "</tr>\n</table>\n</form>\n";
 closetable();
 
