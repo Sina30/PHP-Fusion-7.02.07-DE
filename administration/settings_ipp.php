@@ -56,24 +56,27 @@ while ($data = dbarray($result)) {
 
 opentable($locale['400']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['669'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='newsperpage' value='".$settings2['newsperpage']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['910'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='articles_per_page' value='".$settings2['articles_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['911'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='downloads_per_page' value='".$settings2['downloads_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['912'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='links_per_page' value='".$settings2['links_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['913'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='comments_per_page' value='".$settings2['comments_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
-echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' />\n</td>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['669'].":</br>
+		<input type='text' name='newsperpage' value='".$settings2['newsperpage']."' maxlength='2' class='textbox' style='width:50px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['910'].":</br>
+		<input type='text' name='articles_per_page' value='".$settings2['articles_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></br></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['911'].":</br>
+		<input type='text' name='downloads_per_page' value='".$settings2['downloads_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['912'].":</br>
+		<input type='text' name='links_per_page' value='".$settings2['links_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['913'].":</br>
+		<input type='text' name='comments_per_page' value='".$settings2['comments_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>";
+		
+		echo "</td></tr>";
+
+		echo "</tr>\n<tr>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
+echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
 echo "</tr>\n</table>\n</form>\n";
 closetable();
 

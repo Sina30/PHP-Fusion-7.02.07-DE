@@ -68,50 +68,49 @@ while ($data = dbarray($result)) {
 
 opentable($locale['400']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['951']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='news_image_link' class='textbox'>\n";
-echo "<option value='0'".($settings2['news_image_link'] == 0 ? " selected='selected'" : "").">".$locale['952']."</option>\n";
-echo "<option value='1'".($settings2['news_image_link'] == 1 ? " selected='selected'" : "").">".$locale['953']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['957']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='news_image_frontpage' class='textbox'>\n";
-echo "<option value='0'".($settings2['news_image_frontpage'] == 0 ? " selected='selected'" : "").">".$locale['959']."</option>\n";
-echo "<option value='1'".($settings2['news_image_frontpage'] == 1 ? " selected='selected'" : "").">".$locale['960']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['958']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='news_image_readmore' class='textbox'>\n";
-echo "<option value='0'".($settings2['news_image_readmore'] == 0 ? " selected='selected'" : "").">".$locale['959']."</option>\n";
-echo "<option value='1'".($settings2['news_image_readmore'] == 1 ? " selected='selected'" : "").">".$locale['960']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['950']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['954']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='news_thumb_ratio' class='textbox'>\n";
-echo "<option value='0'".($settings2['news_thumb_ratio'] == 0 ? " selected='selected'" : "").">".$locale['955']."</option>\n";
-echo "<option value='1'".($settings2['news_thumb_ratio'] == 1 ? " selected='selected'" : "").">".$locale['956']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['601']."<br /><span class='small2'>".$locale['604']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='news_thumb_w' value='".$settings2['news_thumb_w']."' maxlength='3' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='news_thumb_h' value='".$settings2['news_thumb_h']."' maxlength='3' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['602']."<br /><span class='small2'>".$locale['604']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='news_photo_w' value='".$settings2['news_photo_w']."' maxlength='3' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='news_photo_h' value='".$settings2['news_photo_h']."' maxlength='3' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['603']."<br /><span class='small2'>".$locale['604']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='news_photo_max_w' value='".$settings2['news_photo_max_w']."' maxlength='4' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='news_photo_max_h' value='".$settings2['news_photo_max_h']."' maxlength='4' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['605']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='news_photo_max_b' value='".$settings2['news_photo_max_b']."' maxlength='10' class='textbox' style='width:100px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
-echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' />\n</td>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['951']."</br><select name='news_image_link' class='textbox'>
+		<option value='0'".($settings2['news_image_link'] == 0 ? " selected='selected'" : "").">".$locale['952']."</option>
+		<option value='1'".($settings2['news_image_link'] == 1 ? " selected='selected'" : "").">".$locale['953']."</option></select></td>";
+		
+		echo "<td class='tbl'>".$locale['957']."</br><select name='news_image_frontpage' class='textbox'>
+		<option value='0'".($settings2['news_image_frontpage'] == 0 ? " selected='selected'" : "").">".$locale['959']."</option>
+		<option value='1'".($settings2['news_image_frontpage'] == 1 ? " selected='selected'" : "").">".$locale['960']."</option></br></select></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['958']."</br><select name='news_image_readmore' class='textbox'>
+		<option value='0'".($settings2['news_image_readmore'] == 0 ? " selected='selected'" : "").">".$locale['959']."</option>
+		<option value='1'".($settings2['news_image_readmore'] == 1 ? " selected='selected'" : "").">".$locale['960']."</option></select></td></tr>";
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['950']."</strong></tr>";
+		echo "<td class='tbl'>".$locale['954']."</br><select name='news_thumb_ratio' class='textbox'>
+		<option value='0'".($settings2['news_thumb_ratio'] == 0 ? " selected='selected'" : "").">".$locale['955']."</option>
+		<option value='1'".($settings2['news_thumb_ratio'] == 1 ? " selected='selected'" : "").">".$locale['956']."</option></select></td>";
+		
+		echo "<td class='tbl'>".$locale['954']."</br><select name='news_thumb_ratio' class='textbox'>
+		<option value='0'".($settings2['news_thumb_ratio'] == 0 ? " selected='selected'" : "").">".$locale['955']."</option>
+		<option value='1'".($settings2['news_thumb_ratio'] == 1 ? " selected='selected'" : "").">".$locale['956']."</option></select></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['601']."<br /><span class='small2'>".$locale['604']."</span></br>
+		<input type='text' name='news_thumb_w' value='".$settings2['news_thumb_w']."' maxlength='3' class='textbox' style='width:40px;' /> x
+		<input type='text' name='news_thumb_h' value='".$settings2['news_thumb_h']."' maxlength='3' class='textbox' style='width:40px;' /></td></tr>";
+		
+		echo "<td class='tbl'>".$locale['602']."<br /><span class='small2'>".$locale['604']."</span></br>
+		<input type='text' name='news_photo_w' value='".$settings2['news_photo_w']."' maxlength='3' class='textbox' style='width:40px;' /> x
+		<input type='text' name='news_photo_h' value='".$settings2['news_photo_h']."' maxlength='3' class='textbox' style='width:40px;' /></td>";
+		
+		
+		
+		echo "<td class='tbl'>".$locale['603']."<br /><span class='small2'>".$locale['604']."</span></br>
+		<input type='text' name='news_photo_max_w' value='".$settings2['news_photo_max_w']."' maxlength='4' class='textbox' style='width:40px;' /> x
+		<input type='text' name='news_photo_max_h' value='".$settings2['news_photo_max_h']."' maxlength='4' class='textbox' style='width:40px;' /></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['605']."</br>
+		<input type='text' name='news_photo_max_b' value='".$settings2['news_photo_max_b']."' maxlength='10' class='textbox' style='width:100px;' /></td>";
+		
+		echo "</td></tr>";
+
+		echo "</tr>\n<tr>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
+echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
 echo "</tr>\n</table>\n</form>\n";
 closetable();
 

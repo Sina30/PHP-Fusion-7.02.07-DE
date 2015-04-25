@@ -87,88 +87,80 @@ while ($data = dbarray($result)) {
 
 opentable($locale['400']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['505']."<br /><span class='small2'>".$locale['506']."</span></td>\n";
-echo "<td width='50%' class='tbl'><select name='numofthreads' class='textbox'>\n";
-echo "<option".($settings2['numofthreads'] == 5 ? " selected='selected'" : "").">5</option>\n";
-echo "<option".($settings2['numofthreads'] == 10 ? " selected='selected'" : "").">10</option>\n";
-echo "<option".($settings2['numofthreads'] == 15 ? " selected='selected'" : "").">15</option>\n";
-echo "<option".($settings2['numofthreads'] == 20 ? " selected='selected'" : "").">20</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['507']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='forum_ips' class='textbox'>\n";
-echo "<option value='1'".($settings2['forum_ips'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['forum_ips'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['508']."<br /><span class='small2'>".$locale['509']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='attachmax' value='".$settings2['attachmax']."' maxlength='150' class='textbox' style='width:100px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['534']."<br /><span class='small2'>".$locale['535']."</span></td>\n";
-echo "<td width='50%' class='tbl'><select name='attachmax_count' class='textbox'>";
-for ($i = 1; $i <= 10; $i++) {
-	echo "<option value='".$i."'".($settings2['attachmax_count'] == $i ? " selected='selected'" : "").">".$i."</option>";
-}
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['510']."<br /><span class='small2'>".$locale['511']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='attachtypes' value='".$settings2['attachtypes']."' maxlength='150' class='textbox' style='width:200px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['512']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='thread_notify' class='textbox'>\n";
-echo "<option value='1'".($settings2['thread_notify'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['thread_notify'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['520']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='forum_ranks' class='textbox'>\n";
-echo "<option value='1'".($settings2['forum_ranks'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['forum_ranks'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['521']."<br /><span class='small2'>".$locale['522']."</span></td>\n";
-echo "<td width='50%' class='tbl'><select name='forum_edit_lock' class='textbox'>\n";
-echo "<option value='1'".($settings2['forum_edit_lock'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['forum_edit_lock'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['536']."<br /><span class='small2'>".$locale['537']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='forum_edit_timelimit' value='".$settings2['forum_edit_timelimit']."' maxlength='50' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['538']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='forum_editpost_to_lastpost' class='textbox'>\n";
-echo "<option value='1'".($settings2['forum_editpost_to_lastpost'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['forum_editpost_to_lastpost'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['525']."<br /><span class='small2'>".$locale['526']."</span></td>\n";
-echo "<td width='50%' class='tbl'><select name='popular_threads_timeframe' class='textbox'>\n";
-echo "<option value='604800'".($settings2['popular_threads_timeframe'] == "604800" ? " selected='selected'" : "").">".$locale['527']."</option>\n";
-echo "<option value='2419200'".($settings2['popular_threads_timeframe'] == "2419200" ? " selected='selected'" : "").">".$locale['528']."</option>\n";
-echo "<option value='31557600'".($settings2['popular_threads_timeframe'] == "31557600" ? " selected='selected'" : "").">".$locale['529']."</option>\n";
-echo "<option value='0'".($settings2['popular_threads_timeframe'] == "0" ? " selected='selected'" : "").">".$locale['530']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['531']."</td>";
-echo "<td width='50%' class='tbl'><select name='forum_last_posts_reply' class='textbox'>\n";
-echo "<option value='0'".($settings2['forum_last_posts_reply'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>";
-echo "<option value='1'".($settings2['forum_last_posts_reply'] == "1" ? " selected='selected'" : "").">".$locale['533']."</option>";
-for ($i = 2; $i<=20; $i++) {
-	echo "<option value='".$i."'".($settings2['forum_last_posts_reply'] == $i ? " selected='selected'" : "").">".sprintf($locale['532'], $i)."</option>";
-}
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-if (!check_admin_pass(isset($_POST['admin_password']) ? stripinput($_POST['admin_password']) : "")) {
-	echo "<td class='tbl'>".$locale['853']."</td>\n";
-	echo "<td class='tbl'><input type='password' name='admin_password' value='".(isset($_POST['admin_password']) ? stripinput($_POST['admin_password']) : "")."' class='textbox' style='width:150px;' autocomplete='off' /></td>\n";
-	echo "</tr>\n<tr>\n";
-}
-echo "<td align='center' colspan='2' class='tbl'><br /><a href='".FUSION_SELF.$aidlink."&amp;action=count_posts'>".$locale['523']."</a>".(isset($_GET['action']) && $_GET['action'] == "count_posts" ? " ".$locale['524'] : "")."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
-echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
-echo "</tr>\n</table>\n</form>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['505']."<br /><span class='small2'>".$locale['506']."</span></br>
+		<select name='numofthreads' class='textbox'>";
+		echo "<option".($settings2['numofthreads'] == 5 ? " selected='selected'" : "").">5</option>\n";
+		echo "<option".($settings2['numofthreads'] == 10 ? " selected='selected'" : "").">10</option>\n";
+		echo "<option".($settings2['numofthreads'] == 15 ? " selected='selected'" : "").">15</option>\n";
+		echo "<option".($settings2['numofthreads'] == 20 ? " selected='selected'" : "").">20</option>\n";
+		echo "</select>\n";
+		echo "<td class='tbl'>".$locale['507']."</br>
+		<select name='forum_ips' class='textbox'>";
+		echo "<option value='1'".($settings2['forum_ips'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['forum_ips'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "</td></tr>";
+		echo "<tr><td class='tbl'>".$locale['508']."<br /><span class='small2'>".$locale['509']."</span></br>
+		<input type='text' name='attachmax' value='".$settings2['attachmax']."' maxlength='150' class='textbox' style='width:100px;' /></td>";
+		echo "<td class='tbl'>".$locale['534']."<br /><span class='small2'>".$locale['535']."</span></br>
+		<select name='attachmax_count' class='textbox'>";
+		for ($i = 1; $i <= 10; $i++) {
+		echo "<option value='".$i."'".($settings2['attachmax_count'] == $i ? " selected='selected'" : "").">".$i."</option>";
+		}
+		echo "<tr><td class='tbl'>".$locale['510']."<br /><span class='small2'>".$locale['511']."</span></br>
+		<input type='text' name='attachtypes' value='".$settings2['attachtypes']."' maxlength='150' class='textbox' style='width:200px;' /></td>";
+		echo "<td class='tbl'>".$locale['512']."</br>
+		<select name='thread_notify' class='textbox'>";
+		echo "<option value='1'".($settings2['thread_notify'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['thread_notify'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "</td></tr>";
+		echo "<td class='tbl'>".$locale['520']."</br>
+		<select name='thread_notify' class='textbox'>";
+		echo "<option value='1'".($settings2['forum_ranks'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['forum_ranks'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "<td class='tbl'>".$locale['521']."<br /><span class='small2'>".$locale['522']."</span></br>
+		<select name='forum_edit_lock' class='textbox'>";
+		echo "<option value='1'".($settings2['forum_edit_lock'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['forum_edit_lock'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "<tr><td class='tbl'>".$locale['536']."<br /><span class='small2'>".$locale['537']."</span></br>
+		<input type='text' name='forum_edit_timelimit' value='".$settings2['forum_edit_timelimit']."' maxlength='50' class='textbox' style='width:40px;' /></td>";
+		echo "<td class='tbl'>".$locale['538']."</br>
+		<select name='forum_editpost_to_lastpost' class='textbox'>";
+		echo "<option value='1'".($settings2['forum_editpost_to_lastpost'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['forum_editpost_to_lastpost'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "</td></tr>";
+		echo "<td class='tbl'>".$locale['525']."<br /><span class='small2'>".$locale['526']."</span></br>
+		<select name='popular_threads_timeframe' class='textbox'>";
+		echo "<option value='604800'".($settings2['popular_threads_timeframe'] == "604800" ? " selected='selected'" : "").">".$locale['527']."</option>\n";
+		echo "<option value='2419200'".($settings2['popular_threads_timeframe'] == "2419200" ? " selected='selected'" : "").">".$locale['528']."</option>\n";
+		echo "<option value='31557600'".($settings2['popular_threads_timeframe'] == "31557600" ? " selected='selected'" : "").">".$locale['529']."</option>\n";
+		echo "<option value='0'".($settings2['popular_threads_timeframe'] == "0" ? " selected='selected'" : "").">".$locale['530']."</option>\n";
+		echo "</select>\n";
+		echo "<td class='tbl'>".$locale['531']."</br>
+		<select name='forum_last_posts_reply' class='textbox'>";
+		echo "<option value='0'".($settings2['forum_last_posts_reply'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>";
+		echo "<option value='1'".($settings2['forum_last_posts_reply'] == "1" ? " selected='selected'" : "").">".$locale['533']."</option>";
+		for ($i = 2; $i<=20; $i++) {
+		echo "<option value='".$i."'".($settings2['forum_last_posts_reply'] == $i ? " selected='selected'" : "").">".sprintf($locale['532'], $i)."</option>";
+		}
+		echo "</select>\n";
+		echo "</td></tr>";
+		echo "<tr><td class='tbl'><a href='".FUSION_SELF.$aidlink."&amp;action=count_posts'>".$locale['523']."</a>".(isset($_GET['action']) && $_GET['action'] == "count_posts" ? " ".$locale['524'] : "")."</br>
+		</td>";
+		if (!check_admin_pass(isset($_POST['admin_password']) ? stripinput($_POST['admin_password']) : "")) {
+		echo "<td class='tbl'>".$locale['853']."</br>
+		<input type='password' name='admin_password' value='".(isset($_POST['admin_password']) ? stripinput($_POST['admin_password']) : "")."' class='textbox' style='width:150px;' autocomplete='off' />";
+		}
+		echo "</tr>\n<tr>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
+		echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
+		echo "</tr>\n</table>\n</form>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br /></td>\n";
 closetable();
 
 require_once THEMES."templates/footer.php";

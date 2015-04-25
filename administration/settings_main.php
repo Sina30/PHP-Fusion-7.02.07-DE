@@ -224,97 +224,70 @@ $locale_files = makefilelist(LOCALE, ".|..", true, "folders");
 
 ob_start();
 opentable($locale['400']);
-echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='600' class='center'>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['402']."</td>\n";
-echo "<td width='70%' class='tbl'><input type='text' name='sitename' value='".$settings2['sitename']."' maxlength='255' class='textbox' style='width:230px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['404']."</td>\n";
-echo "<td width='70%' class='tbl'><input type='text' name='sitebanner' value='".$settings2['sitebanner']."' maxlength='255' class='textbox' style='width:230px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['405']."</td>\n";
-echo "<td width='70%' class='tbl'><input type='text' name='siteemail' value='".$settings2['siteemail']."' maxlength='128' class='textbox' style='width:230px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['406']."</td>\n";
-echo "<td width='70%' class='tbl'><input type='text' name='username' value='".$settings2['siteusername']."' maxlength='32' class='textbox' style='width:230px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'><strong>".$locale['425']."</strong></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['426']."</td>\n";
-echo "<td width='70%' class='tbl'><select id='site_protocol' name='site_protocol' class='textbox' style='width:100px;'>\n";
-echo "<option".($settings2['site_protocol'] == "http" ? " selected='selected'" : "").">http</option>\n";
-echo "<option".($settings2['site_protocol'] == "https" ? " selected='selected'" : "").">https</option>\n";
-echo "</select>\n</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl' valign='top'>".$locale['427']."<br /><span class='small2'>".$locale['428']." ".$locale['433']."</span></td>\n";
-echo "<td width='70%' class='tbl' valign='top'><input type='text' id='site_host' name='site_host' value='".$settings2['site_host']."' maxlength='255' class='textbox' style='width:230px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl' valign='top'>".$locale['429']."<br /><span class='small2'>".$locale['428']." /".$locale['434']."/</span></td>\n";
-echo "<td width='70%' class='tbl' valign='top'><input type='text' id='site_path' name='site_path' value='".$settings2['site_path']."' maxlength='255' class='textbox' style='width:230px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl' valign='top'>".$locale['430']."<br /><span class='small2'>".$locale['408']."</span></td>\n";
-echo "<td width='70%' class='tbl' valign='top'><input type='text' id='site_port' name='site_port' value='".$settings2['site_port']."' maxlength='4' class='textbox' style='width:100px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['431']."</td>\n";
-echo "<td width='70%' class='tbl'>";
-echo "<span id='display_protocol'>".$settings2['site_protocol']."</span>://";
-echo "<span id='display_host'>".$settings2['site_host']."</span>";
-echo "<span id='display_port'>".($settings2['site_port'] ? ":".$settings2['site_port'] : "")."</span>";
-echo "<span id='display_path'>".$settings2['site_path']."</span>";
-echo "</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'><strong>".$locale['432']."</strong></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl' valign='top'>".$locale['407']."<br /><span class='small2'>".$locale['408']."</span></td>\n";
-echo "<td width='70%' class='tbl' valign='top'><textarea name='intro' cols='50' rows='6' class='textbox' style='width:230px;'>".phpentities(stripslashes($settings2['siteintro']))."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['409']."</td>\n";
-echo "<td width='70%' class='tbl'><textarea name='description' cols='50' rows='6' class='textbox' style='width:230px;'>".$settings2['description']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['410']."<br /><span class='small2'>".$locale['411']."</span></td>\n";
-echo "<td width='70%' class='tbl'><textarea name='keywords' cols='50' rows='6' class='textbox' style='width:230px;'>".$settings2['keywords']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['412']."</td>\n";
-echo "<td width='70%' class='tbl'><textarea name='footer' cols='50' rows='6' class='textbox' style='width:230px;'>".phpentities(stripslashes($settings2['footer']))."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' valign='top' class='tbl'>".$locale['413']."</td>\n";
-echo "<td width='70%' class='tbl'><input type='text' name='opening_page' value='".$settings2['opening_page']."' maxlength='100' class='textbox' style='width:200px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['417']."</td>\n";
-echo "<td width='70%' class='tbl'><select name='localeset' class='textbox'>\n";
-echo makefileopts($locale_files, $settings2['locale'])."\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['418'];
-if ($userdata['user_theme'] == "Default") {
-  if ($settings2['theme'] != str_replace(THEMES, "", substr(THEME, 0, strlen(THEME)-1))) {
-  	echo "<div id='close-message'><div class='admin-message'>".$locale['global_302']."</div></div>\n";
-  }
-}
-echo "</td>\n";
-echo "<td width='70%' class='tbl'><select name='theme' class='textbox'>\n";
-echo makefileopts($theme_files, $settings2['theme'])."\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='30%' class='tbl'>".$locale['419']."</td>\n";
-echo "<td width='70%' class='tbl'><select name='default_search' class='textbox'>\n[DEFAULT_SEARCH]</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['420']."<br /><span class='small2'>".$locale['424']."</span></td>\n";
-echo "<td width='70%' class='tbl'><textarea name='exclude_left' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_left']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['421']."<br /><span class='small2'>".$locale['424']."</span></td>\n";
-echo "<td width='70%' class='tbl'><textarea name='exclude_upper' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_upper']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['422']."<br /><span class='small2'>".$locale['424']."</span></td>\n";
-echo "<td width='70%' class='tbl'><textarea name='exclude_lower' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_lower']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='30%' class='tbl'>".$locale['423']."<br /><span class='small2'>".$locale['424']."</span></td>\n";
-echo "<td width='70%' class='tbl'><textarea name='exclude_right' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_right']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />";
-echo "<input type='hidden' name='old_localeset' value='".$settings2['locale']."' />\n";
-echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
-echo "</tr>\n</table>\n</form>\n";
+		echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['402']."</br><input type='text' name='sitename' value='".$settings2['sitename']."' maxlength='255' class='textbox' style='width:230px;' /></td>";
+		echo "<td class='tbl'>".$locale['404']."</br><input type='text' name='sitebanner' value='".$settings2['sitebanner']."' maxlength='255' class='textbox' style='width:230px;' /></br></td></tr>";
+		echo "<tr><td class='tbl'>".$locale['405']."</br><input type='text' name='siteemail' value='".$settings2['siteemail']."' maxlength='128' class='textbox' style='width:230px;' /></td>";
+		echo "<td class='tbl'>".$locale['406']."</br><input type='text' name='username' value='".$settings2['siteusername']."' maxlength='32' class='textbox' style='width:230px;' /></td></tr>";
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['425']."</strong></tr>";
+		echo "<td class='tbl'>".$locale['426']."</br><select id='site_protocol' name='site_protocol' class='textbox' style='width:100px;'>";
+		echo "<option".($settings2['site_protocol'] == "http" ? " selected='selected'" : "").">http</option>\n";
+		echo "<option".($settings2['site_protocol'] == "https" ? " selected='selected'" : "").">https</option>\n";
+		echo "</select>\n";
+		echo "</td>";
+		echo "<td class='tbl'>".$locale['427']."<br/><span class='small2'>".$locale['428']." ".$locale['433']."</span><br />";
+		echo "<input type='text' id='site_host' name='site_host' value='".$settings2['site_host']."' maxlength='255' class='textbox' style='width:230px;' /><br /></td></tr>";
+		echo "<td class='tbl'>".$locale['429']."<br /><span class='small2'>".$locale['428']." /".$locale['434']."/</span></br>";
+		echo "<input type='text' id='site_path' name='site_path' value='".$settings2['site_path']."' maxlength='255' class='textbox' style='width:230px;' /><br />";
+		echo "<td class='tbl'>".$locale['430']."<br /><span class='small2'>".$locale['408']."</span></br>";
+		echo "<input type='text' id='site_port' name='site_port' value='".$settings2['site_port']."' maxlength='4' class='textbox' style='width:100px;' /><br /></td></tr>";
+		echo "<td class='tbl'>".$locale['431']."<br/><br />";
+		echo "<span id='display_protocol'>".$settings2['site_protocol']."</span>://";
+		echo "<span id='display_host'>".$settings2['site_host']."</span>";
+		echo "<span id='display_port'>".($settings2['site_port'] ? ":".$settings2['site_port'] : "")."</span>";
+		echo "<span id='display_path'>".$settings2['site_path']."</span>";
+		echo "<td class='tbl'>";
+		echo "</td></tr>";
+		echo "</tr>\n</table>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['432']."</strong></tr>";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['407']."<br /><span class='small2'>".$locale['408']."</span></br>
+		<textarea name='intro' cols='50' rows='6' class='textbox' style='width:230px;'>".phpentities(stripslashes($settings2['siteintro']))."</textarea></td>";
+		echo "<td class='tbl'>".$locale['412']."</br><textarea name='footer' cols='50' rows='6' class='textbox' style='width:230px;'>".phpentities(stripslashes($settings2['footer']))."</textarea></td></tr>";
+		echo "<tr><td class='tbl'>".$locale['410']."<br /><span class='small2'>".$locale['411']."</span></br>
+		<textarea name='keywords' cols='50' rows='6' class='textbox' style='width:230px;'>".$settings2['keywords']."</textarea></td>";
+		echo "<td class='tbl'>".$locale['409']."</br><textarea name='description' cols='50' rows='6' class='textbox' style='width:230px;'>".$settings2['description']."</textarea></td></tr>";
+		echo "<td class='tbl'>".$locale['413']."</br><input type='text' name='opening_page' value='".$settings2['opening_page']."' maxlength='100' class='textbox' style='width:200px;' /><br />";
+		echo "</td>";
+		echo "<td class='tbl'>".$locale['417']."</br><select name='localeset' class='textbox'>\n";
+		echo makefileopts($locale_files, $settings2['locale'])."\n";
+		echo "</select>";
+		echo "</td></tr>";
+		echo "</tr>\n</table>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['418']."</br>\n";
+		if ($userdata['user_theme'] == "Default") {
+		if ($settings2['theme'] != str_replace(THEMES, "", substr(THEME, 0, strlen(THEME)-1))) {
+		echo "<div id='close-message'><div class='admin-message'>".$locale['global_302']."</div></div>\n";
+			}
+		}
+		echo "<select name='theme' class='textbox'>";
+		echo makefileopts($theme_files, $settings2['theme'])."</td>\n";	
+		echo "<td class='tbl'>".$locale['419']."</br><select name='default_search' class='textbox'>\n[DEFAULT_SEARCH]</select></br></td></tr>";
+		echo "<tr><td class='tbl'>".$locale['420']."<br /><span class='small2'>".$locale['424']."</span></br>
+		<textarea name='exclude_left' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_left']."</textarea></td>";
+		echo "<td class='tbl'>".$locale['421']."<br /><span class='small2'>".$locale['424']."</br>
+		<textarea name='exclude_upper' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_upper']."</textarea></br></td></tr>";
+		echo "<tr><td class='tbl'>".$locale['422']."<br /><span class='small2'>".$locale['424']."</span></br>
+		<textarea name='exclude_lower' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_lower']."</textarea></td>";
+		echo "<td class='tbl'>".$locale['423']."<br /><span class='small2'>".$locale['424']."</span></br>
+		<textarea name='exclude_right' cols='50' rows='5' class='textbox' style='width:230px;'>".$settings2['exclude_right']."</textarea></td></tr>";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
+		echo "<input type='hidden' name='old_localeset' value='".$settings2['locale']."' />\n";
+		echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' />\n</td>\n";
+		echo "</tr>\n</table>\n</form>\n";
 closetable();
 
 $cache = ob_get_contents();

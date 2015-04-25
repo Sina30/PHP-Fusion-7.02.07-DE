@@ -100,6 +100,7 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="text-right m-t-0 m-b-0">'.dbcount("(user_id)", DB_USERS, "user_status='0'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>REGISTRIERTE MITGLIEDER</strong></span>';
 								echo '</div>';
 							echo '<div class="panel-footer"><div class="text-right text-uppercase">';
+							echo "".(checkrights("M") ? "<div class='text-right text-uppercase'>\n<a class='text-smaller' href='".ADMIN."members.php".$aidlink."'>".$locale['255b']."</a><i class='entypo right-open-mini'></i></div>\n" : '')."";
 									echo '</div></div></div></div>';
 									echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
 									echo '<div class="panel panel-default ">';
@@ -108,7 +109,8 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="text-right m-t-0 m-b-0">'.dbcount("(user_id)", DB_USERS, "user_status='6'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>ABGEBROCHEN MITGLIEDER</strong></span>';
 								echo '</div>';
 							echo '<div class="panel-footer"><div class="text-right text-uppercase">';
-									echo '</div></div></div></div>';
+							echo "".(checkrights("M") ? "<div class='text-right text-uppercase'>\n<a class='text-smaller' href='".ADMIN."members.php".$aidlink."&amp;status=5'>".$locale['255b']."</a> <i class='entypo right-open-mini'></i></div>\n" : '')."";
+							echo '</div></div></div></div>';
 									echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
 									echo '<div class="panel panel-default ">';
 									echo '<div class="panel-body">';
@@ -116,6 +118,7 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="text-right m-t-0 m-b-0">'.dbcount("(user_id)", DB_USERS, "user_status='2'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>NICHT AKTIVIERTEN MITGLIEDER</strong></span>';
 								echo '</div>';
 							echo '<div class="panel-footer"><div class="text-right text-uppercase">';
+							echo "".(checkrights("M") ? "<div class='text-right text-uppercase'>\n<a class='text-smaller' href='".ADMIN."members.php".$aidlink."&amp;status=2'>".$locale['255b']."</a> <i class='entypo right-open-mini'></i></div>\n" : '')."";
 									echo '</div></div></div></div>';
 									echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
 									echo '<div class="panel panel-default ">';
@@ -124,6 +127,7 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="text-right m-t-0 m-b-0">'.dbcount("(user_id)", DB_USERS, "user_status='1'").'</h4><span class="m-t-10 text-uppercase text-lighter text-smaller pull-right"><strong>SICHERHEIT BANNED MITGLIEDER</strong></span>';
 								echo '</div>';
 							echo '<div class="panel-footer"><div class="text-right text-uppercase">';
+							echo "".(checkrights("M") ? "<div class='text-right text-uppercase'><a class='text-smaller' href='".ADMIN."members.php".$aidlink."&amp;status=1'>".$locale['255b']."</a> <i class='entypo right-open-mini'></i></div>\n" : '')."";
 									echo '</div></div></div></div>';
 				if ($settings['enable_deactivation'] == "1") {
 				$time_overdue = time()-(86400*$settings['deactivation_period']);
@@ -312,12 +316,43 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 				echo '<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><img class="img-responsive pull-left" src="../administration/images/bewertungen.png">&nbsp;&nbsp;NEUESTE BEWERTUNGEN</strong></span><span class="pull-right label label-warning">'.dbcount("(rating_id)", DB_RATINGS).'</span></div>';
 				echo '<div class="panel-body">';
 			echo '<div class="text-center">'; 
-	if ($data['download_allow_ratings']) {
-			$rate = dbquery("SELECT SUM(rating_vote) FROM ".DB_RATINGS." WHERE rating_type='D,A,N' AND rating_item_id='".$data['rating_id']."'");
-			$info = dbresult($rate,0);
-			$num_rating = dbcount("(rating_vote)", DB_RATINGS, "rating_type='D' AND rating_item_id='".$data['rating_id']."'");
-			$rating_id = ($num_rating ? $info / $num_rating : 0);
-		echo"<img src='".BASEDIR."includes/downloads_includes/ratings/images/rate/".ceil($rating_id).".gif' width='64' height='12' alt='".ceil($rating_id)." ".$locale['r136']."' style=' vertical-align:middle;' title='".ceil($rating_id)." ".$locale['r136']."' />";
+	$rows = dbcount("('rating_id')", DB_RATINGS);
+	$_GET['r_rowstart'] = isset($_GET['r_rowstart']) && $_GET['r_rowstart'] <= $rows ? $_GET['r_rowstart'] : 0;
+	$result = dbquery("SELECT r.*, u.user_id, u.user_name, u.user_status, u.user_avatar
+	FROM ".DB_RATINGS." r LEFT JOIN ".DB_USERS." u on u.user_id=r.rating_user
+	ORDER BY rating_datestamp DESC LIMIT 0,1
+	");
+	$nav = '';
+	if ($rows > $settings['comments_per_page']) {
+		$nav = "<span class='pull-right text-smaller'>".makepagenav($_GET['r_rowstart'], $settings['comments_per_page'], $rows, 2)."</span>\n";
+	}
+	if (dbrows($result)>0) {
+		$i = 0;
+		while ($data = dbarray($result)) {
+			echo "<!--Start Rating Item-->\n";
+			echo "<div class='comment_content clearfix p-t-10 p-b-10' ".($i > 0 ? "style='border-top:1px solid #ddd;'" : '')." >\n";
+			echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'></div>\n";
+			echo "<strong>".profile_link($data['user_id'], ucwords($data['user_name']), $data['user_status'])."</strong>\n";
+			echo "<span class='text-smaller text-lighter'>".$locale['273a']."</span>\n";
+			if ($type != $data['rating_type'] || $type_id !=  $data['rating_item_id']) { 
+							if ($data['rating_type'] == "N") { $db_name = DB_NEWS; $db_id = 'news_id'; $db_field = 'news_subject'; $db_link = 'news.php?readmore='; $db_org = "News"; }
+							if ($data['rating_type'] == "A") { $db_name = DB_ARTICLES; $db_id = 'article_id'; $db_field = 'article_subject'; $db_link = 'articles/articles.php?article_id='; $db_org = "Articles"; }
+							if ($data['rating_type'] == "D") { $db_name = DB_DOWNLOADS; $db_id = 'download_id'; $db_field = 'download_title'; $db_link = 'downloads/downloads.php?download_id='; $db_org = "Downloads"; }
+							if ($data['rating_type'] == "P") { $db_name = DB_PHOTOS; $db_id = 'photo_id'; $db_field = 'photo_title'; $db_link = 'photogallery/photogallery.php?photo_id='; $db_org = "Photos"; }
+							$result_org = dbquery("SELECT ".$db_id.", ".$db_field." FROM ".$db_name." WHERE ".$db_id."='".$data['rating_item_id']."'");
+							if (dbrows($result_org)) {
+								$org = dbarray($result_org);
+								echo '<b><a href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$db_org.'</a> </b>';				
+			echo "<a class='text-smaller' href='".sprintf($link[$data['rating_type']], $data['rating_item_id'])."'><strong>".$comments_type[$data['rating_type']]."</strong></a>";
+			echo "<span class='text-smaller text-lighter m-l-10'><i class='fa fa-star'></i><b><font color='red'>".$data['rating_vote']."</b></font></span>\n";
+			echo "&nbsp;<span class='text-smaller'>".showdate("shortdate", $data['rating_datestamp'])."</span><br/>\n";
+			echo "</div>\n";
+			echo "<!--End Rating Item-->\n";
+			$i++;
+		}
+		echo $nav;
+	}  
+	}	
 	}
 		echo '</div></div></div></div>';
 			echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';

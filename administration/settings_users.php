@@ -71,67 +71,70 @@ if (isset($_GET['error']) && isnum($_GET['error']) && !isset($message)) {
 
 opentable($locale['400']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td width='70%' class='tbl'>".$locale['1002']."</td>\n";
-echo "<td class='tbl' width='30%'><select name='enable_deactivation' class='textbox'>\n";
-echo "<option value='0'".($settings['enable_deactivation'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "<option value='1'".($settings['enable_deactivation'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='70%' class='tbl'>".$locale['1003']."<br /><span class='small2'>(".$locale['1004'].")</span></td>\n";
-echo "<td width='30%' class='tbl'><input type='text' name='deactivation_period' value='".$settings['deactivation_period']."' maxlength='3' class='textbox' style='width:30px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='70%' class='tbl'>".$locale['1005']."<br /><span class='small2'>(".$locale['1006'].")</span></td>\n";
-echo "<td width='30%' class='tbl'><input type='text' name='deactivation_response' value='".$settings['deactivation_response']."' maxlength='3' class='textbox' style='width:30px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='70%' class='tbl'>".$locale['1011']."</td>\n";
-echo "<td class='tbl' width='30%'><select name='deactivation_action' class='textbox'>\n";
-echo "<option value='0'".($settings['deactivation_action'] == "0" ? " selected='selected'" : "").">".$locale['1012']."</option>\n";
-echo "<option value='1'".($settings['deactivation_action'] == "1" ? " selected='selected'" : "").">".$locale['1013']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['1007']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['673']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='hide_userprofiles' class='textbox'>\n";
-echo "<option value='1'".($settings['hide_userprofiles'] == 1 ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings['hide_userprofiles'] == 0 ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['1008']."<br /><span class='small2'>(".$locale['1009'].")</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='avatar_width' value='".$settings['avatar_width']."' maxlength='3' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='avatar_height' value='".$settings['avatar_height']."' maxlength='3' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['1010']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='avatar_filesize' value='".$settings['avatar_filesize']."' maxlength='10' class='textbox' style='width:100px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['1001']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='avatar_ratio' class='textbox'>\n";
-echo "<option value='0'".($settings['avatar_ratio'] == 0 ? " selected='selected'" : "").">".$locale['955']."</option>\n";
-echo "<option value='1'".($settings['avatar_ratio'] == 1 ? " selected='selected'" : "").">".$locale['956']."</option>\n";
-echo "</select>\n</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['691']."?</td>\n";
-echo "<td width='50%' class='tbl'><select name='userNameChange' class='textbox'>\n";
-echo "<option value='1'".($settings['userNameChange'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings['userNameChange'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['668']."?</td>\n";
-echo "<td width='50%' class='tbl'><select name='userthemes' class='textbox'>\n";
-echo "<option value='1'".($settings['userthemes'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings['userthemes'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['1014']."<br /><span class='small2'>(".$locale['1014a'].")</span></td>\n";
-echo "<td width='50%' class='tbl'><select name='multiple_logins' class='textbox'>\n";
-echo "<option value='1'".($settings['multiple_logins'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings['multiple_logins'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
-echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
-echo "</tr>\n</table>\n</form>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr></td>";
+		echo "<td class='tbl'>".$locale['1002']."</br><select name='enable_deactivation' class='textbox'>";
+		echo "<option value='0'".($settings['enable_deactivation'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "<option value='1'".($settings['enable_deactivation'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "</select>\n";
+		echo "</td>";
+		
+		echo "<td class='tbl'>".$locale['1003']."<br /><span class='small2'>(".$locale['1004'].")</span></br>
+		<input type='text' name='deactivation_period' value='".$settings['deactivation_period']."' maxlength='3' class='textbox' style='width:30px;' /></br></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['1005']."<br /><span class='small2'>(".$locale['1006'].")</span></br>
+		<input type='text' name='deactivation_response' value='".$settings['deactivation_response']."' maxlength='3' class='textbox' style='width:30px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['1011']."</br>
+		<select name='deactivation_action' class='textbox'>";
+		echo "<option value='0'".($settings['deactivation_action'] == "0" ? " selected='selected'" : "").">".$locale['1012']."</option>\n";
+		echo "<option value='1'".($settings['deactivation_action'] == "1" ? " selected='selected'" : "").">".$locale['1013']."</option>\n";
+		echo "</select>\n";
+		echo "<tr></td>";
+		
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['1007']."</strong></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['673']."</span></br><select name='hide_userprofiles' class='textbox'>";
+		echo "<option value='1'".($settings['hide_userprofiles'] == 1 ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings['hide_userprofiles'] == 0 ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		
+		echo "<td class='tbl'>".$locale['1008']."<br /><span class='small2'>(".$locale['1009'].")</span></br>
+		<input type='text' name='avatar_width' value='".$settings['avatar_width']."' maxlength='3' class='textbox' style='width:40px;' /> x\n<input type='text' name='avatar_height' value='".$settings['avatar_height']."' maxlength='3' class='textbox' style='width:40px;' /></br></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['1010']."</br>
+		<input type='text' name='avatar_filesize' value='".$settings['avatar_filesize']."' maxlength='10' class='textbox' style='width:100px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['1001']."</br>
+		<select name='avatar_ratio' class='textbox'>";
+		echo "<option value='0'".($settings['avatar_ratio'] == 0 ? " selected='selected'" : "").">".$locale['955']."</option>\n";
+		echo "<option value='1'".($settings['avatar_ratio'] == 1 ? " selected='selected'" : "").">".$locale['956']."</option>\n";
+		echo "</select>\n";
+		echo "<tr></td>";
+				
+		echo "<td class='tbl'>".$locale['691']."?</br>
+		<select name='userNameChange' class='textbox'>";
+		echo "<option value='1'".($settings['userNameChange'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings['userNameChange'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+
+		
+		echo "<td class='tbl'>".$locale['668']."?</br>
+		<select name='userthemes' class='textbox'>";
+		echo "<option value='1'".($settings['userthemes'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings['userthemes'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "</tr></td>";
+		
+		echo "<td class='tbl'>".$locale['1014']."<br /><span class='small2'>(".$locale['1014a'].")</span></br>
+		<select name='multiple_logins' class='textbox'>";
+		echo "<option value='1'".($settings['multiple_logins'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings['multiple_logins'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>\n";
+		echo "</tr>\n<tr>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
+		echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
+		echo "</tr>\n</table>\n</form>\n";
 closetable();
 
 require_once THEMES."templates/footer.php";

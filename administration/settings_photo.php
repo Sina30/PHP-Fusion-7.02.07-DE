@@ -129,56 +129,69 @@ while ($data = dbarray($result)) {
 
 opentable($locale['400']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['601']."<br /><span class='small2'>".$locale['604']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='thumb_w' value='".$settings2['thumb_w']."' maxlength='3' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='thumb_h' value='".$settings2['thumb_h']."' maxlength='3' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['602']."<br /><span class='small2'>".$locale['604']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='photo_w' value='".$settings2['photo_w']."' maxlength='3' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='photo_h' value='".$settings2['photo_h']."' maxlength='3' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['603']."<br /><span class='small2'>".$locale['604']."</span></td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='photo_max_w' value='".$settings2['photo_max_w']."' maxlength='4' class='textbox' style='width:40px;' /> x\n";
-echo "<input type='text' name='photo_max_h' value='".$settings2['photo_max_h']."' maxlength='4' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['605']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='photo_max_b' value='".$settings2['photo_max_b']."' maxlength='10' class='textbox' style='width:100px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['606']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='thumb_compression' class='textbox'>\n";
-echo "<option value='gd1'".($settings2['thumb_compression'] == "gd1" ? " selected='selected'" : "").">".$locale['607']."</option>\n";
-echo "<option value='gd2'".($settings2['thumb_compression'] == "gd2" ? " selected='selected'" : "").">".$locale['608']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['609']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='thumbs_per_row' value='".$settings2['thumbs_per_row']."' maxlength='2' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['610']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='thumbs_per_page' value='".$settings2['thumbs_per_page']."' maxlength='2' class='textbox' style='width:40px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['611']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='photo_watermark' class='textbox' onchange=\"Watermark(this);\">\n";
-echo "<option value='1'".($settings2['photo_watermark'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['photo_watermark'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['617']."<br  /><span class='small2'>".$locale['618']."</span></td>\n";
-echo "<td width='50%' class='tbl'><select name='photo_watermark_save' class='textbox' ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "").">\n";
-echo "<option value='1'".($settings2['photo_watermark_save'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['photo_watermark_save'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select>&nbsp;<input class='button' type='submit' name='delete_watermarks' value='".$locale['619']."' onclick=\"javascript:return confirm('".$locale['620']."');\" ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "")." /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['612']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='photo_watermark_image' value='".$settings2['photo_watermark_image']."' class='textbox' style='width:200px;' ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "")." /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['613']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='photo_watermark_text' class='textbox' ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "").">\n";
-echo "<option value='1'".($settings2['photo_watermark_text'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings2['photo_watermark_text'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'><div style='float:left'>".$locale['614']."</div><div id='preview_photo_watermark_text_color1' style='float:right;width:12px;height:12px;border:1px solid black;background-color:#".$settings2['photo_watermark_text_color1'].";'>&nbsp;</div></td>\n";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<tr><td class='tbl'>".$locale['601']."<br /><span class='small2'>".$locale['604']."</span></span></br>
+		<input type='text' name='thumb_w' value='".$settings2['thumb_w']."' maxlength='3' class='textbox' style='width:40px;' /> x
+		<input type='text' name='thumb_h' value='".$settings2['thumb_h']."' maxlength='3' class='textbox' style='width:40px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['602']."<br /><span class='small2'>".$locale['604']."</span></br>
+		<input type='text' name='photo_w' value='".$settings2['photo_w']."' maxlength='3' class='textbox' style='width:40px;' /> x
+		<input type='text' name='photo_h' value='".$settings2['photo_h']."' maxlength='3' class='textbox' style='width:40px;' /></br></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['603']."<br /><span class='small2'>".$locale['604']."</span></br>
+		<input type='text' name='photo_max_w' value='".$settings2['photo_max_w']."' maxlength='4' class='textbox' style='width:40px;' /> x
+		<input type='text' name='photo_max_h' value='".$settings2['photo_max_h']."' maxlength='4' class='textbox' style='width:40px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['605']."</span></br>
+		<input type='text' name='photo_max_b' value='".$settings2['photo_max_b']."' maxlength='10' class='textbox' style='width:100px;' /></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['606']."</br><select name='thumb_compression' class='textbox'>
+		<option value='gd1'".($settings2['thumb_compression'] == "gd1" ? " selected='selected'" : "").">".$locale['607']."</option>
+		<option value='gd2'".($settings2['thumb_compression'] == "gd2" ? " selected='selected'" : "").">".$locale['608']."</option></td>";
+		
+		echo "<td class='tbl'>".$locale['605']."</span></br>
+		<input type='text' name='photo_max_b' value='".$settings2['photo_max_b']."' maxlength='10' class='textbox' style='width:100px;' /></td></tr>";
+
+		echo "<tr><td class='tbl'>".$locale['609']."</br>
+		<input type='text' name='thumbs_per_row' value='".$settings2['thumbs_per_row']."' maxlength='2' class='textbox' style='width:40px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['610']."</span></br>
+		<input type='text' name='thumbs_per_page' value='".$settings2['thumbs_per_page']."' maxlength='2' class='textbox' style='width:40px;' /></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['611']."</br><select name='photo_watermark' class='textbox' onchange=\"Watermark(this);\">";
+		echo "<option value='1'".($settings2['photo_watermark'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['photo_watermark'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select></td>";
+		
+		echo "<td class='tbl'>".$locale['617']."<br  /><span class='small2'>".$locale['618']."</span></br><select name='photo_watermark_save' class='textbox' ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "").">";
+		echo "<option value='1'".($settings2['photo_watermark_save'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['photo_watermark_save'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select>&nbsp;</br>
+		<input class='button' type='submit' name='delete_watermarks' value='".$locale['619']."' onclick=\"javascript:return confirm('".$locale['620']."');\" ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "")." />";
+		echo "</td></tr>";
+		
+		
+		
+		
+		
+		echo "<tr><td class='tbl'>".$locale['612']."</br>
+		<input type='text' name='photo_watermark_image' value='".$settings2['photo_watermark_image']."' class='textbox' style='width:200px;' ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "")." /></td>";
+		
+		echo "<td class='tbl'>".$locale['613']."</span></br>\n";
+		echo "<option value='1'".($settings2['photo_watermark_text'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
+		echo "<option value='0'".($settings2['photo_watermark_text'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
+		echo "</select></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['609']."</br><select name='photo_watermark_text' class='textbox' ".(!$settings2['photo_watermark'] ? "disabled='disabled'" : "").">
+		<input type='text' name='thumbs_per_row' value='".$settings2['thumbs_per_row']."' maxlength='2' class='textbox' style='width:40px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['610']."</span></br>
+		<input type='text' name='thumbs_per_page' value='".$settings2['thumbs_per_page']."' maxlength='2' class='textbox' style='width:40px;' /></td></tr>";
+		
+		echo "<tr><td class='tbl'>".$locale['609']."</br>
+		<input type='text' name='thumbs_per_row' value='".$settings2['thumbs_per_row']."' maxlength='2' class='textbox' style='width:40px;' /></td>";
+		echo "</td></tr>";
+		echo "<td width='50%' class='tbl'><div style='float:left'>".$locale['614']."</div><div id='preview_photo_watermark_text_color1' style='float:right;width:12px;height:12px;border:1px solid black;background-color:#".$settings2['photo_watermark_text_color1'].";'>&nbsp;</div></td>\n";
 echo "<td width='50%' class='tbl'>".color_mapper("photo_watermark_text_color1", $settings2['photo_watermark_text_color1'])."</td>\n";
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'><div style='float:left'>".$locale['615']."</div><div id='preview_photo_watermark_text_color2' style='float:right;width:12px;height:12px;border:1px solid black;background-color:#".$settings2['photo_watermark_text_color2'].";'>&nbsp;</div></td>\n";
@@ -186,8 +199,10 @@ echo "<td width='50%' class='tbl'>".color_mapper("photo_watermark_text_color2", 
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'><div style='float:left'>".$locale['616']."</div><div id='preview_photo_watermark_text_color3' style='float:right;width:12px;height:12px;border:1px solid black;background-color:#".$settings2['photo_watermark_text_color3'].";'>&nbsp;</div></td>\n";
 echo "<td width='50%' class='tbl'>".color_mapper("photo_watermark_text_color3", $settings2['photo_watermark_text_color3'])."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
+		
+		echo "</td></tr>";
+		echo "</tr>\n<tr>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
 echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
 echo "</tr>\n</table>\n</form>\n";
 echo "<script type='text/javascript'>\n";
