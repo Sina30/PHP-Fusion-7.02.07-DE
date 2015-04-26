@@ -30,12 +30,13 @@ set_image("down", THEME."images/down.png");
 set_image("left", THEME."images/left.png");
 set_image("right", THEME."images/right.png");
 
-set_image("reply", "reply");
-set_image("newthread", "newthread");
-set_image("web", "web");
-set_image("pm", "pm");
-set_image("quote", "quote");
-set_image("forum_edit", "forum_edit");
+set_image("reply", THEME."forum/reply.gif");
+set_image("delete", THEME."forum/delete.gif");
+set_image("newthread", THEME."forum/newthread.gif");
+set_image("web", THEME."forum/web.gif");
+set_image("pm", THEME."forum/pm.gif");
+set_image("quote", THEME."forum/quote.gif");
+set_image("forum_edit", THEME."forum/edit.gif");
 
 function theme_output($output) {
 	

@@ -169,17 +169,44 @@ if (($rows > $posts_per_page) || ($can_post || $can_reply)) {
 	if (iMEMBER && $can_post) {
 		echo "<td align='right' style='padding:0px 0px 4px 0px'>\n<!--pre_forum_buttons-->\n";
 		if ($can_post) {
-			//echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
-			//echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
+			echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
+			echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
 		}
 		if (!$fdata['thread_locked'] && $can_reply) {
-			//echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
-			//echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
+			echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
+			echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
 		}
 		echo "</td>\n";
 	}
 	echo "</tr>\n</table>\n";
 }
+
+
+$forum_list = ""; $current_cat = "";
+$result = dbquery(
+	"SELECT f.forum_id, f.forum_name, f2.forum_name AS forum_cat_name
+	FROM ".DB_FORUMS." f
+	INNER JOIN ".DB_FORUMS." f2 ON f.forum_cat=f2.forum_id
+	WHERE ".groupaccess('f.forum_access')." AND f.forum_cat!='0'
+	ORDER BY f2.forum_order ASC, f.forum_order ASC"
+);
+while ($data = dbarray($result)) {
+	if ($data['forum_cat_name'] != $current_cat) {
+		if ($current_cat != "") { $forum_list .= "</optgroup>\n"; }
+		$current_cat = $data['forum_cat_name'];
+		$forum_list .= "<optgroup label='".$data['forum_cat_name']."'>\n";
+	}
+	$sel = ($data['forum_id'] == $fdata['forum_id'] ? " selected='selected'" : "");
+	$forum_list .= "<option value='".$data['forum_id']."'$sel>".$data['forum_name']."</option>\n";
+}
+$forum_list .= "</optgroup>\n";
+if (iMOD) {
+	echo "<form name='modopts' method='post' action='options.php?forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>\n";
+}
+echo "<table cellpadding='0' cellspacing='0' width='100%'>\n<tr>\n";
+echo "<div class='forum-table-container panel-body'>".$locale['540']."<br />\n";
+echo "<select name='jump_id' class='textbox' onchange=\"jumpforum(this.options[this.selectedIndex].value);\">\n";
+echo $forum_list."</select></div>\n";
 
 if ($rows != 0) {
 	dbquery("UPDATE ".DB_THREADS." SET thread_postcount='$rows', thread_lastpostid='$last_post', thread_views=thread_views+1 WHERE thread_id='".$_GET['thread_id']."'");
@@ -249,38 +276,28 @@ if ($rows != 0) {
 		echo "<tr>\n<td class='tbl2 forum_thread_user_name' style='width:140px'><!--forum_thread_user_name-->".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n";
 		echo "<td class='tbl2 forum_thread_post_date'>\n";
 		echo "<div style='float:right' class='small'>";
-		//echo "<a href='#top'>\n";
-		//echo "&nbsp;<a href='#post_".$data['post_id']."' name='post_".$data['post_id']."' id='post_".$data['post_id']."'>#".($current_row+$_GET['rowstart'])."</a>";
-		//echo "&nbsp;<a href='".BASEDIR."print.php?type=F&amp;thread=".$_GET['thread_id']."&amp;post=".$data['post_id']."&amp;nr=".($current_row+$_GET['rowstart'])."'><img src='".get_image("printer")."' alt='".$locale['519a']."' title='".$locale['519a']."' style='border:0;vertical-align:middle' /></a></div>\n";
+		echo "<a href='#top'>\n";
+		echo "<a href='#top'><img src='".get_image("up")."' alt='".$locale['541']."' title='".$locale['542']."' style='border:0;vertical-align:middle' /></a>\n";
+		echo "&nbsp;<a href='#post_".$data['post_id']."' name='post_".$data['post_id']."' id='post_".$data['post_id']."'>#".($current_row+$_GET['rowstart'])."</a>";
+		echo "&nbsp;<a href='".BASEDIR."print.php?type=F&amp;thread=".$_GET['thread_id']."&amp;post=".$data['post_id']."&amp;nr=".($current_row+$_GET['rowstart'])."'><img src='".get_image("printer")."' alt='".$locale['519a']."' title='".$locale['519a']."' style='border:0;vertical-align:middle' /></a></div>\n";
 		echo "<div class='small'>".$locale['505'].showdate("forumdate", $data['post_datestamp'])."</div>\n";
-		echo "\n<hr />\n<span class='small'>".$locale['508'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['509'].showdate("forumdate", $data['post_edittime'])."</span>\n";
-		//echo "<div class='small'>".$locale['505'].showdate("forumdate", $data['post_datestamp'])."</div>\n";
-		//echo "</td>\n";
-		echo "</tr>\n<td valign='top' class='tbl2 forum_thread_user_info' style='width:140px'>\n";
-		echo "</span>\n";
-		echo "<div id='f1_container'>";
-		echo "<div id='f1_card' class='shadow'>";
-		echo "<div class='front face'>";
+		echo "</td>\n";
+		echo "</tr>\n<td valign='top' class='tbl2 forum_thread_user_info text-center' style='width:140px'>\n";
+		echo "<div class='thread_avatar m-b-10'>\n";
 		if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar']) && $data['user_status']!=6 && $data['user_status']!=5) {
 			echo "<img class='avatarforum' src='".IMAGES."avatars/".$data['user_avatar']."' alt='".$locale['567']."' /><br /><br />\n";
 		} else {
 			echo "<img class='avatarforum' src='".IMAGES."avatars/noavatar100.png' alt='".$locale['567']."' /><br /><br />\n";
 		}
-		echo "</div>";
-		echo "<div class='back face center'>";
-		echo "<p>";
-		echo "<!--forum_thread_user_info--><span class='small'><strong>".$locale['502']."</strong> ".$data['user_posts']."</span><br />\n";
-		echo "<span class='small'><strong>".$locale['504']."</strong> ".showdate("shortdate", $data['user_joined'])."</span><br />\n";
-		echo "</p>";
-		echo "<p>";
+		echo "</div>\n";
 		echo "<span class='small'>";
 		if ($data['user_level'] >= 102) {
 			echo $settings['forum_ranks'] ? show_forum_rank($data['user_posts'], $data['user_level'], $data['user_groups']) : getuserlevel($data['user_level']);
 		} else {
-			$is_mod = false;
+			$is_mod = FALSE;
 			foreach ($mod_groups as $mod_group) {
 				if (!$is_mod && preg_match("(^\.{$mod_group}$|\.{$mod_group}\.|\.{$mod_group}$)", $data['user_groups'])) {
-					$is_mod = true;
+					$is_mod = TRUE;
 				}
 			}
 			if ($settings['forum_ranks']) {
@@ -289,10 +306,9 @@ if ($rows != 0) {
 				echo $is_mod ? $locale['userf1'] : getuserlevel($data['user_level']);
 			}
 		}
-		echo "</p>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
+		echo "</span><br /><br />\n";
+		echo "<!--forum_thread_user_info--><span class='small'><strong>".$locale['502']."</strong> ".$data['user_posts']."</span><br />\n";
+		echo "<span class='small'><strong>".$locale['504']."</strong> ".showdate("shortdate", $data['user_joined'])."</span><br />\n";
 		echo "<br /></td>\n<td valign='top' class='tbl1 forum_thread_user_post'>\n";
 		if (iMOD) { echo "<div style='float:right'><input type='checkbox' name='delete_post[]' value='".$data['post_id']."' /></div>\n"; }
 		$message = parseubb($message);
@@ -333,7 +349,7 @@ if ($rows != 0) {
 			}
 		}
 		if ($data['post_edittime'] != "0") {
-			//echo "\n<hr />\n<span class='small'>".$locale['508'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['509'].showdate("forumdate", $data['post_edittime'])."</span>\n";
+			echo "\n<hr />\n<span class='small'>".$locale['508'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['509'].showdate("forumdate", $data['post_edittime'])."</span>\n";
 			if ($data['post_editreason'] != "" && iMEMBER) {
 				$edit_reason = true;
 				echo "<br /><div class='edit_reason'><a id='reason_pid_".$data['post_id']."' rel='".$data['post_id']."' class='reason_button small' href='#reason_div_pid_".$data['post_id']."'>";
@@ -347,11 +363,16 @@ if ($rows != 0) {
 		}
 		echo "<!--sub_forum_post--></td>\n</tr>\n";
 		echo "<tr>\n<td class='tbl2 forum_thread_ip' style='width:140px;white-space:nowrap'>";
-		echo "</td>\n<td class='tbl2 forum_thread_userbar'>\n<div style='float:left;white-space:nowrap' class='small'><!--forum_thread_userbar-->\n";
-		if (isset($data['user_web']) && $data['user_web'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
-			echo "<a href='".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a>"; 
+		if (($settings['forum_ips'] && iMEMBER) || iMOD) {
+			echo "<strong>".$locale['571']."</strong>: ".$data['post_ip'];
+		} else {
+			echo "&nbsp;";
 		}
-		if (iMEMBER && $data['user_id']!=$userdata['user_id'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
+		echo "</td>\n<td class='tbl2 forum_thread_userbar'>\n<div style='float:left;white-space:nowrap' class='small'><!--forum_thread_userbar-->\n";
+		if (isset($data['user_web']) && $data['user_web'] && (iADMIN || $data['user_status'] != 6 && $data['user_status'] != 5)) {
+			echo "<a href='".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a>";
+		}
+		if (iMEMBER && $data['user_id'] != $userdata['user_id'] && (iADMIN || $data['user_status'] != 6 && $data['user_status'] != 5)) {
 			echo "<a href='".BASEDIR."messages.php?msg_send=".$data['user_id']."'><img src='".get_image("pm")."' alt='".$locale['572']."' style='border:0;vertical-align:middle' /></a>\n";
 		}
 		echo "</div>\n<div style='float:right' class='small'>\n";
@@ -406,47 +427,17 @@ if ($rows != 0) {
 echo "</table><!--sub_forum_thread_table-->\n";
 
 if (iMOD) {
-	echo "<table cellspacing='0' cellpadding='0' width='100%'>\n<tr>\n<td style='padding-top:5px'>";
-	echo "<a href='#' onclick=\"javascript:setChecked('mod_form','delete_post[]',1);return false;\">".$locale['460']."</a> ::\n";
-	echo "<a href='#' onclick=\"javascript:setChecked('mod_form','delete_post[]',0);return false;\">".$locale['461']."</a></td>\n";
-	echo "<td align='right' style='padding-top:5px'><input type='submit' name='move_posts' value='".$locale['517a']."' class='button' onclick=\"return confirm('".$locale['518a']."');\" />\n<input type='submit' name='delete_posts' value='".$locale['517']."' class='button' onclick=\"return confirm('".$locale['518']."');\" /></td>\n";
-	echo "</tr>\n</table>\n</form>\n";
-}
-
-if ($rows > $posts_per_page) {
-	echo "<div align='center' style='padding-top:5px'>\n";
-	echo makepagenav($_GET['rowstart'],$posts_per_page,$rows,3,FUSION_SELF."?thread_id=".$_GET['thread_id'].(isset($_GET['highlight']) ? "&amp;highlight=".urlencode($_GET['highlight']):"")."&amp;")."\n";
+	echo "<div class='forum-table-container panel-body'>\n";
+	echo "<div class='btn-group m-r-10'>\n";
+	echo "<a id='check' class='btn btn-default button' href='#' onclick=\"javascript:setChecked('mod_form','delete_post[]',1);return false;\">".$locale['460']."</a>\n";
+	echo "<a id='uncheck' class='btn btn-default button' href='#' onclick=\"javascript:setChecked('mod_form','delete_post[]',0);return false;\">".$locale['461']."</a>\n";
 	echo "</div>\n";
+	echo "<td align='right' style='padding-top:5px'><input type='submit' name='move_posts' value='".$locale['517a']."' class='btn btn-warning m-r-10' onclick=\"return confirm('".$locale['518a']."');\" />\n<input type='submit' name='delete_posts' value='".$locale['517']."' class='btn btn-danger m-r-10' onclick=\"return confirm('".$locale['518']."');\" /></td>\n";
 }
 
-$forum_list = ""; $current_cat = "";
-$result = dbquery(
-	"SELECT f.forum_id, f.forum_name, f2.forum_name AS forum_cat_name
-	FROM ".DB_FORUMS." f
-	INNER JOIN ".DB_FORUMS." f2 ON f.forum_cat=f2.forum_id
-	WHERE ".groupaccess('f.forum_access')." AND f.forum_cat!='0'
-	ORDER BY f2.forum_order ASC, f.forum_order ASC"
-);
-while ($data = dbarray($result)) {
-	if ($data['forum_cat_name'] != $current_cat) {
-		if ($current_cat != "") { $forum_list .= "</optgroup>\n"; }
-		$current_cat = $data['forum_cat_name'];
-		$forum_list .= "<optgroup label='".$data['forum_cat_name']."'>\n";
-	}
-	$sel = ($data['forum_id'] == $fdata['forum_id'] ? " selected='selected'" : "");
-	$forum_list .= "<option value='".$data['forum_id']."'$sel>".$data['forum_name']."</option>\n";
-}
-$forum_list .= "</optgroup>\n";
-if (iMOD) {
-	echo "<form name='modopts' method='post' action='options.php?forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>\n";
-}
-echo "<table cellpadding='0' cellspacing='0' width='100%'>\n<tr>\n";
-echo "<td style='padding-top:5px'>".$locale['540']."<br />\n";
-echo "<select name='jump_id' class='textbox' onchange=\"jumpforum(this.options[this.selectedIndex].value);\">\n";
-echo $forum_list."</select></td>\n";
 
 if (iMOD) {
-	echo "<td align='right' style='padding-top:5px'>\n";
+	echo "</div>\n<div class='forum-table-container panel-footer clearfix'>\n";
 	echo $locale['520']."<br />\n<select name='step' class='textbox'>\n";
 	echo "<option value='none'>&nbsp;</option>\n";
 	echo "<option value='renew'>".$locale['527']."</option>\n";
@@ -454,21 +445,26 @@ if (iMOD) {
 	echo "<option value='".($fdata['thread_locked'] ? "unlock" : "lock")."'>".($fdata['thread_locked'] ? $locale['523'] : $locale['522'])."</option>\n";
 	echo "<option value='".($fdata['thread_sticky'] ? "nonsticky" : "sticky")."'>".($fdata['thread_sticky'] ? $locale['525'] : $locale['524'])."</option>\n";
 	echo "<option value='move'>".$locale['526']."</option>\n";
-	echo "</select>\n<input type='submit' name='go' value='".$locale['528']."' class='button' />\n";
+	echo "</select>\n<input type='submit' name='go' value='".$locale['528']."' class=' btn btn-default m-l-10 button' />\n";
 	echo "</td>\n";
 }
-echo "</tr>\n</table>\n"; if (iMOD) { echo "</form>\n"; }
+echo "</div>\n"; if (iMOD) { echo "</form>\n"; }
 
+if ($rows > $posts_per_page) {
+	echo "<div align='center' style='padding-top:5px'>\n";
+	echo makepagenav($_GET['rowstart'],$posts_per_page,$rows,3,FUSION_SELF."?thread_id=".$_GET['thread_id'].(isset($_GET['highlight']) ? "&amp;highlight=".urlencode($_GET['highlight']):"")."&amp;")."\n";
+	echo "</div>\n";
+}
 if ($can_post || $can_reply) {
 	echo "<table cellpadding='0' cellspacing='0' width='100%'>\n<tr>\n";
 	echo "<td align='right' style='padding-top:10px'>\n<!--post_forum_buttons-->\n";
 	if ($can_post) {
-		//echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
-		//echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
+		echo "<a href='post.php?action=newthread&amp;forum_id=".$fdata['forum_id']."'>";
+		echo "<img src='".get_image("newthread")."' alt='".$locale['566']."' style='border:0px' /></a>\n";
 	}
 	if (!$fdata['thread_locked'] && $can_reply) {
-		//echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
-		//echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
+		echo "<a href='post.php?action=reply&amp;forum_id=".$fdata['forum_id']."&amp;thread_id=".$_GET['thread_id']."'>";
+		echo "<img src='".get_image("reply")."' alt='".$locale['565']."' style='border:0px' /></a>\n";
 	}
 	echo "</td>\n</tr>\n</table>\n";
 }

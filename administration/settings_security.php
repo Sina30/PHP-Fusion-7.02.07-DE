@@ -90,19 +90,10 @@ if (isset($_GET['error']) && isnum($_GET['error']) && !isset($message)) {
 
 opentable($locale['683']);
 echo "<form name='settingsform' method='post' action='".FUSION_SELF.$aidlink."'>\n";
-echo "<table cellpadding='0' cellspacing='0' width='500' class='center'>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['692']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>";
-echo $locale['693']."<br />";
-echo "<div class='recaptcha_keys' style='margin-top:7px;'>";
-echo $locale['694']."<br />";
-echo "<span style='margin-top:7px; display:block;'>".$locale['695']."</span>";
-echo "<span style='margin-top:7px; display:block;'>".$locale['697']."</span>";
-echo "</div>";
-echo "</td>\n";
-echo "<td width='50%' class='tbl'>";
-echo "<select name='captcha' id='captcha' size='1' class='textbox'>".captcha_options($available_captchas, $settings['captcha'])."</select>";
+		echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['692']."</strong></tr>";
+		echo "<tr><td class='tbl'>".$locale['693']."</br>";
+		echo "<select name='captcha' id='captcha' size='1' class='textbox'>".captcha_options($available_captchas, $settings['captcha'])."</select>";
 echo "<div class='recaptcha_keys' style='margin-top:5px;'>";
 echo "<input type='text' name='recaptcha_public' value='".$settings['recaptcha_public']."' class='textbox' style='width:200px;' /><br />";
 echo "<input type='text' name='recaptcha_private' value='".$settings['recaptcha_private']."' class='textbox' style='width:200px; margin-top:5px;' />";
@@ -111,53 +102,50 @@ echo "<option value='red'".($settings['recaptcha_theme'] == "red" ? " selected='
 echo "<option value='blackglass'".($settings['recaptcha_theme'] == "blackglass" ? " selected='selected'" : "").">".$locale['697b']."</option>\n";
 echo "<option value='clean'".($settings['recaptcha_theme'] == "clean" ? " selected='selected'" : "").">".$locale['697c']."</option>\n";
 echo "<option value='white'".($settings['recaptcha_theme'] == "white" ? " selected='selected'" : "").">".$locale['697w']."</option>\n";
-echo "</select>\n</div>";
-echo "</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['682']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['660']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='flood_interval' value='".$settings['flood_interval']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['680']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='flood_autoban' class='textbox'>\n";
-echo "<option value='1'".($settings['flood_autoban'] == "1" ? " selected='selected'" : "").">".$locale['502']."</option>\n";
-echo "<option value='0'".($settings['flood_autoban'] == "0" ? " selected='selected'" : "").">".$locale['503']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['687']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['659']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='bad_words_enabled' class='textbox'>\n";
-echo "<option value='1'".($settings['bad_words_enabled'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>\n";
-echo "<option value='0'".($settings['bad_words_enabled'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='50%' class='tbl'>".$locale['651']."<br /><span class='small2'>".$locale['652']."<br />".$locale['653']."</span></td>\n";
-echo "<td width='50%' class='tbl'><textarea name='bad_words' cols='50' rows='5' class='textbox' style='width:200px;'>".$settings['bad_words']."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['654']."</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='bad_word_replace' value='".$settings['bad_word_replace']."' maxlength='128' class='textbox' style='width:200px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td class='tbl2' align='center' colspan='2'>".$locale['681']."</td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['675']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='maintenance_level' class='textbox'>\n";
-echo "<option value='102'".($settings['maintenance_level'] == "102" ? " selected='selected'" : "").">".$locale['676']."</option>\n";
-echo "<option value='103'".($settings['maintenance_level'] == "103" ? " selected='selected'" : "").">".$locale['677']."</option>\n";
-echo "<option value='1'".($settings['maintenance_level'] == "1" ? " selected='selected'" : "").">".$locale['678']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['657']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='maintenance' class='textbox'>\n";
-echo "<option value='1'".($settings['maintenance'] == "1" ? " selected='selected'" : "").">".$locale['502']."</option>\n";
-echo "<option value='0'".($settings['maintenance'] == "0" ? " selected='selected'" : "").">".$locale['503']."</option>\n";
-echo "</select></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='50%' class='tbl'>".$locale['658']."</td>\n";
-echo "<td width='50%' class='tbl'><textarea name='maintenance_message' cols='50' rows='5' class='textbox' style='width:200px;'>".stripslashes($settings['maintenance_message'])."</textarea></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td align='center' colspan='2' class='tbl'><br />\n";
+echo "</select>";
+		
+		echo "</td>";
+		echo "<tr></td>";
+		
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['682']."</strong></tr>";
+
+		echo "<tr><td class='tbl'>".$locale['660']."</br>
+		<input type='text' name='flood_interval' value='".$settings['flood_interval']."' maxlength='2' class='textbox' style='width:50px;' /></td>";
+		
+		echo "<td class='tbl'>".$locale['680']."</br><select name='flood_autoban' class='textbox'>
+		<option value='1'".($settings['flood_autoban'] == "1" ? " selected='selected'" : "").">".$locale['502']."</option>
+		<option value='0'".($settings['flood_autoban'] == "0" ? " selected='selected'" : "").">".$locale['503']."</option></select></td></tr>";
+		
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['687']."</strong></tr>";
+
+		echo "<tr><td class='tbl'>".$locale['659']."</br><select name='bad_words_enabled' class='textbox'>
+		<option value='1'".($settings['bad_words_enabled'] == "1" ? " selected='selected'" : "").">".$locale['518']."</option>
+		<option value='0'".($settings['bad_words_enabled'] == "0" ? " selected='selected'" : "").">".$locale['519']."</option></select></td>";
+		
+		echo "<td class='tbl'>".$locale['651']."<br /><span class='small2'>".$locale['652']."<br />".$locale['653']."</span></br>
+		<textarea name='bad_words' cols='50' rows='5' class='textbox' style='width:200px;'>".$settings['bad_words']."</textarea></td>";
+		
+		echo "<tr><td class='tbl'>".$locale['654']."</br>
+		<input type='text' name='bad_word_replace' value='".$settings['bad_word_replace']."' maxlength='128' class='textbox' style='width:200px;' /></td></tr>";
+		
+		echo "<td class='tbl' align='center' colspan='2'><strong>".$locale['681']."</strong></tr>";
+
+		echo "<tr><td class='tbl'>".$locale['675']."</span></br><select name='maintenance_level' class='textbox'>
+		<option value='102'".($settings['maintenance_level'] == "102" ? " selected='selected'" : "").">".$locale['676']."</option>
+		<option value='103'".($settings['maintenance_level'] == "103" ? " selected='selected'" : "").">".$locale['677']."</option>
+		<option value='1'".($settings['maintenance_level'] == "1" ? " selected='selected'" : "").">".$locale['678']."</option></select></td>";
+		
+		echo "<td class='tbl'>".$locale['657']."</br><select name='maintenance' class='textbox'>
+		<option value='1'".($settings['maintenance'] == "1" ? " selected='selected'" : "").">".$locale['502']."</option>
+		<option value='0'".($settings['maintenance'] == "0" ? " selected='selected'" : "").">".$locale['503']."</option></select></td>";
+		
+		echo "<tr><td class='tbl'>".$locale['658']."</br>
+		<textarea name='maintenance_message' cols='50' rows='5' class='textbox' style='width:200px;'>".stripslashes($settings['maintenance_message'])."</textarea></td></tr>";
+		
+		echo "</td></tr>";
+
+		echo "</tr>\n<tr>\n";
+		echo "<td align='center' colspan='2' class='tbl'><br />\n";
 echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' /></td>\n";
 echo "</tr>\n</table>\n</form>\n";
 closetable();

@@ -23,7 +23,7 @@ $result = dbquery(
 	INNER JOIN ".DB_FORUMS." tf ON tt.forum_id=tf.forum_id
 	INNER JOIN ".DB_USERS." tu ON tt.thread_lastuser=tu.user_id
 	WHERE ".groupaccess('tf.forum_access')." AND tt.thread_lastpost >= ".$timeframe." AND tt.thread_hidden='0'
-	ORDER BY tt.thread_lastpost DESC LIMIT 0,".$settings['numofthreads']
+	ORDER BY tt.thread_lastpost DESC LIMIT 0,2"
 );
 
 	$i = 0;

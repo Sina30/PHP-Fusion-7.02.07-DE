@@ -345,7 +345,7 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 								echo '<b><a href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$db_org.'</a> </b>';				
 			echo "<a class='text-smaller' href='".sprintf($link[$data['rating_type']], $data['rating_item_id'])."'><strong>".$comments_type[$data['rating_type']]."</strong></a>";
 			echo "<span class='text-smaller text-lighter m-l-10'><i class='fa fa-star'></i><b><font color='red'>".$data['rating_vote']."</b></font></span>\n";
-			echo "&nbsp;<span class='text-smaller'>".showdate("shortdate", $data['rating_datestamp'])."</span><br/>\n";
+			echo "&nbsp;<span class='text-smaller'>".timer($data['rating_datestamp'])."</span><br/>\n";
 			echo "</div>\n";
 			echo "<!--End Rating Item-->\n";
 			$i++;

@@ -145,15 +145,33 @@ if ($rows > $threads_per_page || (iMEMBER && $can_post)) {
 }
 
 echo $post_info;
-
+echo "<div class='forum-table-container panel-body'>\n";
+$forum_list = ""; $current_cat = "";
+$result = dbquery(
+   "SELECT f.forum_id, f.forum_name, f2.forum_name AS forum_cat_name
+   FROM ".DB_FORUMS." f
+   INNER JOIN ".DB_FORUMS." f2 ON f.forum_cat=f2.forum_id
+   WHERE ".groupaccess('f.forum_access')." AND f.forum_cat!='0' ORDER BY f2.forum_order ASC, f.forum_order ASC"
+);
+while ($data2 = dbarray($result)) {
+   if ($data2['forum_cat_name'] != $current_cat) {
+      if ($current_cat != "") { $forum_list .= "</optgroup>\n"; }
+      $current_cat = $data2['forum_cat_name'];
+      $forum_list .= "<optgroup label='".$data2['forum_cat_name']."'>\n";
+   }
+   $sel = ($data2['forum_id'] == $fdata['forum_id'] ? " selected='selected'" : "");
+   $forum_list .= "<option value='".$data2['forum_id']."'$sel>".$data2['forum_name']."</option>\n";
+}
+$forum_list .= "</optgroup>\n";
+echo "<div style='padding-top:5px'>\n".$locale['540']."<br />\n";
+echo "<select name='jump_id' class='textbox' onchange=\"jumpforum(this.options[this.selectedIndex].value);\">";
+echo $forum_list."</select>\n</div>\n";
+echo "</div>\n";
 if (iMOD) { echo "<form name='mod_form' method='post' action='".FUSION_SELF."?forum_id=".$_GET['forum_id']."&amp;rowstart=".$_GET['rowstart']."'>\n"; }
-echo "<table cellpadding='0' cellspacing='1' width='100%' class='tbl-border forum_table'>\n<tr>\n";
-echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>&nbsp;</td>\n";
-echo "<td class='tbl2 forum-caption'>".$locale['451']."</td>\n";
-echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>".$locale['452']."</td>\n";
-echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center' >".$locale['453']."</td>\n";
-//echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center'>".$locale['454']."</td>\n";
-echo "<td class='tbl2 forum-caption' width='1%' style='white-space:nowrap'>".$locale['404']."</td>\n</tr>\n";
+echo "<table class='tbl-border forum_table table table-responsive'>\n<thead>\n<tr>\n";
+echo "<th class='tbl2 forum-caption' colspan='2'>".$locale['451']."</th>\n";
+echo "<th class='tbl2 forum-caption' width='1%' style='white-space:nowrap' align='center' >".$locale['453']."</th>\n";
+echo "<th class='tbl2 forum-caption' style='width: 250px;'>".$locale['404']."</th>\n</tr>\n</thead>\n<tbody id='threadlisting'>\n"; // <-- filter hit target
 
 if ($rows) {
    $result = dbquery(
@@ -213,10 +231,6 @@ if ($rows) {
       else { $src = IMAGES."avatars/noavatar50.png"; }
      if($tdata['user_avatarlastuser'] && file_exists(IMAGES."avatars/".$tdata['user_avatarlastuser'])) { $src = IMAGES."avatars/".$tdata['user_avatarlastuser']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
-      echo "<td width='1%' class='tbl2' style='white-space:nowrap;' align='center'>
-         <span class='small'>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</span><br />
-         <a href='".BASEDIR."profile.php?lookup=".$tdata['user_id']."' class='profile-link'>
-         <span><img id='author' style='border-radius:6px;' width='30' src='".$asrc."' alt='".$asrc."' /></span></a></td>\n";
       echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".$tdata['thread_views']." </br>Views</td>\n";
       echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".($tdata['thread_postcount']-1)." </br>Post</td>\n";
       echo "<td width='1%' class='tbl1' style='white-space:nowrap; padding-right:50px;'>
@@ -225,23 +239,28 @@ if ($rows) {
         Zuletzt&nbsp;geantwortet&nbsp;<span class='small'>".profile_link($tdata['thread_lastuser'], $tdata['user_lastuser'], $tdata['status_lastuser'])."</span><br />
          ".showdate("forumdate", $tdata['thread_lastpost'])."</td>\n";
       echo "</tr>\n";
-   }
-   echo "</table>\n";
+   
+		echo "<tr>\n<td class='text-center' colspan='6'>".$locale['574']."</td>\n</tr>\n";
+	}
+	echo "</tbody>\n</table><!--sub_forum_table-->\n";
 } else {
-   if (!$rows) {
-      echo "<tr>\n<td colspan='6' class='tbl1' style='text-align:center'>".$locale['456']."</td>\n</tr>\n</table><!--sub_forum_table-->\n";
-   } else {
-      echo "</table><!--sub_forum_table-->\n";
-   }
+	if (!$rows) {
+		echo "<tr>\n<td colspan='6' class='tbl1' style='text-align:center'>".$locale['456']."</td>\n</tr>\n</table><!--sub_forum_table-->\n";
+	} else {
+		echo "</tbody>\n</table><!--sub_forum_table-->\n";
+	}
 }
+
 
 if (iMOD) {
    if ($rows) {
-      echo "<table cellspacing='0' cellpadding='0' width='100%'>\n<tr>\n<td style='padding-top:5px'>";
-      echo "<a href='#' onclick=\"javascript:setChecked('mod_form','check_mark[]',1);return false;\">".$locale['460']."</a> ::\n";
-      echo "<a href='#' onclick=\"javascript:setChecked('mod_form','check_mark[]',0);return false;\">".$locale['461']."</a></td>\n";
-      echo "<td align='right' style='padding-top:5px'><input type='submit' name='delete_threads' value='".$locale['462']."' class='button' onclick=\"return confirm('".$locale['463']."');\" /></td>\n";
-      echo "</tr>\n</table>\n";
+      echo "<div class='forum-table-container panel-body'>\n";
+	  echo "<div class='btn-group m-r-10'>\n";
+      echo "<a id='check' class='btn btn-default button'  href='#' onclick=\"javascript:setChecked('mod_form','check_mark[]',1);return false;\">".$locale['460']."</a>\n";
+      echo "<a id='uncheck' class='btn btn-default button'  href='#' onclick=\"javascript:setChecked('mod_form','check_mark[]',0);return false;\">".$locale['461']."</a>\n";
+      echo "</div>\n";
+	  echo "<input type='submit' name='delete_threads' value='".$locale['462']."' class='btn btn-danger m-r-10' onclick=\"return confirm('".$locale['463']."');\" />\n";
+      echo "</div>\n";
    }
    echo "</form>\n";
    if ($rows) {
@@ -257,26 +276,7 @@ if (iMOD) {
 
 echo $post_info;
 
-$forum_list = ""; $current_cat = "";
-$result = dbquery(
-   "SELECT f.forum_id, f.forum_name, f2.forum_name AS forum_cat_name
-   FROM ".DB_FORUMS." f
-   INNER JOIN ".DB_FORUMS." f2 ON f.forum_cat=f2.forum_id
-   WHERE ".groupaccess('f.forum_access')." AND f.forum_cat!='0' ORDER BY f2.forum_order ASC, f.forum_order ASC"
-);
-while ($data2 = dbarray($result)) {
-   if ($data2['forum_cat_name'] != $current_cat) {
-      if ($current_cat != "") { $forum_list .= "</optgroup>\n"; }
-      $current_cat = $data2['forum_cat_name'];
-      $forum_list .= "<optgroup label='".$data2['forum_cat_name']."'>\n";
-   }
-   $sel = ($data2['forum_id'] == $fdata['forum_id'] ? " selected='selected'" : "");
-   $forum_list .= "<option value='".$data2['forum_id']."'$sel>".$data2['forum_name']."</option>\n";
-}
-$forum_list .= "</optgroup>\n";
-echo "<div style='padding-top:5px'>\n".$locale['540']."<br />\n";
-echo "<select name='jump_id' class='textbox' onchange=\"jumpforum(this.options[this.selectedIndex].value);\">";
-echo $forum_list."</select>\n</div>\n";
+
 
 echo "<div><hr />\n";
 echo "<img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle;' /> - ".$locale['470']."<br />\n";

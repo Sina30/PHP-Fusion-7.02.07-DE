@@ -88,35 +88,39 @@ if (dbrows($result) != 0) {
          echo $locale['405']."in&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a>";
       } else {
 
-		 echo "<h2><b>";
+		 echo "<h3><b>";
       if ($tdata['thread_sticky'] == 1) {
          echo "<img src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
       }
-		 echo"<a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
-		 echo trimlink($data['thread_subject'], 33)." </a></b></h2>\n";
-		 
-		echo "Gestartet von&nbsp;";
+		 echo"<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a></b></h3>\n";
+		 echo "<span class='small'>".nl2br(parseubb($data['forum_description'])).($data['forum_description'] && $moderators ? "<br />\n" : "");
+		echo "<br />letztes Thema:";
+		 echo"&nbsp;-&nbsp;<a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
+		 echo trimlink($data['thread_subject'], 33)." </a>\n";
 		 if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
      if($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $src = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
 		echo "
          <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
-         ".$data['thread_author'], $data['user_author']."\n";
-		echo"<!--forum_name-->in&nbsp;".$data['forum_cat_name']."&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a>\n";
-		echo "</td>\n";
+        ".$locale['406']."<a>".profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."</a>\n";
+		
+		echo " letzte Aktualisierung&nbsp;".timer($data['thread_lastpost'])."</td>\n";
 		echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".$data['forum_threadcount']." </br>Themen</td>\n";
 		echo "<td align='center' width='0%' class='mainbody display-inline-block forum-stats well p-5 m-r-5 m-b-0' style='white-space:nowrap'>".$data['forum_postcount']." </br>Beiträge</td>\n";
 		echo "<td width='1%' class='tbl1' style='white-space:nowrap; padding-right:50px;'>";
-				 if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
-      else { $src = IMAGES."avatars/noavatar50.png"; }
-     if($data['user_avatarlastuser'] && file_exists(IMAGES."avatars/".$data['user_avatarlastuser'])) { $src = IMAGES."avatars/".$data['user_avatarlastuser']; }
-      else { $src = IMAGES."avatars/noavatar50.png"; }
 		
-			echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_lastuser']."' class='profile-link flleft'>
+		if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+     if($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $src = IMAGES."avatars/".$data['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+		echo"<a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
+		 echo trimlink($data['thread_subject'], 18)." </a>\n";
+			echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_author']."' class='profile-link flleft'>
          <span ><img style='margin-right:4px; border-radius:6px;' width='30' src='".$src."' alt='".$src."' /></span></a>
-        Zuletzt geantwortet <span class='small'>".profile_link($data['thread_lastuser'], $data['user_lastuser'], $data['status_lastuser'])."</span><br />
-         ".showdate("forumdate", $data['thread_lastpost'])."</td>\n";
+        <span class='small'><br />".$locale['406'].profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."
+		</span><br />
+         ".showdate("shortdate", $data['thread_lastpost'])."</td>\n";
 }
 		 }
 		 }

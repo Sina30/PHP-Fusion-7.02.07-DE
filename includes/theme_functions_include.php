@@ -294,7 +294,82 @@ function panelstate($state, $bname) {
 	}
 	return "<div id='box_".$bname."'".($state == "off" ? " style='display:none'" : "").">\n";
 }
-
+function timer($updated = FALSE) {
+	if (!$updated) {
+		$updated = time();
+	}
+	$updated = stripinput($updated);
+	$current = time();
+	$calculated = $current-$updated;
+	$second = 1;
+	$minute = $second*60;
+	$hour = $minute*60;
+	$day = 24*$hour;
+	$month = days_current_month()*$day;
+	$year = (date("L", $updated) > 0) ? 366*$day : 365*$day;
+	if ($calculated < 1) {
+		return "<abbr class='atooltip' data-toggle='tooltip' data-placement='top' title='".showdate('longdate', $updated)."'>gerade jetzt</abbr>\n";
+	}
+	$timer = array($year => "Jahren", $month => "Monate", $day => "Tag", $hour => "Stunden", $minute => "Minuten",
+		$second => "Sekunden");
+	foreach ($timer as $arr => $unit) {
+		$calc = $calculated/$arr;
+		if ($calc >= 1) {
+			$answer = round($calc);
+			$s = ($answer > 1) ? "s" : "";
+			return "Vor <abbr class='atooltip' data-toggle='tooltip' data-placement='top' title='".showdate('longdate', $updated)."'>$answer ".$unit.$s."</abbr>";
+		}
+	}
+}
+function days_current_month() {
+	$year = showdate("%Y", time());
+	$month = showdate("%m", time());
+	return $month == 2 ? ($year%4 ? 28 : ($year%100 ? 29 : ($year%400 ? 28 : 29))) : (($month-1)%7%2 ? 30 : 31);
+}
+function countdown($time) {
+	$updated = stripinput($time);
+	$second = 1;
+	$minute = $second*60;
+	$hour = $minute*60;
+	$day = 24*$hour;
+	$month = days_current_month()*$day;
+	$year = (date("L", $updated) > 0) ? 366*$day : 365*$day;
+	$timer = array($year => "year", $month => "month", $day => "day", $hour => "hour", $minute => "minute",
+		$second => "second");
+	foreach ($timer as $arr => $unit) {
+		$calc = $updated/$arr;
+		if ($calc >= 1) {
+			$answer = round($calc);
+			$s = ($answer > 1) ? "s" : "";
+			return "<abbr class='atooltip' data-toggle='tooltip' data-placement='top' title='~".showdate('newsdate', $updated+time())."'>$answer ".$unit.$s."</abbr>";
+		}
+	}
+	if (!isset($answer)) {
+		return "<abbr class='atooltip' data-toggle='tooltip' data-placement='top' title='".showdate('newsdate', time())."'>now</abbr>";
+	}
+}
+function tab_active($tab_title, $default_active, $link_mode=false) {
+	if ($link_mode) {
+		$section = isset($_GET['section']) && $_GET['section'] ? $_GET['section'] : $default_active;
+		$count = count($tab_title['title']);
+		if ($count > 0) {
+			for ($i = 0; $i <= $count; $i++) {
+				$id = $tab_title['id'][$i];
+				if ($section == $id) {
+					return $id;
+				}
+			}
+		} else {
+			return $default_active;
+		}
+	} else {
+		$id = $tab_title['id'][$default_active];
+		$title = $tab_title['title'][$default_active];
+		$v_link = str_replace(" ", "-", $title);
+		$v_link = str_replace("/", "-", $v_link);
+		return "".$id."$v_link";
+	}
+}
 // v6 compatibility
 function opensidex($title, $state = "on") {
 
