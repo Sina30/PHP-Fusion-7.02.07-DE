@@ -239,7 +239,7 @@ if ($rows) {
       else { $src = IMAGES."avatars/noavatar50.png"; }
 		echo "
          <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
-        ".$locale['406']."<a>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</a>\n";
+        <a>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</a>\n";
 
 	 
 	 
