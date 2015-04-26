@@ -1005,11 +1005,10 @@ div.side-both {
 	  padding: 0px 0px 7px 0px;
 }
 
-.tbl2  {
-	font-size: 12px;
-	color: #555;
-	background-color: #f8f8f8;
-	padding: 8px 5px 0px 0px;
+.tbl2 {
+  color: #555;
+  background-color: #F9F9F9;
+  padding: 4px;
 }
 
 .tbl21  {
@@ -1751,6 +1750,20 @@ border-radius: 50px;
   max-width: 100%;
   height: auto;
 }
+
+.forumavatar { 
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
 .weblink { 
 	width: 70px; 
 	height: 60px;
@@ -1911,7 +1924,7 @@ border-radius: 50px;
   user-select: none;
 }
 .m-r-10 {
-  margin-right: 10px;
+  margin-right: 0px;
 }
 .btn-danger {
   color: #FFF;
@@ -1945,7 +1958,7 @@ border-radius: 50px;
   color: #FFF;
 }
 .forum_idx_table td:first-child, .forum_idx_table th:first-child, .forum_table th:first-child, .forum_table td:first-child {
-  padding: 0px 0px 0px 15px !important;
+  padding: 0px 4px 0px 11px !important;
     border-top: 1px solid #DDD;
 }  
 .table > thead > tr > th {

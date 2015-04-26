@@ -83,7 +83,7 @@ if (dbrows($result) != 0) {
 		}
 		echo "<tr>\n";
 		echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>$fim</td>\n";
-		echo "<td class='tbl11 forum_name'>";
+		echo "<td class='tbl2 forum_name'>";
 		if ($data['forum_lastpost'] == 0) {
          echo $locale['405']."in&nbsp;-&nbsp;<a href='viewforum.php?forum_id=".$data['forum_id']."'>".$data['forum_name']."</a>";
       } else {
@@ -117,7 +117,7 @@ if (dbrows($result) != 0) {
 		echo"<a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
 		 echo trimlink($data['thread_subject'], 18)." </a>\n";
 			echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_author']."' class='profile-link flleft'>
-         <span ><img style='margin-right:4px; border-radius:6px;' width='30' src='".$src."' alt='".$src."' /></span></a>
+         <span ><img class='forumavatar m-b-10' width='30' src='".$src."' alt='".$src."' /></span></a>
         <span class='small'><br />".$locale['406'].profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."
 		</span><br />
          ".showdate("shortdate", $data['thread_lastpost'])."</td>\n";
