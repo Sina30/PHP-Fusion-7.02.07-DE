@@ -122,15 +122,20 @@ if (isset($_POST['delete_threads']) && iMOD) {
    }
    redirect(FUSION_SELF."?forum_id=".$_GET['forum_id']."&rowstart=".$_GET['rowstart']);
 }
-
-opentable($locale['450']);
-echo "<!--pre_forum--><div class='tbl2 forum_breadcrumbs'><a href='index.php'>".$settings['sitename']."</a> &raquo; ".$caption."</div>\n";
+echo '<h2 class="main-content h2">'.$locale['450'].'</front></h2>';
+opentable();
+echo "<!--pre_forum-->\n";
+echo "<ol class='forum_breadcrumbs breadcrumb'>\n";
+echo "<li><a href='index.php'>".$settings['sitename']."</a> / <a href='".BASEDIR."forum/index.php?cat=".$fdata['forum_cat']."'>".$fdata['forum_cat_name']."</a> / ".$fdata['forum_name']."</li>\n";
+echo "<li></li>\n";
+//echo "<li></li>\n";
+echo "</ol>\n";
 
 $rows = dbcount("(thread_id)", DB_THREADS, "forum_id='".$_GET['forum_id']."' AND thread_hidden='0'");
 
 $post_info = "";
 if ($rows > $threads_per_page || (iMEMBER && $can_post)) {
-   $post_info .= "<table cellspacing='0' cellpadding='0' width='100%'>\n<tr>\n";
+   $post_info .= "<table class='table table-responsive'>\n<tr>\n";
    if ($rows > $threads_per_page) {
       $post_info .= "<td style='padding:4px 0px 4px 0px'>";
       $post_info .= makepagenav($_GET['rowstart'],$threads_per_page,$rows,3,FUSION_SELF."?forum_id=".$_GET['forum_id']."&amp;");
@@ -200,7 +205,7 @@ if ($rows) {
          } else {
             $folder = "<img src='".get_image("folder")."' alt='".$locale['561']."' />";
          }
-         echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>$folder</td>";
+         echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'></td>";
       }
       $reps = ceil($tdata['thread_postcount'] / $threads_per_page);
       $threadsubject = "<a href='viewthread.php?thread_id=".$tdata['thread_id']."'>".$tdata['thread_subject']."</a>";
@@ -225,8 +230,19 @@ if ($rows) {
       if ($tdata['thread_sticky'] == 1) {
          echo "<img src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
       }
-      echo $threadsubject."</td>\n";
+			echo $threadsubject;
      
+		echo "<br />Begonnen von:";
+		 if ($tdata['user_avatar'] && file_exists(IMAGES."avatars/".$tdata['user_avatar'])) { $asrc = IMAGES."avatars/".$tdata['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+     if($tdata['user_avatar'] && file_exists(IMAGES."avatars/".$tdata['user_avatar'])) { $src = IMAGES."avatars/".$tdata['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+		echo "
+         <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
+        ".$locale['406']."<a>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</a>\n";
+
+	 
+	 
       if ($tdata['user_avatar'] && file_exists(IMAGES."avatars/".$tdata['user_avatar'])) { $asrc = IMAGES."avatars/".$tdata['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
      if($tdata['user_avatarlastuser'] && file_exists(IMAGES."avatars/".$tdata['user_avatarlastuser'])) { $src = IMAGES."avatars/".$tdata['user_avatarlastuser']; }

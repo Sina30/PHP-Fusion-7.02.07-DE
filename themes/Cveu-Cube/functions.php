@@ -109,7 +109,7 @@ function showsecondbanner($display = "") {
 
 function opentable($title) {
 
-	echo "<div class='capmain'><h2 class='title'>".$title."</h2></div>\n";
+	echo "<div class=''><h2 class='title'>".$title."</h2></div>\n";
 
 	echo "<div class='main-body floatfix spacer'>\n";
 

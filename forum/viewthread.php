@@ -152,12 +152,15 @@ if (iMEMBER) {
 		$user_field[$data['field_name']] = true;
 	}
 }
-
-opentable($locale['500']);
-
 // breadcrumbs
-$caption = $fdata['forum_cat_name']." &raquo; <a href='viewforum.php?forum_id=".$fdata['forum_id']."'>".$fdata['forum_name']."</a>";
-echo "<!--pre_forum_thread--><div class='tbl2 forum_breadcrumbs' style='margin:0px 0px 4px 0px'><a href='index.php' id='top'>".$settings['sitename']."</a> &raquo; ".$caption."</div>\n";
+echo '<h2 class="main-content h2">'.$locale['500'].'</front></h2>';
+opentable();
+echo "<!--pre_forum-->\n";
+echo "<ol class='tbl2 forum_breadcrumbs breadcrumb' style='margin:0px 0px 4px 0px'>\n";
+echo "<li><a href='index.php'>".$settings['sitename']."</a> / ".$fdata['forum_cat_name']." / <a href='viewforum.php?forum_id=".$fdata['forum_id']."'>".$fdata['forum_name']."</a></li>\n";
+echo "<li></li>\n";
+//echo "<li></li>\n";
+echo "</ol>\n";
 
 // thread
 list($rows, $last_post) = dbarraynum(dbquery(

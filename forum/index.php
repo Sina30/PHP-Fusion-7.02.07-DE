@@ -57,10 +57,14 @@ if (dbrows($result) != 0) {
 	while ($data = dbarray($result)) {
 		if ($data['forum_cat_name'] != $current_cat) {
 			$current_cat = $data['forum_cat_name'];
-			echo "<tr>\n<a><td colspan='2' class='forum-caption forum_cat_name'><!--forum_cat_name-->".$data['forum_cat_name']."</td>\n";
+			echo "<table class='forum_idx_table table table-responsive' cellpadding='0' cellspacing='0' width='100%'>\n";
+			echo '<h2 class="main-content h2">'.$data['forum_cat_name'].'</front></h2>';
+			echo "</div>\n";
+		
+			echo "<tr>\n<td colspan='2' class='forum-caption forum_cat_name'><!--forum_cat_name--></td>\n";
 			//echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['402']."</td>\n";
-			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['400']."</td>\n";
-			echo "<td width='1%' class='forum-caption' style='white-space:nowrap'>".$locale['404']."</td>\n";
+			echo "<td align='center' width='1%' class='forum-caption' style='white-space:nowrap'></td>\n";
+			echo "<td width='1%' class='forum-caption' style='white-space:nowrap'></td>\n";
 			echo "</tr>\n";
 		}
 		$moderators = "";
@@ -71,16 +75,7 @@ if (dbrows($result) != 0) {
 				$moderators .= $mod_group<101 ? "<a href='".BASEDIR."profile.php?group_id=".$mod_group."'>".getgroupname($mod_group)."</a>" : getgroupname($mod_group);
 			}
 		}
-		$forum_match = "\|".$data['forum_lastpost']."\|".$data['forum_id'];
-		if ($data['forum_lastpost'] > $lastvisited) {
-			if (iMEMBER && ($data['forum_lastuser'] == $userdata['user_id'] || preg_match("({$forum_match}\.|{$forum_match}$)", $userdata['user_threads']))) {
-				$fim = "<img src='".get_image("folder")."' alt='".$locale['561']."' />";
-			} else {
-				$fim = "<img src='".get_image("foldernew")."' alt='".$locale['560']."' />";
-			}
-		} else {
-			$fim = "<img src='".get_image("folder")."' alt='".$locale['561']."' />";
-		}
+		
 		echo "<tr>\n";
 		echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>$fim</td>\n";
 		echo "<td class='tbl2 forum_name'>";
@@ -101,8 +96,7 @@ if (dbrows($result) != 0) {
       else { $src = IMAGES."avatars/noavatar50.png"; }
      if($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $src = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
-		echo "
-         <img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
+		echo "<img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />
         ".$locale['406']."<a>".profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."</a>\n";
 		
 		echo " letzte Aktualisierung&nbsp;".timer($data['thread_lastpost'])."</td>\n";
@@ -115,7 +109,7 @@ if (dbrows($result) != 0) {
      if($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $src = IMAGES."avatars/".$data['user_avatar']; }
       else { $src = IMAGES."avatars/noavatar50.png"; }
 		echo"<a href='".FORUM."viewthread.php?thread_id=".$data['thread_id']."#post_".$data['thread_lastpostid']."' title='".$data['thread_subject']."'>";
-		 echo trimlink($data['thread_subject'], 18)." </a>\n";
+		 echo trimlink($data['thread_subject'], 9)." </a>\n";
 			echo "<a href='".BASEDIR."profile.php?lookup=".$data['thread_author']."' class='profile-link flleft'>
          <span ><img class='forumavatar m-b-10' width='30' src='".$src."' alt='".$src."' /></span></a>
         <span class='small'><br />".$locale['406'].profile_link($data['forum_lastuser'], $data['user_name'], $data['user_status'])."
