@@ -66,7 +66,9 @@ $locale['251'] = "Registrierte Mitglieder:";
 $locale['252'] = "Unaktivierte Mitglieder:";
 $locale['253'] = "Gesperrte Mitglieder (Sicherheitssperre):";
 $locale['254'] = "Eingesendete News:";
-$locale['254b'] = "There are no ratings now.";
+$locale['254a'] = "Heute gibt es keine Anträge.";
+$locale['254b'] = "Heute gibt es noch keine Bewertungen.";
+$locale['254c'] = "Heute gibt es keine Kommentare.";
 $locale['255'] = "Eingesendete Artikel:";
 $locale['255b'] = "MEHR ANZEIGEN";
 $locale['256'] = "Eingesendete Links:";
@@ -87,6 +89,9 @@ $locale['270'] = "Articles";
 $locale['271'] = "Weblinks";
 $locale['272'] = "Gallery";
 $locale['273'] = "kommentiert";
+$locale['273a'] = "bewertet in";
+$locale['273b'] = "machte Einsendungen in";
+$locale['284'] = "There are no infusions installed";
 $locale['285'] = "INFUSIONEN VERWALTEN";
 
 ?>

@@ -487,6 +487,19 @@ div.emulated-fieldset div.attachments-list {
 	text-shadow: none !important;
 }
 
+.forum-icon {
+    background: #FFF !Important;
+}
+
+.forum-icon img {
+    max-width: 25px;
+    margin-top: 11px !important;
+}
+
+.forum-icon-stickythread {
+    max-height: 24px;
+}
+
 .main-nav-wrapper {
 	width: 100%;
 	min-width: 1200px;

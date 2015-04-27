@@ -41,8 +41,9 @@ echo '			<div style="height:164px;width:100%;clear:both;background-image:url('.T
 						echo '<div style="width:100px;float:left">';		
 							echo '<br />';	
 							echo '<font style="font-size:13px"><b>'.$userdata['user_name'].'</b></font><br /><br />';		
-							if (!$userdata['user_avatar']) { echo '<img src="'.THEMES.'templates/images/admin/no-avatar.jpg" class="avatar-effect" />';			
-							} else { echo '<img src="'.IMAGES.'avatars/'.$userdata['user_avatar'].'" width="100" height="100" class="avatar-effect" />'; }	
+							if (!$userdata['user_avatar']) { echo '<img src="'.THEMES.'templates/images/admin/no-avatar.jpg" class="pull-left m-r-10 display-inline-block" style="margin-top:0px; margin-bottom:10px;" />';			
+							} else { echo '<img src="'.IMAGES.'avatars/'.$userdata['user_avatar'].'" width="40" height="40" class="pull-left m-r-10 display-inline-block" style="margin-top:0px; margin-bottom:10px;" />'; }	
+
 echo '				</div>';	
 						echo '<div style="float:right;height:100px;margin-top:40px;line-height:185%">';		
 							echo ''.THEME_BULLET.' <a href="'.BASEDIR.'edit_profile.php" class="grey">'.$locale['global_120'].'</a><br />';			

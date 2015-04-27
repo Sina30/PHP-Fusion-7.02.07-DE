@@ -212,7 +212,7 @@ if ($rows) {
 				$icon .= "<img class='forum-icon-stickythread' title='".$locale['474']."' src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
 			}
 			// hot icon
-			if ($tdata['thread_postcount'] >= 50) {
+			if ($tdata['thread_postcount'] >= 20) {
 				$icon .= "<img class='forum-icon-hotthread' src='".get_image("hot")."' alt='".$locale['611']."' title='".$locale['611']."' alt='".$locale['611']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
 			}
 			// attach icon

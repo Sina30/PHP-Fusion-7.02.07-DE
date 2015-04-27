@@ -60,11 +60,7 @@ echo '<div class="col-sm-6">';
 		}
 		echo "</td>\n";
 		echo "<td width='20%' class='".$row_color."' style='border-left: 1px solid #d5d5d5;border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff;' height='58'><a href='".FORUM."profile.php?lookup=".$data['user_id']."'>";
-		if (!$data['user_avatar']) { 
-			echo '<img src="'.THEMES.'templates/images/admin/no-avatar.jpg" class="avatar-effect" width="35" height="35" style="vertical-align:middle" />'; 	
-		} else {	
-			echo '<img src="'.IMAGES.'avatars/'.$data['user_avatar'].'" width="35" height="35" class="avatar-effect" style="vertical-align:middle" />';	
-		}
+		echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'>".display_avatar($data, '40px')."</div>\n";
 		echo "<b>&nbsp;&nbsp;".trimlink($data['user_name'], 30)."</b></a></td>\n";
 		echo "<td width='50%' class='".$row_color."' style='text-align:left;white-space:nowrap;border-left: 1px solid #d5d5d5;border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff' height='58'>".trimlink($data['message_subject'], 30)."</td>\n";
 		echo "<td width='1%' class='".$row_color."' style='text-align:center;white-space:nowrap;border-left: 1px solid #d5d5d5;border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff' height='58'>".showdate("longdate", $data['message_datestamp'])."</td>\n";

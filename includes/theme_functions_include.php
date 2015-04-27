@@ -294,6 +294,18 @@ function panelstate($state, $bname) {
 	}
 	return "<div id='box_".$bname."'".($state == "off" ? " style='display:none'" : "").">\n";
 }
+
+function display_avatar($userdata, $size, $class = FALSE) {
+	$class = ($class) ? "class='$class'" : '';
+	if (array_key_exists('user_avatar', $userdata) && $userdata['user_avatar'] && file_exists(IMAGES."avatars/".$userdata['user_avatar']) && $userdata['user_status'] !='5' && $userdata['user_status'] !='6') {
+		$userdata['user_id'] = array_key_exists('user_id', $userdata) && $userdata['user_id'] ? $userdata['user_id'] : 1;
+		return "<a $class title='".$userdata['user_name']."' href='".BASEDIR."profile.php?lookup=".$userdata['user_id']."'><img class='img-responsive img-thumbnail m-r-10' style='display:inline; max-width:$size; max-height:$size;' src='".IMAGES."avatars/".$userdata['user_avatar']."'></a>\n";
+	} else {
+		$userdata['user_id'] = array_key_exists('user_id', $userdata) && $userdata['user_id'] ? $userdata['user_id'] : 1;
+		return "<a $class title='".$userdata['user_name']."' href='".BASEDIR."profile.php?lookup=".$userdata['user_id']."'><img class='img-responsive img-thumbnail m-r-10' style='display:inline; max-width:$size; max-height:$size;' src='".IMAGES."avatars/noavatar100.png'></a>\n";
+	}
+}
+
 function timer($updated = FALSE) {
 	if (!$updated) {
 		$updated = time();

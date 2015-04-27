@@ -51,11 +51,7 @@ echo '<div class="col-sm-6">';
 	while ($data = dbarray($result)) {
 		$row_color = ($i % 2 == 0 ? "tbl1" : "tbl2");
 		echo "<tr>\n<td class='".$row_color."' style='border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff;width:50px' height='58' width='45' align='center'>";
-		if (!$data['user_avatar']) { 
-			echo '<img src="'.THEMES.'templates/images/admin/no-avatar.jpg" class="avatar-effect" width="35" height="35" /></a>'; 	
-		} else {
-			echo '<img src="'.IMAGES.'avatars/'.$data['user_avatar'].'" width="35" height="35" class="avatar-effect" /></a>';	
-		}
+		echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'>".display_avatar($data, '40px')."</div>\n";
 		echo "</td>\n";
 		echo "<td width='55%' class='".$row_color."' style='border-left: 1px solid #d5d5d5;border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff' height='58'><a href='".BASEDIR."profile.php?lookup=".$data['user_id']."'>".trimlink($data['user_name'], 30)."</a></td>\n";
 		echo "<td width='1%' class='".$row_color."' style='text-align:center;white-space:nowrap;border-left: 1px solid #d5d5d5;border-bottom: 1px solid #d5d5d5;border-top: 1px solid #fff' height='58'>".$data['user_ip']."</td>\n";
