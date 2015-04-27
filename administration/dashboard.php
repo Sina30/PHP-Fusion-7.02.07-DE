@@ -178,6 +178,11 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='d'").'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
+									echo '<span class="text-smaller">Bewertungen&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							echo '<br>';
+									echo '<h4 class="m-t-0">'.dbcount("('rating_id')", DB_RATINGS, "rating_type='d'").'</h4>';
+							echo '</div>';
+									echo '<div class="pull-left display-inline-block m-r-10">';
 									echo '<span class="text-smaller">Einsendungen</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='d'").'</h4>';
@@ -199,6 +204,11 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='n'").'</h4>';
 							echo '</div>';
+									echo '<div class="pull-left display-inline-block m-r-10">';
+									echo '<span class="text-smaller">Bewertungen&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							echo '<br>';
+									echo '<h4 class="m-t-0">'.dbcount("('rating_id')", DB_RATINGS, "rating_type='n'").'</h4>';
+							echo '</div>';		
 									echo '<div class="pull-left display-inline-block m-r-10">';
 									echo '<span class="text-smaller">Einsendungen</span>';
 							echo '<br>';
@@ -222,6 +232,11 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='A'").'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
+									echo '<span class="text-smaller">Bewertungen&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							echo '<br>';
+									echo '<h4 class="m-t-0">'.dbcount("('rating_id')", DB_RATINGS, "rating_type='A'").'</h4>';
+							echo '</div>';
+									echo '<div class="pull-left display-inline-block m-r-10">';
 									echo '<span class="text-smaller">Einsendungen</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='a'").'</h4>';
@@ -243,6 +258,11 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='L'").'</h4>';
 						echo '</div>';
+						echo '<div class="pull-left display-inline-block m-r-10">';
+									echo '<span class="text-smaller">Bewertungen&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							echo '<br>';
+									echo '<h4 class="m-t-0">'.dbcount("('rating_id')", DB_RATINGS, "rating_type='L'").'</h4>';
+							echo '</div>';
 					echo '<div class="pull-left display-inline-block m-r-10">';
 					echo '<span class="text-smaller">Einsendungen</span>';
 						echo '<br>';
@@ -356,7 +376,7 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 	$_GET['r_rowstart'] = isset($_GET['r_rowstart']) && $_GET['r_rowstart'] <= $rows ? $_GET['r_rowstart'] : 0;
 	$result = dbquery("SELECT r.*, u.user_id, u.user_name, u.user_status, u.user_avatar
 	FROM ".DB_RATINGS." r LEFT JOIN ".DB_USERS." u on u.user_id=r.rating_user
-	ORDER BY rating_datestamp DESC LIMIT ".$_GET['r_rowstart'].", ".$settings['comments_per_page']."
+	ORDER BY rating_datestamp DESC LIMIT 0,2
 	");
 	$nav = '';
 	if ($rows > $settings['comments_per_page']) {
@@ -393,7 +413,7 @@ echo '</div></div></div></div>';
 // Submissions
 
 include LOCALE.LOCALESET."admin/adminpro.php";		
-$result = dbquery("SELECT s.*, u.user_id, u.user_name, u.user_avatar FROM ".DB_SUBMISSIONS." s INNER JOIN ".DB_USERS." u ON s.submit_user =u.user_id ORDER BY s.submit_datestamp DESC LIMIT 0,1");
+$result = dbquery("SELECT s.*, u.user_id, u.user_name, u.user_avatar FROM ".DB_SUBMISSIONS." s INNER JOIN ".DB_USERS." u ON s.submit_user =u.user_id ORDER BY s.submit_datestamp DESC LIMIT 0,2");
 
 if (dbrows($result)) {
 	$i = 0;
