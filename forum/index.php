@@ -121,12 +121,14 @@ if (dbrows($result) != 0) {
 	//echo "<tr>\n<td colspan='5' class='tbl1'>".$locale['407']."</td>\n</tr>\n";
 
 echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
-echo "</br>";
 echo "<tr><td><img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle; width:24px;' /> - ".$locale['470']."</td>";
 echo "<td><img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle; width:24px;' /> - ".$locale['472']."</td></tr>";
 echo "<tr><td><img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle; width:24px;' /> - ".$locale['473']."</td>";
 echo "<td><img src='".get_image("stickythread")."' alt='".$locale['563']."' style='vertical-align:middle; width:24px;' /> - ".$locale['474']."</td></tr>";
-
+echo "<tr><td><img src='".get_image("hot")."' alt='".$locale['611']."' style='vertical-align:middle; width:24px;' /> - ".$locale['611']."</td>";
+echo "<td><img src='".get_image("poll_posticon")."' alt='".$locale['614']."' style='vertical-align:middle; width:24px;' /> - ".$locale['614']."</td></tr>";
+echo "<tr><td><img src='".get_image("attach")."' alt='".$locale['612']."' style='vertical-align:middle; width:24px;' /> - ".$locale['612']."</td>";
+echo "<td><img src='".get_image("image_attach")."' alt='".$locale['613']."' style='vertical-align:middle; width:24px;' /> - ".$locale['613']."</td></tr>";
 echo "</table>\n<!--sub_forum-->\n";
 closetable();
 	

@@ -298,7 +298,8 @@ $locale['global_900'] = "Nicht m&ouml;glich HEX zu DEC umzuwandeln.";
 #$locale['global_453'] = utf8_encode($locale['global_453']);
 #$locale['global_454'] = utf8_encode($locale['global_454']);
 #$locale['global_455'] = utf8_encode($locale['global_455']);
-
+$locale['273a'] = "rated on";
+$locale['278'] = "Latest Ratings";
 // Template Locale
 $locale['pro_1001'] = "Suche ...";
 $locale['pro_1002'] = "Content Admin";

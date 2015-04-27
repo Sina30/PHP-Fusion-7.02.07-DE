@@ -68,6 +68,7 @@ $locale['253'] = "Gesperrte Mitglieder (Sicherheitssperre):";
 $locale['254'] = "Eingesendete News:";
 $locale['254b'] = "There are no ratings now.";
 $locale['255'] = "Eingesendete Artikel:";
+$locale['255b'] = "MEHR ANZEIGEN";
 $locale['256'] = "Eingesendete Links:";
 $locale['257'] = "Kommentare:";
 $locale['258'] = "";
@@ -80,5 +81,12 @@ $locale['264'] = "Inaktive Mitglieder:";
 $locale['265'] = "Eingesendete Downloads:";
 $locale['266'] = "Benutzerlog";
 $locale['267'] = "robots.txt";
+$locale['268'] = "Downloads";
+$locale['269'] = "News";
+$locale['270'] = "Articles";
+$locale['271'] = "Weblinks";
+$locale['272'] = "Gallery";
+$locale['273'] = "kommentiert";
+$locale['285'] = "INFUSIONEN VERWALTEN";
 
 ?>

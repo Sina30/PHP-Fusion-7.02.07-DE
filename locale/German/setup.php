@@ -304,8 +304,8 @@ $locale['240'] .= "Vielen Dank, dass du dich f&uuml;r PHP-Fusion entschieden has
 
 // Standart Daten - Zeit und Datum
 $locale['shortdate']     = "%d.%m.%y";
-$locale['longdate']      = "%d. %B %Y um %H:%M:%S";
-$locale['forumdate']     = "%d.%m.%Y um %H:%M";
+$locale['longdate']      = "%d. %B %Y %H:%M:%S";
+$locale['forumdate']     = "%d.%m.%Y %H:%M";
 $locale['newsdate']      = "%d. %B %Y";
 $locale['subheaderdate'] = "%d. %B %Y - %H:%M:%S";
 //Multilanguage table rights

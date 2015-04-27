@@ -190,46 +190,95 @@ if ($rows) {
       ORDER BY thread_sticky DESC, thread_lastpost DESC LIMIT ".$_GET['rowstart'].",$threads_per_page"
    );
    $numrows = dbrows($result);
-   while ($tdata = dbarray($result)) {
-      $thread_match = $tdata['thread_id']."\|".$tdata['thread_lastpost']."\|".$fdata['forum_id'];
-      echo "<tr>\n";
-      if ($tdata['thread_locked']) {
-         echo "<td align='center' width='25' class='tbl2'><img src='".get_image("folderlock")."' alt='".$locale['564']."' /></td>";
-      } else  {
-         if ($tdata['thread_lastpost'] > $lastvisited) {
-            if (iMEMBER && ($tdata['thread_lastuser'] == $userdata['user_id'] || preg_match("(^\.{$thread_match}$|\.{$thread_match}\.|\.{$thread_match}$)", $userdata['user_threads']))) {
-               $folder = "<img src='".get_image("folder")."' alt='".$locale['561']."' />";
-            } else {
-               $folder = "<img src='".get_image("foldernew")."' alt='".$locale['560']."' />";
-            }
-         } else {
-            $folder = "<img src='".get_image("folder")."' alt='".$locale['561']."' />";
-         }
-         echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'></td>";
-      }
-      $reps = ceil($tdata['thread_postcount'] / $threads_per_page);
-      $threadsubject = "<a href='viewthread.php?thread_id=".$tdata['thread_id']."'>".$tdata['thread_subject']."</a>";
-      if ($reps > 1) {
-         $ctr = 0; $ctr2 = 1; $pages = ""; $middle = false;
-         while ($ctr2 <= $reps) {
-            if ($reps < 5 || ($reps > 4 && ($ctr2 == 1 || $ctr2 > ($reps-3)))) {
-               $pnum = "<a href='viewthread.php?thread_id=".$tdata['thread_id']."&amp;rowstart=$ctr'>$ctr2</a> ";
-            } else {
-               if ($middle == false) {
-                  $middle = true; $pnum = "... ";
-               } else {
-                  $pnum = "";
-               }
-            }
-            $pages .= $pnum; $ctr = $ctr + $threads_per_page; $ctr2++;
-         }
-         $threadsubject .= "<br />(".$locale['455'].trim($pages).")";
-      }
-      echo "<td width='100%' class='tbl1'>";
-      if (iMOD) { echo "<input type='checkbox' name='check_mark[]' value='".$tdata['thread_id']."' />\n"; }
-      if ($tdata['thread_sticky'] == 1) {
-         echo "<img src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
-      }
+	} else {
+		$result = dbquery("SELECT t.*, tu1.user_name AS user_author, tu1.user_status AS status_author,
+            tu2.user_name AS user_lastuser, tu2.user_status AS status_lastuser, tu2.user_avatar AS user_avatar
+            FROM ".DB_THREADS." t
+            LEFT JOIN ".DB_USERS." tu1 ON t.thread_author = tu1.user_id
+            LEFT JOIN ".DB_USERS." tu2 ON t.thread_lastuser = tu2.user_id
+            WHERE t.forum_id='".$_GET['forum_id']."' AND thread_hidden='0'
+            ORDER BY thread_sticky DESC, thread_lastpost DESC LIMIT ".$_GET['rowstart'].",$threads_per_page");
+		$numrows = dbrows($result);
+	}
+	if ($numrows) {
+		while ($tdata = dbarray($result)) {
+			$thread_match = $tdata['thread_id']."\|".$tdata['thread_lastpost']."\|".$fdata['forum_id'];
+			echo "<tr>\n";
+			$icon = '';
+			$sticky_status = '';
+			// sticky icon
+			if ($tdata['thread_sticky'] == 1) {
+				$sticky_status = "<span>".$locale['474']." : </span>\n";
+				$icon .= "<img class='forum-icon-stickythread' title='".$locale['474']."' src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
+			}
+			// hot icon
+			if ($tdata['thread_postcount'] >= 50) {
+				$icon .= "<img class='forum-icon-hotthread' src='".get_image("hot")."' alt='".$locale['611']."' title='".$locale['611']."' alt='".$locale['611']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+			}
+			// attach icon
+			$attach_icons = dbquery("SELECT attach_id, attach_ext FROM ".DB_FORUM_ATTACHMENTS." WHERE thread_id = '".$tdata['thread_id']."' AND (attach_ext='.zip' OR attach_ext='.rar')");
+			if (dbrows($attach_icons)) {
+				$icon .= "<img class='forum-icon-attachthread' src='".get_image("attach")."' alt='".$locale['612']."' title='".$locale['612']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+			}
+			// image attach icon
+			$attach_icons2 = dbquery("SELECT attach_id, attach_ext FROM ".DB_FORUM_ATTACHMENTS." WHERE thread_id = '".$tdata['thread_id']."' AND (attach_ext='.gif' OR attach_ext='.jpg' OR attach_ext='.png')");
+			if (dbrows($attach_icons2)) {
+				$icon .= "<img class='icon-imgattachthread' src='".get_image("image_attach")."' alt='".$locale['613']."' title='".$locale['613']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+			}
+			// poll icon
+			if ($tdata['thread_poll']) {
+				$icon .= "<img class='icon-pollthread' src='".get_image("poll_posticon")."' alt='".$locale['614']."' title='".$locale['614']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+			}
+			// what is this?
+			if (dbcount("(attach_id)", DB_FORUM_ATTACHMENTS, "thread_id='".$tdata['thread_id']."'") > 0) {
+				echo "<div style='float:right'><img src='".get_image("attach")."' alt='".$locale['612']."' title='".$locale['612']."' style='vertical-align:middle;' /></div>";
+			}
+			// folder graphics
+			if ($tdata['thread_locked']) {
+				echo "<td align='center' width='25' class='tbl2 forum-icon'><img class='img-responsive' src='".get_image("folderlock")."' alt='".$locale['564']."' /></td>";
+			} else {
+				// normal folder
+				if ($tdata['thread_lastpost'] > $lastvisited) {
+					if (iMEMBER && ($tdata['thread_lastuser'] == $userdata['user_id'] || preg_match("(^\.{$thread_match}$|\.{$thread_match}\.|\.{$thread_match}$)", $userdata['user_threads']))) {
+						$folder = "<img class='img-responsive' src='".get_image("folder")."' alt='".$locale['561']."' />";
+					} else {
+						$folder = "<img class='img-responsive' src='".get_image("foldernew")."' alt='".$locale['560']."' />";
+					}
+				} else {
+					$folder = "<img class='img-responsive' src='".get_image("folder")."' alt='".$locale['561']."' />";
+				}
+				echo "<td align='center' width='1%' class='tbl2 forum-icon' style='white-space:nowrap'>$folder</td>";
+			}
+			$reps = ceil($tdata['thread_postcount']/$threads_per_page);
+			$threadsubject = "<h3 class='display-inline'>$sticky_status<a href='".FORUM."viewthread.php?thread_id=".$tdata['thread_id']."'>".$tdata['thread_subject']."</a> $icon</h3>";
+			if ($reps > 1) {
+				$ctr = 0;
+				$ctr2 = 1;
+				$pages = "";
+				$middle = FALSE;
+				while ($ctr2 <= $reps) {
+					if ($reps < 5 || ($reps > 4 && ($ctr2 == 1 || $ctr2 > ($reps-3)))) {
+						$pnum = "<a href='viewthread.php?thread_id=".$tdata['thread_id']."&amp;rowstart=$ctr'>$ctr2</a> ";
+					} else {
+						if ($middle == FALSE) {
+							$middle = TRUE;
+							$pnum = "... ";
+						} else {
+							$pnum = "";
+						}
+					}
+					$pages .= $pnum;
+					$ctr = $ctr+$threads_per_page;
+					$ctr2++;
+				}
+				$threadsubject .= "<br/><span class='forum-pages'><small>(".$locale['455'].trim($pages).")</small></span>\n";
+			}
+     echo "<td class='tbl1 forum-name'>";
+			if (iMOD) {
+				echo "<div class='pull-left m-r-10 display-block' style='height:40px'>\n";
+				echo "<input type='checkbox' name='check_mark[]' value='".$tdata['thread_id']."' />\n";
+				echo "</div>\n";
+			}
 			echo $threadsubject;
      
 		echo "<br />Begonnen von:";
@@ -294,12 +343,16 @@ echo $post_info;
 
 
 
-echo "<div><hr />\n";
-echo "<img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle;' /> - ".$locale['470']."<br />\n";
-echo "<img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle;' /> - ".$locale['472']."<br />\n";
-echo "<img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle;' /> - ".$locale['473']."<br />\n";
-echo "<img src='".get_image("stickythread")."' alt='".$locale['563']."' style='vertical-align:middle;' /> - ".$locale['474']."\n";
-echo "</div><!--sub_forum-->\n";
+echo "<table class='tbl-border table table-responsive' border='0' width='100%' align='center'>";
+echo "<tr><td><img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle; width:24px;' /> - ".$locale['470']."</td>";
+echo "<td><img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle; width:24px;' /> - ".$locale['472']."</td></tr>";
+echo "<tr><td><img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle; width:24px;' /> - ".$locale['473']."</td>";
+echo "<td><img src='".get_image("stickythread")."' alt='".$locale['563']."' style='vertical-align:middle; width:24px;' /> - ".$locale['474']."</td></tr>";
+echo "<tr><td><img src='".get_image("hot")."' alt='".$locale['611']."' style='vertical-align:middle; width:24px;' /> - ".$locale['611']."</td>";
+echo "<td><img src='".get_image("poll_posticon")."' alt='".$locale['614']."' style='vertical-align:middle; width:24px;' /> - ".$locale['614']."</td></tr>";
+echo "<tr><td><img src='".get_image("attach")."' alt='".$locale['612']."' style='vertical-align:middle; width:24px;' /> - ".$locale['612']."</td>";
+echo "<td><img src='".get_image("image_attach")."' alt='".$locale['613']."' style='vertical-align:middle; width:24px;' /> - ".$locale['613']."</td></tr>";
+echo "</table>\n<!--sub_forum-->\n";
 closetable();
 
 echo "<script type='text/javascript'>\n"."function jumpforum(forumid) {\n";
@@ -308,7 +361,7 @@ echo "</script>\n";
 
 list($threadcount, $postcount) = dbarraynum(dbquery("SELECT COUNT(thread_id), SUM(thread_postcount) FROM ".DB_THREADS." WHERE forum_id='".$_GET['forum_id']."' AND thread_hidden='0'"));
 if(isnum($threadcount) && isnum($postcount)){
-   dbquery("UPDATE ".DB_FORUMS." SET forum_postcount='$postcount', forum_threadcount='$threadcount' WHERE forum_id='".$_GET['forum_id']."'");
+    dbquery("UPDATE ".DB_FORUMS." SET forum_postcount='$postcount', forum_threadcount='$threadcount' WHERE forum_id='".$_GET['forum_id']."'");
 }
 
 require_once THEMES."templates/footer.php";

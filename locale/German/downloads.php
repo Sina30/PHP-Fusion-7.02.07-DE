@@ -27,7 +27,7 @@ $locale['429'] = "Download Statistik";
 $locale['429b '] = "Lizenz-< span Style ='Color: #ff0000;'> Bitte lesen</span> ";
 $locale['429c '] = "dieser Download ist lizensiert unter";
 $locale['429d '] = "Lizenz ausblenden";
-
+$locale['r136'] = "Out of 5 Stars";
 // Downloads Hinweise
 $locale['430'] = "Es wurden noch keine Download Kategorien angelegt.";
 $locale['431'] = "Es wurden noch keine Downloads in dieser Kategorie abgelegt.";

@@ -134,24 +134,24 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 				$members['inactive'] = dbcount("(user_id)", DB_USERS, "user_lastvisit<'$time_overdue' AND user_actiontime='0' AND user_joined<'$time_overdue' AND user_status='0'");
 			}
 							echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">';
-								echo '<div class="panel panel-default blank-stats">';
+								echo '<div class="panel panel-default blank-stats purple-stats">';
 								echo '<div class="panel-body">';
 								echo '<span class="text-smaller text-uppercase"><strong>FORUM ÜBERSICHT</strong></span>';
 							echo '<br>';
 								echo '<div class="clearfix m-t-10">';
 								echo '<img class="img-responsive pull-right" src="../administration/images/forums.gif">';
 								echo '<div class="pull-left display-inline-block m-r-10">';
-								echo '<span class="text-smaller">Forum</span>';
+								echo '<span class="text-smaller">Forum&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 						echo '<h4 class="m-t-0">'.dbcount("(forum_id)", DB_FORUMS).'</h4>';
 								echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Themen</span>';
+									echo '<span class="text-smaller">Themen&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("(thread_id)", DB_THREADS).'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Beiträge</span>';
+									echo '<span class="text-smaller">Beiträge&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("(post_id)", DB_POSTS).'</h4>';
 							echo '</div>';
@@ -168,12 +168,12 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<div class="clearfix m-t-10">';
 									echo '<img class="img-responsive pull-right" src="../administration/images/dl.gif">';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Downloads</span>';
+									echo '<span class="text-smaller">Downloads&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 										echo '<h4 class="m-t-0">'.dbcount("('download_id')", DB_DOWNLOADS).'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Kommentare</span>';
+									echo '<span class="text-smaller">Kommentare&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='d'").'</h4>';
 							echo '</div>';
@@ -190,12 +190,12 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<div class="clearfix m-t-10">';
 									echo '<img class="img-responsive pull-right" src="../administration/images/news.png">';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Nachrichten</span>';
+									echo '<span class="text-smaller">Nachrichten&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('news_id')", DB_NEWS).'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Kommentare</span>';
+									echo '<span class="text-smaller">Kommentare&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='n'").'</h4>';
 							echo '</div>';
@@ -212,12 +212,12 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<div class="clearfix m-t-10">';
 									echo '<img class="img-responsive pull-right" src="../administration/images/articles.png">';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Artike</span>';
+									echo '<span class="text-smaller">Artikel&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('article_id')", DB_ARTICLES).'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Kommentare</span>';
+									echo '<span class="text-smaller">Kommentare&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='A'").'</h4>';
 							echo '</div>';
@@ -227,19 +227,19 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 									echo '<h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='a'").'</h4>';
 								echo '</div></div></div></div></div>';
 				echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">';
-									echo '<div class="panel panel-default blank-stats">';
+									echo '<div class="panel panel-default green-stats">';
 									echo '<div class="panel-body">';
 									echo '<span class="text-smaller text-uppercase"><strong>Weblinks Übersicht</strong></span>';
 							echo '<br>';
 									echo '<div class="clearfix m-t-10">';
 									echo '<img class="img-responsive pull-right" src="../administration/images/wl.gif">';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Weblinks</span>';
+									echo '<span class="text-smaller">'.$locale['271'].'&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('weblink_id')", DB_WEBLINKS).'</h4>';
 							echo '</div>';
 									echo '<div class="pull-left display-inline-block m-r-10">';
-									echo '<span class="text-smaller">Kommentare</span>';
+									echo '<span class="text-smaller">Kommentare&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							echo '<br>';
 									echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='L'").'</h4>';
 						echo '</div>';
@@ -249,19 +249,19 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 					echo '<h4 class="m-t-0">'.dbcount("(submit_id)", DB_SUBMISSIONS, "submit_type='l'").'</h4>';
 				echo '</div></div></div></div></div>';
 						echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">';
-						echo '<div class="panel panel-default flat-stats">';
+						echo '<div class="panel panel-default dark-stats">';
 					echo '<div class="panel-body">';
 					echo '<span class="text-smaller text-uppercase"><strong>Galerie Übersicht</strong></span>';
 						echo '<br>';
 				echo '<div class="clearfix m-t-10">';
 				echo '<img class="img-responsive pull-right" src="../administration/images/photoalbums.gif">';
 					echo '<div class="pull-left display-inline-block m-r-10">';
-					echo '<span class="text-smaller">Galerie</span>';
+					echo '<span class="text-smaller">Galerie&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 						echo '<br>';
 				echo '<h4 class="m-t-0">'.dbcount("('photo_id')", DB_PHOTOS).'</h4>';
 		echo '</div>';
 					echo '<div class="pull-left display-inline-block m-r-10">';
-					echo '<span class="text-smaller">Kommentare</span>';
+					echo '<span class="text-smaller">Kommentare&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 						echo '<br>';
 				echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='P'").'</h4>';
 		echo '</div>';
@@ -272,55 +272,86 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 			echo '</div></div></div></div></div>';
 			echo '<div style="float:left">';
 				echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
+
 					echo '<div class="panel panel-default ">';
 					echo '<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'infusions.php'.$aidlink.'"><img class="img-responsive pull-left" src="../administration/images/infusionss.png">&nbsp;&nbsp;Infusions</a></strong></span><span class="pull-right label label-warning">'.dbcount("(inf_id)", DB_INFUSIONS).'</span></div>';
 					echo '<div class="panel-body">';
-				echo '<div class="text-center">'; 
-		echo '</div>';
-			echo '</div></div></div>';
+								echo '</div>';
+							echo '<div class="panel-footer">';
+							/*echo'<div class="text-right text-uppercase">';*/
+							echo "".(checkrights("I") ? "<div class='text-right text-uppercase'>\n<a class='text-smaller' href='".ADMIN."infusions.php".$aidlink."'>".$locale['285']."</a><i class='entypo right-open-mini'></i>\n" : '')."";
+									echo '</div></div></div></div>';
 				echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
 					echo '<div class="panel panel-default ">';
 					echo '<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><img class="img-responsive pull-left" src="../administration/images/kommentare.png">&nbsp;&nbsp;NEUESTE KOMMENTARE</strong></span><span class="pull-right label label-warning">'.dbcount("(comment_id)", DB_COMMENTS).'</span></div>';
 					echo '<div class="panel-body">';
 				echo '<div class="text-center">'; 
-	include LOCALE.LOCALESET."admin/adminpro.php";		
-		$result = dbquery(		
-			"SELECT c.comment_id, c.comment_name, c.comment_message, c.comment_datestamp, c.comment_ip, c.comment_type, c.comment_item_id, u.user_id, u.user_name, u.user_status, u.user_level, u.user_avatar FROM ".DB_COMMENTS." c	
-			LEFT JOIN ".DB_USERS." u ON c.comment_name=u.user_id ORDER BY c.comment_datestamp DESC LIMIT 0,1");
-			if (dbrows($result)) {
-				$counter = 0; $type = ""; $type_id = "";
-				while ($data = dbarray($result)) {
-					$counter++;
-					if (($type != $data['comment_type'] || $type_id !=  $data['comment_item_id']) && $counter >= '2') { echo "<hr />"; }
-					if ($type != $data['comment_type'] || $type_id !=  $data['comment_item_id']) { 
-							if ($data['comment_type'] == "N") { $db_name = DB_NEWS; $db_id = 'news_id'; $db_field = 'news_subject'; $db_link = 'news.php?readmore='; $db_org = "News"; }
-							if ($data['comment_type'] == "A") { $db_name = DB_ARTICLES; $db_id = 'article_id'; $db_field = 'article_subject'; $db_link = 'articles/articles.php?article_id='; $db_org = "Articles"; }
-							if ($data['comment_type'] == "D") { $db_name = DB_DOWNLOADS; $db_id = 'download_id'; $db_field = 'download_title'; $db_link = 'downloads/downloads.php?download_id='; $db_org = "Downloads"; }
-							if ($data['comment_type'] == "P") { $db_name = DB_PHOTOS; $db_id = 'photo_id'; $db_field = 'photo_title'; $db_link = 'photogallery/photogallery.php?photo_id='; $db_org = "Photos"; }
-							$result_org = dbquery("SELECT ".$db_id.", ".$db_field." FROM ".$db_name." WHERE ".$db_id."='".$data['comment_item_id']."'");
-							if (dbrows($result_org)) {
-								$org = dbarray($result_org);
-								echo '<b><a href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$org[$db_field].'</a></b>';
-								echo ' '.$locale['pro_1017'].' '.$db_org.' ';
-							}
-					}
-					$type = $data['comment_type'];
-					$type_id = $data['comment_item_id'];
-				}
-			} else {
-			}
+	
+	// comments commit, ratings commit, submissions commit bloat up.
+	$comments_type = array(
+		'N' => $locale['269'],
+		'D' => $locale['268'],
+		'P' => $locale['272'],
+		'A' => $locale['270'],
+	);
+	$submit_type = array(
+		'n' => $locale['269'],
+		'd' => $locale['268'],
+		'p' => $locale['272'],
+		'a' => $locale['270'],
+		'l' => $locale['271'],
+	);
+	$link = array(
+		'N' => $settings['siteurl']."news.php?readmore=%s",
+		'D' => $settings['siteurl']."downloads/downloads.php?download_id=%s",
+		'P' => $settings['siteurl']."photogallery/photogallery.php?photo_id=%s",
+		'A' => $settings['siteurl']."articles/articles.php?article_id=%s",
+	);
 
+	$rows = dbcount("('comment_id')", DB_COMMENTS);
+	$_GET['c_rowstart'] = isset($_GET['c_rowstart']) && $_GET['c_rowstart'] <= $rows ? $_GET['c_rowstart'] : 0;
+	$result = dbquery("SELECT c.*, u.user_id, u.user_name, u.user_status, u.user_avatar
+	FROM ".DB_COMMENTS." c LEFT JOIN ".DB_USERS." u on u.user_id=c.comment_name
+	ORDER BY comment_datestamp DESC LIMIT 0,2
+	");
+	$nav = '';
+	if ($rows > $settings['comments_per_page']) {
+		$nav = "<span class='pull-right text-smaller'>".makepagenav($_GET['c_rowstart'], $settings['comments_per_page'], $rows, 2)."</span>\n";
+	}
+	if (dbrows($result)>0) {
+		$i = 0;
+
+		while ($data = dbarray($result)) {
+			echo "<!--Start Comment Item-->\n";
+			echo "<div data-id='$i' class='comment_content clearfix p-t-10 p-b-10' ".($i > 0 ? "style='border-top:1px solid #ddd;'" : '')." >\n";
+			echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'>".display_avatar($data, '40px')."</div>\n";
+			echo "<div id='comment_action-$i' class='btn-group pull-right display-none' style='position:absolute; right: 30px; margin-top:27px;'>\n
+			<a style='float:left;margin-right:5px;' title='".$locale['274']."' href='".ADMIN."comments.php".$aidlink."&amp;ctype=".$data['comment_type']."&amp;cid=".$data['comment_item_id']."'><img src='".THEMES."templates/images/admin/view.png' /></a>
+			<a style='float:left;margin-right:5px;' title='".$locale['275']."' href='".ADMIN."comments.php".$aidlink."&amp;action=edit&amp;comment_id=".$data['comment_id']."&amp;ctype=".$data['comment_type']."&amp;cid=".$data['comment_item_id']."'><img src='".THEMES."templates/images/admin/edit.png' /></a>
+			<a style='float:left' title='".$locale['276']."' href='".ADMIN."comments.php".$aidlink."&amp;action=delete&amp;comment_id=".$data['comment_id']."&amp;ctype=".$data['comment_type']."&amp;cid=".$data['comment_item_id']."'><img src='".THEMES."templates/images/admin/delete.png' /></a></div>\n";
+			echo "<strong>".profile_link($data['user_id'], ucwords($data['user_name']), $data['user_status'])."</strong>\n";
+			echo "<span class='text-smaller text-lighter'>".$locale['273']."</span> <a class='text-smaller t-1' href='".sprintf($link[$data['comment_type']], $data['comment_item_id'])."'><strong>".$comments_type[$data['comment_type']]."</strong></a>";
+			echo "&nbsp;<span class='text-smaller'>".timer($data['comment_datestamp'])."</span><br/>\n";
+			echo "<span class='text-smaller text-lighter'>".trimlink(parseubb($data['comment_message']), 70)."</span>\n";
+			echo "</div>\n";
+			echo "<!--End Comment Item-->\n";
+			$i++;
+		}
+		echo $nav;
+	}  
 	echo'</div></div></div></div>';
 		echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
 			echo '<div class="panel panel-default ">';
 				echo '<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><img class="img-responsive pull-left" src="../administration/images/bewertungen.png">&nbsp;&nbsp;NEUESTE BEWERTUNGEN</strong></span><span class="pull-right label label-warning">'.dbcount("(rating_id)", DB_RATINGS).'</span></div>';
 				echo '<div class="panel-body">';
 			echo '<div class="text-center">'; 
+	
+	// Ratings
 	$rows = dbcount("('rating_id')", DB_RATINGS);
 	$_GET['r_rowstart'] = isset($_GET['r_rowstart']) && $_GET['r_rowstart'] <= $rows ? $_GET['r_rowstart'] : 0;
 	$result = dbquery("SELECT r.*, u.user_id, u.user_name, u.user_status, u.user_avatar
 	FROM ".DB_RATINGS." r LEFT JOIN ".DB_USERS." u on u.user_id=r.rating_user
-	ORDER BY rating_datestamp DESC LIMIT 0,1
+	ORDER BY rating_datestamp DESC LIMIT 0,2
 	");
 	$nav = '';
 	if ($rows > $settings['comments_per_page']) {
@@ -331,7 +362,7 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 		while ($data = dbarray($result)) {
 			echo "<!--Start Rating Item-->\n";
 			echo "<div class='comment_content clearfix p-t-10 p-b-10' ".($i > 0 ? "style='border-top:1px solid #ddd;'" : '')." >\n";
-			echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'></div>\n";
+			echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'>".display_avatar($data, '40px')."</div>\n";
 			echo "<strong>".profile_link($data['user_id'], ucwords($data['user_name']), $data['user_status'])."</strong>\n";
 			echo "<span class='text-smaller text-lighter'>".$locale['273a']."</span>\n";
 			if ($type != $data['rating_type'] || $type_id !=  $data['rating_item_id']) { 
@@ -342,27 +373,31 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 							$result_org = dbquery("SELECT ".$db_id.", ".$db_field." FROM ".$db_name." WHERE ".$db_id."='".$data['rating_item_id']."'");
 							if (dbrows($result_org)) {
 								$org = dbarray($result_org);
-								echo '<b><a href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$db_org.'</a> </b>';				
-			echo "<a class='text-smaller' href='".sprintf($link[$data['rating_type']], $data['rating_item_id'])."'><strong>".$comments_type[$data['rating_type']]."</strong></a>";
-			echo "<span class='text-smaller text-lighter m-l-10'><i class='fa fa-star'></i><b><font color='red'>".$data['rating_vote']."</b></font></span>\n";
+								echo '<b><a class="text-smaller t-1" href="'.BASEDIR.$db_link.$org[$db_id].'" target="_blank"> '.$db_org.'</a> </b>';
+			//echo "<a class='text-smaller' href='".sprintf($link[$data['rating_type']], $data['rating_item_id'])."'><strong>".$comments_type[$data['rating_type']]."</strong></a>";
+			echo "<span class='text-smaller text-lighter m-l-10'>".str_repeat("<img src='".get_image("star")."' alt='*' title='".$locale['426']."' style='vertical-align:middle; width:10px;height:10px;' />", $data['rating_vote'])."</span>\n";
 			echo "&nbsp;<span class='text-smaller'>".timer($data['rating_datestamp'])."</span><br/>\n";
 			echo "</div>\n";
 			echo "<!--End Rating Item-->\n";
 			$i++;
 		}
+		echo "<div class='clearfix'>\n";
 		echo $nav;
-	}  
-	}	
+		echo "</div>\n";
+	} else {
+		echo "<div class='text-center'>".$locale['254b']."</div>\n";
+	}
+	}
 	}
 		echo '</div></div></div></div>';
 			echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">';
 				echo '<div class="panel panel-default ">';
-				echo '<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><a href="'.ADMIN.'submissions.php'.$aidlink.'"><img class="img-responsive pull-left" src="../administration/images/einsendungen.png">&nbsp;&nbsp;NEUESTE EINSENDUNGEN</a></strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>';
+				echo '<div class="panel-heading"><span class="text-smaller text-uppercase"><strong><img class="img-responsive pull-left" src="../administration/images/einsendungen.png">&nbsp;&nbsp;NEUESTE EINSENDUNGEN</strong></span><span class="pull-right label label-warning">'.dbcount("(submit_id)", DB_SUBMISSIONS).'</span></div>';
 			echo '<div class="panel-body">';
 		echo '<div class="text-center">';
 
 include LOCALE.LOCALESET."admin/adminpro.php";		
-$result = dbquery("SELECT s.*, u.user_id, u.user_name, u.user_avatar FROM ".DB_SUBMISSIONS." s INNER JOIN ".DB_USERS." u ON s.submit_user =u.user_id ORDER BY s.submit_datestamp DESC LIMIT 0,1");
+$result = dbquery("SELECT s.*, u.user_id, u.user_name, u.user_avatar FROM ".DB_SUBMISSIONS." s INNER JOIN ".DB_USERS." u ON s.submit_user =u.user_id ORDER BY s.submit_datestamp DESC LIMIT 0,2");
 
 if (dbrows($result)) {
 	$i = 0;
@@ -389,7 +424,10 @@ if (dbrows($result)) {
 }
 	echo "</table>\n";
 } else { echo '<div align="center">'.$locale['pro_1055'].'</div>'; }
+	echo '</div>';
+							echo '<div class="panel-footer">';
 echo'</div></div></div></div>';	
+echo '<div></div>';
 echo '<script type="text/javascript">
 function hideDiv(){
     if ($(window).width() > 1215) {
@@ -457,19 +495,16 @@ echo '</div>
 		echo '</ul>';
 	}
 echo '</div></div>';
+echo '<div></div>';
 echo '<div class="dashboard-content" id="small" style="display:none">
 	<div style="width:100%;">';
-		include ADMIN."proadmin/proforum.php";
 		include ADMIN."proadmin/promembers.php";
-		include ADMIN."proadmin/procomment.php";
 		include ADMIN."proadmin/promessages.php";
-		include ADMIN."proadmin/prosubmission.php";
 echo '</div></div>';
 echo '<div class="dashboard-content" id="small" style="display:none">
 	<div style="width:100%;">';
 		include ADMIN."proadmin/promembers.php";
 		include ADMIN."proadmin/promessages.php";
-		include ADMIN."proadmin/prosubmission.php";
 echo '</div></div>';
 echo '	<script type="text/javascript" src="'.INCLUDES.'fusionpro/jquery.dragsort-0.5.1.min.js"></script>
 <!-- Bottom Scripts -->

@@ -120,7 +120,7 @@ $locale['567'] = "Benutzeravatar";
 $locale['568'] = "Bearbeiten";
 $locale['569'] = "Zitieren";
 $locale['570'] = "schrieb";
-$locale['571'] = "IP-Adresse";
+$locale['571'] = "IP";
 $locale['572'] = "Private Nachricht senden";
 
 // Beitraege verschieben
@@ -137,6 +137,12 @@ $locale['607']  = "Keine Beitr&auml;ge zu verschieben.";
 $locale['608']  = "Keine Themen in diesem Forum.";
 $locale['609']  = "Zur&uuml;ck zum Thema";
 $locale['610']  = "Keine Themen um Beitr&auml;ge zu verschieben.";
+
+// Viewforum icons
+$locale['611'] = "Hot Thread";
+$locale['612'] = "Files Attached";
+$locale['613'] = "Image Attached";
+$locale['614'] = "Poll";
 
 // Beitraege verschieben - Fehlermeldungen
 $locale['error-MP000'] = "Beitr&auml;ge verschieben - Fehler";
