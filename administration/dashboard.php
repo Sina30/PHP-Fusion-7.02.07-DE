@@ -285,6 +285,11 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 						echo '<br>';
 				echo '<h4 class="m-t-0">'.dbcount("('comment_id')", DB_COMMENTS, "comment_type='P'").'</h4>';
 		echo '</div>';
+		echo '<div class="pull-left display-inline-block m-r-10">';
+									echo '<span class="text-smaller">Bewertungen&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							echo '<br>';
+									echo '<h4 class="m-t-0">'.dbcount("('rating_id')", DB_RATINGS, "rating_type='P'").'</h4>';
+							echo '</div>';
 				echo '<div class="pull-left display-inline-block m-r-10">';
 				echo '<span class="text-smaller">Einsendungen</span>';
 			echo '<br>';
