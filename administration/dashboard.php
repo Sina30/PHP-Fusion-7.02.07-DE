@@ -350,14 +350,14 @@ if (!iADMIN || $userdata['user_rights'] == "" || !defined("iAUTH") || !isset($_G
 			echo "<!--Start Comment Item-->\n";
 			echo "<div data-id='$i' class='comment_content clearfix p-t-10 p-b-10' ".($i > 0 ? "style='border-top:1px solid #ddd;'" : '')." >\n";
 			echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px;'>".display_avatar($data, '40px')."</div>\n";
-			echo "<div id='comment_action-$i' class='btn-group pull-right display-none' style='position:absolute; right: 30px; margin-top:27px;'>\n
+			echo "<div id='comment_action-$i' class='btn-group pull-right display-none' style='position:absolute; right: 20px; margin-top:37px;'>\n
 			<a class='btn btn-xs btn-default' title='".$locale['274']."' href='".ADMIN."comments.php".$aidlink."&amp;ctype=".$data['comment_type']."&amp;cid=".$data['comment_item_id']."'><img src='".THEMES."templates/images/admin/view.png' /></a>
 			<a class='btn btn-xs btn-default' title='".$locale['275']."' href='".ADMIN."comments.php".$aidlink."&amp;action=edit&amp;comment_id=".$data['comment_id']."&amp;ctype=".$data['comment_type']."&amp;cid=".$data['comment_item_id']."'><img src='".THEMES."templates/images/admin/edit.png' /></a>
 			<a class='btn btn-xs btn-default' title='".$locale['276']."' href='".ADMIN."comments.php".$aidlink."&amp;action=delete&amp;comment_id=".$data['comment_id']."&amp;ctype=".$data['comment_type']."&amp;cid=".$data['comment_item_id']."'><img src='".THEMES."templates/images/admin/delete.png' /></a></div>\n";
 			echo "<strong>".profile_link($data['user_id'], ucwords($data['user_name']), $data['user_status'])."</strong>\n";
 			echo "<span class='text-smaller text-lighter'>".$locale['273']."</span> <a class='text-smaller t-1' href='".sprintf($link[$data['comment_type']], $data['comment_item_id'])."'><strong>".$comments_type[$data['comment_type']]."</strong></a>";
 			echo "&nbsp;<span class='text-smaller'>".timer($data['comment_datestamp'])."</span><br/>\n";
-			echo "<span class='text-smaller text-lighter'>".trimlink(parseubb($data['comment_message']), 70)."</span>\n";
+			echo "<span class='text-smaller text-lighter'><font color='red'>".trimlink(parseubb($data['comment_message']), 15)."</span></font>\n";
 			echo "</div>\n";
 			echo "<!--End Comment Item-->\n";
 			$i++;
