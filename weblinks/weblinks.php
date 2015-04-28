@@ -44,9 +44,9 @@ if (!isset($_GET['cat_id']) || !isnum($_GET['cat_id'])) {
 		while ($data = dbarray($result)) {
 			if ($counter != 0 && ($counter % $columns == 0)) { echo "</tr>\n<tr>\n"; }
 			$num = dbcount("(weblink_cat)", DB_WEBLINKS, "weblink_cat='".$data['weblink_cat_id']."'");
-			echo "<table><td align='left'><img src='".BASEDIR."images/link.jpg' class='weblink'/>&nbsp;&nbsp;<b><a href='".FUSION_SELF."?cat_id=".$data['weblink_cat_id']."'>".$data['weblink_cat_name']."</a></b>&nbsp;($num)";
-			if ($data['weblink_cat_description'] != "") { echo "<br /><h4>".$data['weblink_cat_description']."</td></h4>"; }
-			
+			echo "<td valign='top' width='50%' class='tbl'><a href='".FUSION_SELF."?cat_id=".$data['weblink_cat_id']."'>".$data['weblink_cat_name']."</a> <span class='small2'>($num)</span>";
+			if ($data['weblink_cat_description'] != "") { echo "<br />\n<span class='small'>".$data['weblink_cat_description']."</span>"; }
+			echo "</td>\n";
 			$counter++;
 		}
 		echo "</tr>\n</table>\n";
@@ -70,18 +70,18 @@ if (!isset($_GET['cat_id']) || !isnum($_GET['cat_id'])) {
 				$numrows = dbrows($result); $i = 1;
 				while ($data = dbarray($result)) {
 					if ($data['weblink_datestamp']+604800 > time()+($settings['timeoffset']*3600)) {
-						$new = " <span class='small'>".$locale['410']."</span>";
+						$new = " <span class='small'> &nbsp;<img src='".THEME."images/icons/new_dl_icon.png' alt='Neu' title='Neu' style='border:0px; vertical-align:middle;' /></span>";
 					} else {
 						$new = "";
 					}
 					echo "<table width='100%' cellpadding='0' cellspacing='1' class='tbl-border'>\n";
-					echo "<tr>\n<td colspan='2' class='tbl2'><a href='".FUSION_SELF."?cat_id=".$_GET['cat_id']."&amp;weblink_id=".$data['weblink_id']."' target='_blank'>".$data['weblink_name']."</a>$new <img src='".THEME."images/icons/new_dl.png' class='blink'/></td>\n</tr>\n";
+					echo "<tr>\n<td colspan='2' class='tbl2'><a href='".FUSION_SELF."?cat_id=".$_GET['cat_id']."&amp;weblink_id=".$data['weblink_id']."' target='_blank'>".$data['weblink_name']."</a>$new</td>\n</tr>\n";
 					echo "<br />\n";
 					echo "</td>\n";
 					echo "<td align='center' class='tbl1' style='white-space:nowrap'><a href='".FUSION_SELF."?cat_id=".$_GET['cat_id']."&amp;weblink_id=".$data['weblink_id']."' target='_blank'><div style='border: 0px solid'><img src='http://fadeout.de/thumbshot-pro/?scale=4&url=".$data['weblink_url']."' style='border: 0,2px solid ;''/></div></a></td>\n";
-					echo "<td align='left' class='tbl1'>".nl2br(stripslashes($data['weblink_description']))."</td>\n";
 					echo "<tr>\n<td align='center' width='16%' class='tbl2'><strong>Vorschau</strong></td>\n";
 					echo "<td width='84%' class='tbl2'><strong>".$locale['411']."</strong> ".showdate("shortdate", $data['weblink_datestamp'])." - <strong>".$locale['412']."</strong> ".$data['weblink_count']."</td>\n</tr>\n</table>\n";
+					echo "<td align='left' class='tbl1'>".nl2br(stripslashes($data['weblink_description']))."</td>\n";
 					if ($i != $numrows) { echo "<div align='center'><img src='".get_image("blank")."' alt='' height='15' width='1' /></div>\n"; $i++; }
 				}
 				closetable();
