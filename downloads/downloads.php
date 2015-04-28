@@ -186,7 +186,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 		echo "</div>\n";
 		while ($cat_data = dbarray($cat_result)) {
 			echo "<div class='list-group-item'>\n";
-			echo "<h4><a href='".FUSION_SELF."?cat_id=".$cat_data['download_cat_id']."'><strong>".$cat_data['download_cat_name']."</strong></a></h4>\n";
+			echo "<h1><a href='".FUSION_SELF."?cat_id=".$cat_data['download_cat_id']."'><strong>".$cat_data['download_cat_name']."</strong></a></h1>\n";
 			echo (isset($_POST['cat_id']) && isnum($_POST['cat_id']) && $cat_data['download_cat_description']) ? "<span>".$cat_data['download_cat_description']."</span>\n<br/>" : '';
 			if (checkgroup($cat_data['download_cat_access'])) {
 				echo "<!--pre_download_cat-->";
@@ -224,7 +224,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 						echo "<div class='media clearfix'>\n";
 						echo ($settings['download_screenshot']) ? "<a class='pull-left' href='".FUSION_SELF."?cat_id=".$cat_data['download_cat_id']."&amp;download_id=".$data['download_id']."'>\n<img class='img-responsive img-thumbnail' src='".$img_thumb."' style='float: left;margin:3px;' alt='".$data['download_title']."' />\n</a>\n" : '';
 						echo "<div class='media-body'>\n";
-						echo "<h4 class='media-heading'><a href='".FUSION_SELF."?cat_id=".$cat_data['download_cat_id']."&amp;download_id=".$data['download_id']."'>".$data['download_title']."</a> <small>$new</small></h4>\n";
+						echo "<h3 class='media-heading'><a href='".FUSION_SELF."?cat_id=".$cat_data['download_cat_id']."&amp;download_id=".$data['download_id']."'>".$data['download_title']."</a> <small>$new</small></h3>\n";
 						echo "<div class='media-info'><strong>\n";
 						echo "<i title='".$locale['421']."' class='fa fa-calendar-o'></i> ".showdate("shortdate", $data['download_datestamp'])."\n";
 						if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
