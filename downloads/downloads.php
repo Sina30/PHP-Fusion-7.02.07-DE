@@ -211,7 +211,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 					$i = 1;
 					while ($data = dbarray($result)) {
 						if ($data['download_datestamp']+604800 > time()+($settings['timeoffset']*3600)) {
-							$new = " <span class='label label-success'>".$locale['410']."</span>";
+							$new = " <span class='label label-success'> &nbsp;<img src='".THEME."images/icons/new_dl_icon.png' alt='Neu' title='Neu' style='border:0px; vertical-align:middle;' /></span>";
 						} else {
 							$new = "";
 						}

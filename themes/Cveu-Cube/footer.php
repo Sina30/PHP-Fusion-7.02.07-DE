@@ -93,7 +93,7 @@ if (dbrows($resultnews)) {
 	while ($dldata = dbarray($result)) {
 	$dl_title = trimlink(strip_tags(parseubb($dldata['download_title'])), 33);
 	if ($dldata['download_datestamp'] + 604800 > time() + ($settings['timeoffset'] * 3600)) {
-	$new = "<span><a style='font-weight: 700; color: #FF9933;' title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."&nbsp;<i class='fa fa-external-link-square'></i></a> &nbsp;<img src='".THEME."images/icons/new_dl.png' alt='Neu' title='Neu' class='blink'  style='border:0px; vertical-align:middle;' /></span>";
+	$new = "<span><a style='font-weight: 700; color: #FF9933;' title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."&nbsp;<i class='fa fa-external-link-square'></i></a> &nbsp;<img src='".THEME."images/icons/new_dl_icon.png' alt='Neu' title='Neu' class='blink'  style='border:0px; vertical-align:middle;' /></span>";
 	} else {
 	$new = "<span><a title='".$dldata['download_title']."' href='".BASEDIR."downloads/downloads.php?cat_id=".$dldata['download_cat_id']."&amp;download_id=".$dldata['download_id']."'>".$dl_title."&nbsp;<i class='fa fa-external-link-square'></i></a></span>";
 	}

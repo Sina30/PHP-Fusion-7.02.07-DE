@@ -3,7 +3,7 @@ $locale['400b'] = "- Download Kategorie -";
 $locale['400c'] = "Verwandte Downloads";
 // Downloads Allgemein und Dateiinformationen
 $locale['400'] = "Downloads";
-$locale['410'] = "[NEU]";
+$locale['410'] = "[ NEU ]";
 $locale['411'] = "Lizenz:";
 $locale['412'] = "O/S:";
 $locale['413'] = "Version:";
@@ -12,7 +12,7 @@ $locale['415'] = "Downloads:";
 $locale['416'] = "Download";
 $locale['417'] = "Downloads &Uuml;bersicht";
 $locale['418'] = "Homepage";
-$locale['418b '] = "Besuchen";
+$locale['418b'] = "Besuchen";
 $locale['419'] = "Screenshot";
 $locale['420'] = "Download Titel";
 $locale['421'] = "Datum";
