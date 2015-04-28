@@ -133,7 +133,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 		echo "<form name='searchform' method='get' action='".BASEDIR."search.php'>\n";
 		echo "<span class='small'>".$locale['460']." </span><br />\n";
 		echo "<input type='text' name='stext' class='textbox' style='width:90%' />\n";
-		echo "<input type='submit' name='search' value='".$locale['461']."' class='button' />\n";
+		echo "<input type='submit' name='search' value='".$locale['461']."' class='btn btn-default button' />\n";
 		echo "<input type='hidden' name='stype' value='downloads' />\n";
 		echo "</form>\n";
 		echo "<script language='JavaScript' type='text/javascript'>\n";
@@ -149,7 +149,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 		echo "<tr>\n";
 		//echo "<td class='tbl1' style='width:40%; text-align:left;'>".$locale['450']."</td>\n";
 		echo "<td class='tbl1' style='width:90%; text-align:right;'>".$locale['462']."\n";
-		echo "<select name='cat_id' class='textbox' onchange='this.form.submit();'>\n";
+		echo "<select name='cat_id' class='textbox' onchange='this.form.submit();' style='width: 250px;'>\n";
 		echo "<option value='all'>".$locale['451']."</option>".$cats_list."</select>\n";
 		echo "</td>\n";
 		echo "</tr>\n";
