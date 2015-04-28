@@ -59,7 +59,7 @@ $result = dbquery("SELECT td.download_id, td.download_title, td.download_count, 
             ORDER BY download_count DESC LIMIT 0,15
             ");
 if (dbrows($result) != 0) {
-	$dl_stats .= "<div class='list-group'>\n";
+	$dl_stats .= "<div class='list-group' style='width:90%'>\n";
 	while ($data = dbarray($result)) {
 		$dl_stats .= "<div class='list-group-item'>";
 		$download_title = $data['download_title'];
@@ -77,7 +77,7 @@ $result = dbquery("SELECT td.download_id, td.download_title, td.download_count, 
 		WHERE ".groupaccess('download_cat_access')."
 		ORDER BY download_datestamp DESC LIMIT 0,15");
 if (dbrows($result) != 0) {
-	$dl_stats .= "<div class='list-group'>\n";
+	$dl_stats .= "<div class='list-group' style='width:90%'>\n";
 	while ($data = dbarray($result)) {
 		$dl_stats .= "<div class='list-group-item'>";
 		$download_title = $data['download_title'];
@@ -178,7 +178,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 			WHERE ".groupaccess('download_cat_access').$filter."
 			ORDER BY download_cat_name");
 	if (dbrows($cat_result)) {
-		echo "<div class='list-group'>\n";
+		echo "<div class='list-group' style='width:90%'>\n";
 		echo "<div class='list-group-item'>\n";
 		echo "<span class='pull-left'><strong>".$locale['415']." ".dbcount("(download_cat)", DB_DOWNLOADS)." </strong>\n</span>\n";
 		$i_alt = dbresult(dbquery("SELECT SUM(download_count) FROM ".DB_DOWNLOADS), 0);
