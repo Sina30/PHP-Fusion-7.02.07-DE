@@ -816,10 +816,11 @@ div.side-both {
 	padding-top: 5px;
 }
 
-#side-center { 
-    color: #555;
-	background-color: #f5f5f5;
-	padding: 10px 0 5px 0;
+#side-center {
+  color: #555;
+  /* background-color: #f5f5f5; */
+  padding: 10px 5px 5px 14px;
+  background-color: #FFF;
 }
 
 .capmain {
@@ -2423,7 +2424,8 @@ table td[class*="col-"], table th[class*="col-"] {
     }
 
     .col-lg-6 {
-        width: 50%
+        width: 50%;
+		background-color: #FFF;
     }
 
     .col-lg-5 {
@@ -2937,7 +2939,7 @@ table td[class*="col-"], table th[class*="col-"] {
   position: relative;
   display: block;
   padding: 10px 15px;
-  margin-bottom: -1px;
+  margin-bottom: 1px;
   background-color: #FFF;
   border: 1px solid #DDD;
 }
@@ -2957,10 +2959,10 @@ table td[class*="col-"], table th[class*="col-"] {
 .label {
   display: inline;
   padding: .2em .6em .3em;
-  font-size: 75%;
+  font-size: 100%;
   font-weight: bold;
   line-height: 1;
-  color: #FFF;
+  color: #000;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -3010,3 +3012,4 @@ a.badge:hover, a.badge:focus {
     text-decoration: none;
     cursor: pointer
 }
+
