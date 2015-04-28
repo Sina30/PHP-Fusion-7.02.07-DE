@@ -155,7 +155,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 		echo "</tr>\n";
 		if (isset($_GET['cat_id']) && isnum($_GET['cat_id'])) {
 			echo "<tr>\n";
-			echo $locale['463']." <select name='orderby' class='textbox' onchange='this.form.submit();'>\n";
+			echo "<span class='pull-right'>".$locale['463']." <select name='orderby' class='textbox' onchange='this.form.submit();'>\n";
 			echo "<option value='download_id'".($order_by == "download_id" ? " selected='selected'" : "").">".$locale['452']."</option>\n";
 			echo "<option value='download_title'".($order_by == "download_title" ? " selected='selected'" : "").">".$locale['453']."</option>\n";
 			echo "<option value='download_user'".($order_by == "download_user" ? " selected='selected'" : "").">".$locale['454']."</option>\n";
@@ -165,7 +165,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 			echo "<select name='sort' class='textbox' onchange='this.form.submit();'>\n";
 			echo "<option value='ASC'".($sort == "ASC" ? " selected='selected'" : "").">".$locale['457']."</option>\n";
 			echo "<option value='DESC'".($sort == "DESC" ? " selected='selected'" : "").">".$locale['458']."</option>\n";
-			echo "</select>";
+			echo "</select></span>";
 			echo "</td>\n";
 			echo "</tr>\n";
 		}
