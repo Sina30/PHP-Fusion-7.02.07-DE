@@ -135,8 +135,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 			$sort = isset($_GET['sort']) && $_GET['sort'] == "DESC" ? 'DESC' : 'ASC';
 		}
 		echo "<ol class='breadcrumb'>\n";
-		echo "<li><a href='".FUSION_SELF."'>".$locale['417']."</a></li>\n";
-		echo isset($_GET['cat_id']) && isnum($_GET['cat_id']) ? "<li><a href='".FUSION_SELF."?cat_id=".$_data['download_cat_id']."'>".$_data['download_cat_name']."</a></li>\n" : '';
+		echo "<li><a href='".FUSION_SELF."'>".$locale['417']."</a> / <a href='".FUSION_SELF."?cat_id=".$_data['download_cat_id']."'>".$_data['download_cat_name']."</a></li>\n";
 		echo "</ol>\n";
 	}
 	$cat_result = dbquery("SELECT download_cat_id, download_cat_name, download_cat_description, download_cat_access, download_cat_sorting
