@@ -71,7 +71,7 @@
 		echo "<a class='tozoom' href='".DOWNLOADS."images/".$data['download_image']."'><img src='".$dl_img_thumb."' style='float: left;margin:3px; height: 50px; width: 50px;' alt='".$data['download_title']."' /></a>\n";
 		}
 		echo "</td>\n";
-		echo "<td width='100%'><a href='".BASEDIR."downloads.php?cat_id=".$data['download_cat_id']."&amp;download_id=".$data['download_id']."'>".trimlink($data['download_title'], 100)."</a></td>\n";
+		echo "<td width='100%'><a href='".BASEDIR."downloads/downloads.php?cat_id=".$data['download_cat_id']."&amp;download_id=".$data['download_id']."'>".trimlink($data['download_title'], 100)."</a></td>\n";
 		echo "<td width='1%' style='text-align:center;white-space:nowrap'>".showdate("shortdate", $data['download_datestamp'])."&nbsp;</td>\n";
 		echo "<td width='1%' style='text-align:center;white-space:nowrap'>".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n";
 		echo "</tr>\n";

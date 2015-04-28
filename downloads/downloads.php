@@ -93,50 +93,85 @@ $dl_stats .= "</div>\n</div>\n";
 if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 	opentable($locale['400']);
 	echo "<!--pre_download_idx-->\n";
-	$cat_list_result = dbquery("SELECT download_cat_id, download_cat_name
+	$cat_list_result = dbquery(
+		"SELECT download_cat_id, download_cat_name
 		FROM ".DB_DOWNLOAD_CATS." WHERE ".groupaccess('download_cat_access')."
 		ORDER BY download_cat_name");
-	$cats_list = array();
-	$filter = "";
-	$order_by = "";
-	$sort = "";
-	$getString = "";
+	$cats_list = ""; $filter = ""; $order_by = ""; $sort = ""; $getString = "";
 	if (dbrows($cat_list_result)) {
-		$catlist_opts['all'] = $locale['451'];
 		while ($cat_list_data = dbarray($cat_list_result)) {
-			$catlist_opts[$cat_list_data['download_cat_id']] = $cat_list_data['download_cat_name'];
+			$sel = (isset($_GET['cat_id']) && $_GET['cat_id'] == $cat_list_data['download_cat_id'] ? " selected='selected'" : "");
+			$cats_list .= "<option value='".$cat_list_data['download_cat_id']."'".$sel.">".$cat_list_data['download_cat_name']."</option>";
 		}
-		if (!isset($_GET['rowstart']) || !isnum($_GET['rowstart']) || $_GET['rowstart'] > dbrows($cat_list_result)) {
-			$_GET['rowstart'] = 0;
-		}
-		if (isset($_POST['cat_id']) && isnum($_POST['cat_id']) && $_POST['cat_id'] != "all") {
-			$order_by_allowed = array("download_id", 'download_title', "download_user", "download_count",
-									  "download_datestamp");
-			$getString[] = "cat_id=".$_POST['cat_id'];
-			if (isset($_POST['orderby']) && in_array($_POST['orderby'], $order_by_allowed)) {
-				$getString[] = "orderby=".$_POST['orderby'];
+
+		if (!isset($_GET['rowstart']) || !isnum($_GET['rowstart']) || $_GET['rowstart'] > dbrows($cat_list_result)) { $_GET['rowstart'] = 0; }
+		if (isset($_GET['cat_id']) && isnum($_GET['cat_id']) && $_GET['cat_id'] != "all") {
+			$filter .= " AND download_cat_id='".$_GET['cat_id']."'";
+			$order_by_allowed = array("download_id", "download_user", "download_count", "download_datestamp");
+			if (isset($_GET['orderby']) && in_array($_GET['orderby'], $order_by_allowed)) {
+				$order_by = $_GET['orderby'];
+				$getString .= "&amp;orderby=".$order_by;
+			} else {
+				$order_by = "";
 			}
-			if (isset($_POST['sort']) && $_POST['sort'] == "DESC") {
-				$getString[] = "sort=DESC";
+			if (isset($_GET['sort']) && $_GET['sort'] == "DESC") {
+				$sort = "DESC";
+				$getString .= "&amp;sort=DESC";
+			} else {
+				$sort = "ASC";
 			}
-			// parse to get.
-			$val = '';
-			$i = 1;
-			foreach ($getString as $redirectVal) {
-				$val .= $i == 1 ? "$redirectVal" : "&amp;$redirectVal";
-				$i++;
-			}
-			redirect(FUSION_SELF.($val ? "?$val" : ''));
-		} elseif (isset($_GET['cat_id']) && isnum($_GET['cat_id'])) {
-			$_data = dbarray(dbquery("SELECT download_cat_id, download_cat_name FROM ".DB_DOWNLOAD_CATS." WHERE download_cat_id='".$_GET['cat_id']."' LIMIT 1"));
-			$filter = " AND download_cat_id='".$_GET['cat_id']."'";
-			$cat_id = isset($_GET['cat_id']) ? $_GET['cat_id'] : '';
-			$order_by = isset($_GET['orderby']) ? "AND " : '';
-			$sort = isset($_GET['sort']) && $_GET['sort'] == "DESC" ? 'DESC' : 'ASC';
+		} else {
+			$filter = ""; $order_by = ""; $sort = ""; // Can be removed
 		}
 		echo "<ol class='breadcrumb'>\n";
 		echo "<li><a href='".FUSION_SELF."'>".$locale['417']."</a> / <a href='".FUSION_SELF."?cat_id=".$_data['download_cat_id']."'>".$_data['download_cat_name']."</a></li>\n";
 		echo "</ol>\n";
+		
+		echo "<div class='panel panel-default'>\n";
+		echo "<div class='panel-body p-b-0'>\n";
+		echo "</form>\n";
+		echo "<form name='searchform' method='get' action='".BASEDIR."search.php'>\n";
+		echo "<span class='small'>".$locale['460']." </span><br />\n";
+		echo "<input type='text' name='stext' class='textbox' style='width:90%' />\n";
+		echo "<input type='submit' name='search' value='".$locale['461']."' class='button' />\n";
+		echo "<input type='hidden' name='stype' value='downloads' />\n";
+		echo "</form>\n";
+		echo "<script language='JavaScript' type='text/javascript'>\n";
+		echo "/* <![CDATA[ */\n";
+		echo "jQuery(document).ready(function() {
+				jQuery('#filter_button').hide();
+			});";
+		echo "/* ]]>*/\n";
+		echo "</script>\n";
+		echo "</div>\n";
+		echo "<div class='panel-footer clearfix'>\n";
+		echo "<form name='filter_form' method='get' action='".FUSION_SELF."'>\n";
+		echo "<tr>\n";
+		//echo "<td class='tbl1' style='width:40%; text-align:left;'>".$locale['450']."</td>\n";
+		echo "<td class='tbl1' style='width:90%; text-align:right;'>".$locale['462']."\n";
+		echo "<select name='cat_id' class='textbox' onchange='this.form.submit();'>\n";
+		echo "<option value='all'>".$locale['451']."</option>".$cats_list."</select>\n";
+		echo "</td>\n";
+		echo "</tr>\n";
+		if (isset($_GET['cat_id']) && isnum($_GET['cat_id'])) {
+			echo "<tr>\n";
+			echo $locale['463']." <select name='orderby' class='textbox' onchange='this.form.submit();'>\n";
+			echo "<option value='download_id'".($order_by == "download_id" ? " selected='selected'" : "").">".$locale['452']."</option>\n";
+			echo "<option value='download_title'".($order_by == "download_title" ? " selected='selected'" : "").">".$locale['453']."</option>\n";
+			echo "<option value='download_user'".($order_by == "download_user" ? " selected='selected'" : "").">".$locale['454']."</option>\n";
+			echo "<option value='download_count'".($order_by == "download_count" ? " selected='selected'" : "").">".$locale['455']."</option>\n";
+			echo "<option value='download_datestamp'".($order_by == "download_datestamp" ? " selected='selected'" : "").">".$locale['456']."</option>\n";
+			echo "</select>\n";
+			echo "<select name='sort' class='textbox' onchange='this.form.submit();'>\n";
+			echo "<option value='ASC'".($sort == "ASC" ? " selected='selected'" : "").">".$locale['457']."</option>\n";
+			echo "<option value='DESC'".($sort == "DESC" ? " selected='selected'" : "").">".$locale['458']."</option>\n";
+			echo "</select>";
+			echo "</td>\n";
+			echo "</tr>\n";
+		}
+		echo "</div>\n</div>\n";
+		
+		
 	}
 	$cat_result = dbquery("SELECT download_cat_id, download_cat_name, download_cat_description, download_cat_access, download_cat_sorting
 			FROM ".DB_DOWNLOAD_CATS."
