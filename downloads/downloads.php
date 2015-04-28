@@ -49,7 +49,7 @@ if (isset($_GET['file_id']) && isnum($_GET['file_id'])) {
 // Statistics
 $dl_stats = "";
 $dl_stats .= "<div class='row m-t-20'>\n";
-$dl_stats .= "<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>\n";
+$dl_stats .= "<div class='col-md-6 col-lg-6'>\n";
 $dl_stats .= "<h4><strong>".$locale['441']."</strong>\n</h4>";
 $result = dbquery("SELECT td.download_id, td.download_title, td.download_count, td.download_cat,
             tc.download_cat_id, tc.download_cat_access
@@ -64,12 +64,12 @@ if (dbrows($result) != 0) {
 		$dl_stats .= "<div class='list-group-item'>";
 		$download_title = $data['download_title'];
 		$dl_stats .= "<a href='".FUSION_SELF."?download_id=".$data['download_id']."' title='".$download_title."'>".trimlink($data['download_title'], 100)."</a>";
-		$dl_stats .= "<span class='badge'>".$data['download_count']." </span>\n";
+		$dl_stats .= "<span class='badge'>&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".$data['download_count']." </span>\n";
 		$dl_stats .= "</div>\n";
 	}
 	$dl_stats .= "</div>\n";
 }
-$dl_stats .= "</div>\n<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>\n";
+$dl_stats .= "</div>\n<div class='col-md-6 col-lg-6'>\n";
 $dl_stats .= "<h4><strong>".$locale['442']."</strong>\n</h4>";
 $result = dbquery("SELECT td.download_id, td.download_title, td.download_count, td.download_cat, td.download_datestamp, tc.download_cat_id, tc.download_cat_access
 		FROM ".DB_DOWNLOADS." td
@@ -82,7 +82,7 @@ if (dbrows($result) != 0) {
 		$dl_stats .= "<div class='list-group-item'>";
 		$download_title = $data['download_title'];
 		$dl_stats .= " <a href='".FUSION_SELF."?download_id=".$data['download_id']."' title='".$download_title."'>".trimlink($data['download_title'], 100)."</a>";
-		$dl_stats .= "<span class='badge'>".$data['download_count']." </span>\n";
+		$dl_stats .= "<span class='badge'>&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".$data['download_count']." </span>\n";
 		$dl_stats .= "</div>\n";
 	}
 	$dl_stats .= "</div>\n";
@@ -163,7 +163,7 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 				if ($rows != 0) {
 					$result = dbquery("SELECT td.download_id, td.download_user, td.download_datestamp, td.download_image_thumb, td.download_cat,
 									td.download_title, td.download_version, td.download_count, td.download_description_short,
-									tu.user_id, tu.user_name, tu.user_status,
+									tu.user_id, tu.user_name, tu.user_avatar, tu.user_status,
                                     SUM(tr.rating_vote) AS sum_rating,
                                     COUNT(tr.rating_item_id) AS count_votes
                                     FROM ".DB_DOWNLOADS." td
@@ -192,11 +192,16 @@ if (!isset($_GET['download_id']) || !isnum($_GET['download_id'])) {
 						echo "<div class='media-body'>\n";
 						echo "<h4 class='media-heading'><a href='".FUSION_SELF."?cat_id=".$cat_data['download_cat_id']."&amp;download_id=".$data['download_id']."'>".$data['download_title']."</a> <small>$new</small></h4>\n";
 						echo "<div class='media-info'><strong>\n";
-						echo "<i title='".$locale['421']."' class='entypo calendar text-lighter'></i> ".showdate("shortdate", $data['download_datestamp'])."\n";
-						echo "<i title='".$locale['422']."' class='entypo user text-lighter'></i> ".profile_link($data['user_id'], $data['user_name'], $data['user_status']);
-						echo($data['download_version'] ? "<i title='".$locale['423']."' class='entypo flow-branch'></i>  ".$data['download_version'] : "--");
-						echo "<i title='".$locale['424']."' class='entypo cloud text-lighter'></i> ".number_format($data['download_count']);
-						echo($data['count_votes'] > 0 ? str_repeat("<img src='".get_image("star")."' alt='*' title='".$locale['426']."' style='vertical-align:middle; width:10px;height:10px;' />", ceil($data['sum_rating']/$data['count_votes'])) : "");
+						echo "<i title='".$locale['421']."' class='fa fa-calendar-o'></i> ".showdate("shortdate", $data['download_datestamp'])."\n";
+						if ($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $asrc = IMAGES."avatars/".$data['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+     if($data['user_avatar'] && file_exists(IMAGES."avatars/".$data['user_avatar'])) { $src = IMAGES."avatars/".$data['user_avatar']; }
+      else { $src = IMAGES."avatars/noavatar50.png"; }
+		echo "<img class='img-responsive img-rounded m-r-10' style='display:inline; max-width:15px; max-height:15px;  border-radius: 6px;' src='".$src."' alt='".$src."' />";
+						echo "&nbsp;<i title='".$locale['422']."' class='fa fa-user'></i> ".profile_link($data['user_id'], $data['user_name'], $data['user_status']);
+						echo($data['download_version'] ? "&nbsp;<i title='".$locale['423']."' class='fa fa-code-fork'></i>  ".$data['download_version'] : "--");
+						echo "&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".number_format($data['download_count']);
+						echo($data['count_votes'] > 0 ? str_repeat("&nbsp;<i title='".$locale['426']."' class='fa fa-star' style='vertical-align:middle; width:10px;height:10px;' /></i>", ceil($data['sum_rating']/$data['count_votes'])) : "");
 						echo "</strong></div>";
 						echo $data['download_description_short'] ? $data['download_description_short'] : '';
 						echo "</div>\n</div>\n";
@@ -246,13 +251,13 @@ if (isset($_GET['download_id']) && isnum($_GET['download_id'])) {
 		echo "<li>".$data['download_title']."</li>\n";
 		echo "</ol>\n";
 		echo "<!--pre_download_details-->\n";
-		echo "<h2>".$data['download_title']." ".$data['download_version']."</h2>\n";
+		echo "<h2>".$data['download_title']." V:".$data['download_version']."</h2>\n";
 		echo "<div class='row'>\n";
 		echo "<div class='col-xs-12 col-sm-8 col-md-8 col-lg-8'>\n";
 		echo "<div class='panel panel-default'>\n";
 		echo "<div class='panel-body'>\n";
 		$na = $locale['429a'];
-		echo $data['download_image'] && file_exists(DOWNLOADS."images/".$data['download_image']) ? "<img class='img-responsive' src='".DOWNLOADS."images/".$data['download_image']."' />" : "<img class='img-responsive' src=\"holder.js/500x250/text:$na/grey\" />";
+		echo $data['download_image'] && file_exists(DOWNLOADS."images/".$data['download_image']) ? "<img class='img-responsive' src='".DOWNLOADS."images/".$data['download_image']."' />" : "<img class='img-responsive' src='".DOWNLOADS."images/Download.svg".$data['download_image']."' />";
 		echo "<div>\n";
 		echo "<a href='".BASEDIR."downloads/downloads.php?cat_id=".$data['download_cat_id']."&amp;file_id=".$data['download_id']."' class='btn btn-success m-t-10 btn-block' target='_blank'><strong>".$locale['416']."
                 ".($data['download_filesize'] ? "(".$data['download_filesize'].")" : '')."
@@ -272,7 +277,7 @@ if (isset($_GET['download_id']) && isnum($_GET['download_id'])) {
 			}
 			echo "<div class='panel panel-default'>\n<div class='panel-body'>\n";
 			echo "<div class='row m-0'>\n<label class='text-left col-xs-12 col-sm-5 col-md-5 col-lg-5 p-l-0'>".$locale['418']."</label>\n";
-			echo "<a href='".$urlprefix.$data['download_homepage']."' title='".$urlprefix.$data['download_homepage']."' target='_blank'>".$locale['418a']."</a>";
+			echo "<a href='".$urlprefix.$data['download_homepage']."' title='".$urlprefix.$data['download_homepage']."' target='_blank'>".$locale['418b']."</a>";
 			echo "</div>\n";
 			echo "<div class='row m-0'>\n<label class='text-left col-xs-12 col-sm-5 col-md-5 col-lg-5 p-l-0'>".$locale['427']."</label>\n";
 			echo "".showdate("shortdate", $data['download_datestamp'])."\n";
@@ -289,8 +294,8 @@ if (isset($_GET['download_id']) && isnum($_GET['download_id'])) {
 		echo "<img style='max-width:20px; margin-right:10px;' src='".get_image("downloads")."' alt='".$locale['424']."' /><span class='icon-sm'><strong>".$data['download_count']."</strong></span> ".$locale['416']."\n";
 		echo "</div>\n</div>\n";
 		echo "<div class='clearfix'>\n";
-		echo "<div class='pull-left m-r-10'>".display_avatar($data, '50px')."</div>\n";
-		echo "<strong>".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</strong><br/>\n".getuserlevel($data['user_level'])." ";
+		echo "<div class='pull-left m-r-10 display-inline-block' style='margin-top:0px; margin-bottom:10px; margin: 2px 10px 0px 5px;'>".display_avatar($data, '50px')."</div>\n";
+		echo "<strong> ".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</strong><br/>\n".getuserlevel($data['user_level'])." ";
 		echo "</div>\n";
 		echo "</div>\n</div>\n";
 		echo "<!--sub_download_details-->\n";
