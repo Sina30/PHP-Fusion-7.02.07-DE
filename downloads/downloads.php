@@ -64,7 +64,7 @@ if (dbrows($result) != 0) {
 		$dl_stats .= "<div class='list-group-item'>";
 		$download_title = $data['download_title'];
 		$dl_stats .= "<a href='".FUSION_SELF."?download_id=".$data['download_id']."' title='".$download_title."'>".trimlink($data['download_title'], 100)."</a>";
-		$dl_stats .= "<span class='badge'>&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".$data['download_count']." </span>\n";
+		$dl_stats .= "<span class='pull-right'><span class='badge'>&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".$data['download_count']." </span>\n";
 		$dl_stats .= "</div>\n";
 	}
 	$dl_stats .= "</div>\n";
@@ -82,7 +82,7 @@ if (dbrows($result) != 0) {
 		$dl_stats .= "<div class='list-group-item'>";
 		$download_title = $data['download_title'];
 		$dl_stats .= " <a href='".FUSION_SELF."?download_id=".$data['download_id']."' title='".$download_title."'>".trimlink($data['download_title'], 100)."</a>";
-		$dl_stats .= "<span class='badge'>&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".$data['download_count']." </span>\n";
+		$dl_stats .= "<span class='pull-right'><span class='badge'>&nbsp;<i title='".$locale['424']."' class='fa fa-cloud-download'></i>&nbsp;".$data['download_count']." </span>\n";
 		$dl_stats .= "</div>\n";
 	}
 	$dl_stats .= "</div>\n";

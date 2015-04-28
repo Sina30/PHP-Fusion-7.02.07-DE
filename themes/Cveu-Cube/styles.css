@@ -1953,13 +1953,13 @@ border-radius: 50px;
 .panel-body {
   padding: 15px;
 }
-.panel-footer {
+/*.panel-footer {
   padding: 10px 15px;
   background-color: #F5F5F5;
   border-top: 1px solid #DDD;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-}  
+} */ 
 .forum_idx_table th:first-child, .forum_table th:first-child {
   color: #FFF;
 }
@@ -2638,7 +2638,7 @@ table td[class*="col-"], table th[class*="col-"] {
 }
 
 .panel-footer {
-    padding: 10px 15px;
+    padding: 25px 30px;
     background-color: #F5F5F5;
     border-top: 1px solid #DDD;
     border-bottom-right-radius: 3px;
@@ -2975,4 +2975,38 @@ table td[class*="col-"], table th[class*="col-"] {
 }
 .m-t-20 {
     margin-top: 20px
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFF;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #999;
+    border-radius: 10px
+}
+
+.badge:empty {
+    display: none
+}
+
+.btn .badge {
+    position: relative;
+    top: -1px
+}
+
+.btn-xs .badge {
+    top: 0;
+    padding: 1px 5px
+}
+
+a.badge:hover, a.badge:focus {
+    color: #FFF;
+    text-decoration: none;
+    cursor: pointer
 }
